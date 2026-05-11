@@ -102,3 +102,9 @@ body {
   opacity: 0.2;
   animation: float linear infinite;
 }
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: clip;
+  max-width: 100vw;
+}
