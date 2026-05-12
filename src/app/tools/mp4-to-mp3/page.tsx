@@ -45,81 +45,57 @@ export default function MP4ToMP3Page() {
     setProgress("Loading video...");
 
     try {
+      // Quick metadata read for duration display (optional, non-fatal if it fails)
       const videoUrl = URL.createObjectURL(file);
       const video = document.createElement("video");
       video.src = videoUrl;
       video.muted = true;
+      try {
+        await new Promise<void>((resolve, reject) => {
+          video.onloadedmetadata = () => { setDuration(video.duration); resolve(); };
+          video.onerror = () => reject(new Error("metadata"));
+          setTimeout(() => reject(new Error("timeout")), 5000);
+        });
+      } catch {
+        // Duration is just for display, not critical
+      }
+      URL.revokeObjectURL(videoUrl);
 
-      await new Promise<void>((resolve, reject) => {
-        video.onloadedmetadata = () => {
-          setDuration(video.duration);
-          resolve();
-        };
-        video.onerror = () => reject(new Error("Failed to load video"));
+      setProgress("Loading converter (one-time download)...");
+      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+      const { fetchFile, toBlobURL } = await import("@ffmpeg/util");
+
+      const ffmpeg = new FFmpeg();
+      ffmpeg.on("progress", ({ progress }) => {
+        const pct = Math.max(0, Math.min(100, Math.round(progress * 100)));
+        setProgress("Extracting audio... " + pct + "%");
       });
 
-      setProgress("Extracting audio...");
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
+      await ffmpeg.load({
+        coreURL: await toBlobURL(baseURL + "/ffmpeg-core.js", "text/javascript"),
+        wasmURL: await toBlobURL(baseURL + "/ffmpeg-core.wasm", "application/wasm"),
+      });
 
-      const audioContext = new AudioContext();
-      const response = await fetch(videoUrl);
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+      setProgress("Reading file...");
+      const ext = file.name.match(/\.[^.]+$/)?.[0] || ".mp4";
+      const inputName = "input" + ext;
+      await ffmpeg.writeFile(inputName, await fetchFile(file));
 
-      setProgress("Encoding MP3...");
+      // -vn: strip video, -acodec libmp3lame: MP3 codec, -q:a 2: VBR ~190kbps (high quality)
+      await ffmpeg.exec(["-i", inputName, "-vn", "-acodec", "libmp3lame", "-q:a", "2", "output.mp3"]);
 
-      const numberOfChannels = audioBuffer.numberOfChannels;
-      const sampleRate = audioBuffer.sampleRate;
-      const length = audioBuffer.length;
-
-      const { Mp3Encoder } = await import("@breezystack/lamejs");
-      const mp3Encoder = new Mp3Encoder(numberOfChannels, sampleRate, 128);
-
-      const leftChannel = audioBuffer.getChannelData(0);
-      const rightChannel = numberOfChannels > 1 ? audioBuffer.getChannelData(1) : leftChannel;
-
-      const sampleBlockSize = 1152;
-      const mp3Data: Int8Array[] = [];
-
-      const leftInt16 = new Int16Array(length);
-      const rightInt16 = new Int16Array(length);
-      for (let i = 0; i < length; i++) {
-        leftInt16[i] = Math.max(-32768, Math.min(32767, Math.round(leftChannel[i] * 32767)));
-        rightInt16[i] = Math.max(-32768, Math.min(32767, Math.round(rightChannel[i] * 32767)));
-
-        if (i % (sampleRate * 2) === 0) {
-          const pct = Math.round((i / length) * 100);
-          setProgress("Encoding MP3... " + pct + "%");
-        }
-      }
-
-      for (let i = 0; i < length; i += sampleBlockSize) {
-        const leftChunk = leftInt16.subarray(i, i + sampleBlockSize);
-        const rightChunk = rightInt16.subarray(i, i + sampleBlockSize);
-        const mp3buf = mp3Encoder.encodeBuffer(leftChunk, rightChunk);
-        if (mp3buf.length > 0) {
-          mp3Data.push(new Int8Array(mp3buf));
-        }
-      }
-
-      const finalBuf = mp3Encoder.flush();
-      if (finalBuf.length > 0) {
-        mp3Data.push(new Int8Array(finalBuf));
-      }
-
-      const totalLength = mp3Data.reduce((acc, buf) => acc + buf.length, 0);
-      const merged = new Uint8Array(totalLength);
-      let offset = 0;
-      for (const buf of mp3Data) {
-        merged.set(new Uint8Array(buf.buffer), offset);
-        offset += buf.length;
-      }
-
-      const blob = new Blob([merged], { type: "audio/mp3" });
+      const data = (await ffmpeg.readFile("output.mp3")) as Uint8Array;
+      const blob = new Blob([data as BlobPart], { type: "audio/mp3" });
       setResultSize(blob.size);
       saveAs(blob, file.name.replace(/\.[^.]+$/, ".mp3"));
 
-      URL.revokeObjectURL(videoUrl);
-      await audioContext.close();
+      try {
+        await ffmpeg.deleteFile(inputName);
+        await ffmpeg.deleteFile("output.mp3");
+      } catch {}
+      ffmpeg.terminate();
+
       setDone(true);
     } catch (err) {
       console.error(err);
