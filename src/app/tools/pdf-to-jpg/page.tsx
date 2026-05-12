@@ -54,33 +54,23 @@ export default function PDFToJPGPage() {
           ctx.fillStyle = "#ffffff";
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-          try {
-            const pdfjsLib = await import("pdfjs-dist");
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+          const pdfjsLib = await import("pdfjs-dist");
+          pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+            "pdfjs-dist/build/pdf.worker.mjs",
+            import.meta.url
+          ).toString();
 
-            const pdfDoc = await pdfjsLib.getDocument({ data: singlePageBytes }).promise;
-            const pdfPage = await pdfDoc.getPage(1);
-            const viewport = pdfPage.getViewport({ scale });
+          const pdfDoc = await pdfjsLib.getDocument({ data: singlePageBytes }).promise;
+          const pdfPage = await pdfDoc.getPage(1);
+          const viewport = pdfPage.getViewport({ scale });
 
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
 
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            await pdfPage.render({ canvasContext: ctx as any, viewport } as any).promise;
-          } catch {
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#1e293b";
-            ctx.font = `bold ${18 * scale}px system-ui`;
-            ctx.textAlign = "center";
-            ctx.fillText(`Page ${i + 1}`, canvas.width / 2, canvas.height / 2 - 10 * scale);
-            ctx.fillStyle = "#64748b";
-            ctx.font = `${13 * scale}px system-ui`;
-            ctx.fillText(`${Math.round(pageWidth)} × ${Math.round(pageHeight)} pts`, canvas.width / 2, canvas.height / 2 + 16 * scale);
-            ctx.fillText(`Install pdfjs-dist for full rendering`, canvas.width / 2, canvas.height / 2 + 36 * scale);
-          }
+          await pdfPage.render({ canvasContext: ctx as any, viewport } as any).promise;
 
           const jpgBlob = await new Promise<Blob | null>((resolve) => {
             canvas.toBlob((b) => resolve(b), "image/jpeg", quality);
