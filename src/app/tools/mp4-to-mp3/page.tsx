@@ -71,7 +71,7 @@ export default function MP4ToMP3Page() {
       const sampleRate = audioBuffer.sampleRate;
       const length = audioBuffer.length;
 
-      const { Mp3Encoder } = await import("lamejs");
+      const { Mp3Encoder } = await import("@breezystack/lamejs");
       const mp3Encoder = new Mp3Encoder(numberOfChannels, sampleRate, 128);
 
       const leftChannel = audioBuffer.getChannelData(0);
