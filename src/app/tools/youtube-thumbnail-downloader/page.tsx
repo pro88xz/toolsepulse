@@ -77,7 +77,7 @@ export default function YouTubeThumbnailPage() {
 
   const downloadThumbnail = async (thumb: Thumbnail) => {
     try {
-      const response = await fetch(thumb.url);
+      const response = await fetch("/api/yt-thumb?url=" + encodeURIComponent(thumb.url));
       const blob = await response.blob();
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
