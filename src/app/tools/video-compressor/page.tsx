@@ -39,86 +39,82 @@ export default function VideoCompressorPage() {
     setProgress("Preparing video...");
 
     try {
+      // Quick metadata read for original dimensions
       const videoUrl = URL.createObjectURL(file);
       const video = document.createElement("video");
       video.src = videoUrl;
       video.muted = true;
-      video.playsInline = true;
-
-      await new Promise<void>((resolve, reject) => {
-        video.onloadedmetadata = () => resolve();
-        video.onerror = () => reject(new Error("Failed to load video"));
-      });
-
-      const duration = video.duration;
-      const origWidth = video.videoWidth;
-      const origHeight = video.videoHeight;
-
-      const scaleFactor = quality === "high" ? 0.85 : quality === "medium" ? 0.65 : 0.45;
-      const targetWidth = Math.round(origWidth * scaleFactor);
-      const targetHeight = Math.round(origHeight * scaleFactor);
-      const fps = quality === "high" ? 30 : quality === "medium" ? 24 : 15;
-      const bitrate = quality === "high" ? 2500000 : quality === "medium" ? 1500000 : 800000;
-
-      const canvas = document.createElement("canvas");
-      canvas.width = targetWidth;
-      canvas.height = targetHeight;
-      const ctx = canvas.getContext("2d")!;
-
-      const stream = canvas.captureStream(fps);
-
-      const audioCtx = new AudioContext();
-      const source = audioCtx.createMediaElementSource(video);
-      const dest = audioCtx.createMediaStreamDestination();
-      source.connect(dest);
-      source.connect(audioCtx.destination);
-
-      dest.stream.getAudioTracks().forEach((track) => stream.addTrack(track));
-
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: "video/webm;codecs=vp8,opus",
-        videoBitsPerSecond: bitrate,
-      });
-
-      const chunks: Blob[] = [];
-      mediaRecorder.ondataavailable = (e) => {
-        if (e.data.size > 0) chunks.push(e.data);
-      };
-
-      const recordingDone = new Promise<Blob>((resolve) => {
-        mediaRecorder.onstop = () => {
-          resolve(new Blob(chunks, { type: "video/webm" }));
-        };
-      });
-
-      mediaRecorder.start(100);
-      video.currentTime = 0;
-      await video.play();
-
-      setProgress("Compressing...");
-
-      const drawFrame = () => {
-        if (video.ended || video.paused) {
-          mediaRecorder.stop();
-          return;
-        }
-        ctx.drawImage(video, 0, 0, targetWidth, targetHeight);
-        const pct = Math.round((video.currentTime / duration) * 100);
-        setProgress("Compressing... " + pct + "%");
-        requestAnimationFrame(drawFrame);
-      };
-      requestAnimationFrame(drawFrame);
-
-      video.onended = () => {
-        mediaRecorder.stop();
-        audioCtx.close();
-      };
-
-      const blob = await recordingDone;
+      let origWidth = 1280;
+      let origHeight = 720;
+      try {
+        await new Promise<void>((resolve, reject) => {
+          video.onloadedmetadata = () => {
+            origWidth = video.videoWidth || 1280;
+            origHeight = video.videoHeight || 720;
+            resolve();
+          };
+          video.onerror = () => reject(new Error("metadata"));
+          setTimeout(() => reject(new Error("timeout")), 5000);
+        });
+      } catch {
+        // Use defaults if metadata read fails
+      }
       URL.revokeObjectURL(videoUrl);
 
+      const scaleFactor = quality === "high" ? 0.85 : quality === "medium" ? 0.65 : 0.45;
+      const crf = quality === "high" ? "23" : quality === "medium" ? "28" : "32";
+      // x264 requires even dimensions
+      const targetWidth = Math.floor((origWidth * scaleFactor) / 2) * 2;
+      const targetHeight = Math.floor((origHeight * scaleFactor) / 2) * 2;
+
+      setProgress("Loading converter (one-time download)...");
+      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+      const { fetchFile, toBlobURL } = await import("@ffmpeg/util");
+
+      const ffmpeg = new FFmpeg();
+      ffmpeg.on("progress", ({ progress }) => {
+        const pct = Math.max(0, Math.min(100, Math.round(progress * 100)));
+        setProgress("Compressing... " + pct + "%");
+      });
+
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
+      await ffmpeg.load({
+        coreURL: await toBlobURL(baseURL + "/ffmpeg-core.js", "text/javascript"),
+        wasmURL: await toBlobURL(baseURL + "/ffmpeg-core.wasm", "application/wasm"),
+      });
+
+      setProgress("Reading file...");
+      const ext = file.name.match(/\.[^.]+$/)?.[0] || ".mp4";
+      const inputName = "input" + ext;
+      await ffmpeg.writeFile(inputName, await fetchFile(file));
+
+      // -c:v libx264 -preset fast -crf X: H.264 with quality control
+      // -vf scale=W:H: resize
+      // -c:a aac -b:a 128k: AAC audio at 128k
+      // -movflags +faststart: web-streamable MP4
+      await ffmpeg.exec([
+        "-i", inputName,
+        "-c:v", "libx264",
+        "-preset", "fast",
+        "-crf", crf,
+        "-vf", "scale=" + targetWidth + ":" + targetHeight,
+        "-c:a", "aac",
+        "-b:a", "128k",
+        "-movflags", "+faststart",
+        "output.mp4",
+      ]);
+
+      const data = (await ffmpeg.readFile("output.mp4")) as Uint8Array;
+      const blob = new Blob([data as BlobPart], { type: "video/mp4" });
       setResultSize(blob.size);
-      saveAs(blob, file.name.replace(/\.[^.]+$/, "_compressed.webm"));
+      saveAs(blob, file.name.replace(/\.[^.]+$/, "_compressed.mp4"));
+
+      try {
+        await ffmpeg.deleteFile(inputName);
+        await ffmpeg.deleteFile("output.mp4");
+      } catch {}
+      ffmpeg.terminate();
+
       setDone(true);
     } catch (err) {
       console.error(err);
