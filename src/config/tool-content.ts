@@ -1819,6 +1819,170 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Product descriptions", description: "Generate descriptive paragraphs for e-commerce listings and marketing materials." },
     ],
   },
+  "audio-joiner": {
+    toolSlug: "audio-joiner",
+    howTo: {
+      title: "How to Join Audio Files Online Without Re-encoding Loss",
+      steps: [
+        { title: "Open the Audio Joiner", description: "Navigate to the tool. No signup required, nothing to install." },
+        { title: "Upload your audio files", description: "Drop your MP3, WAV, OGG, or M4A files. Add them in the order you want them joined." },
+        { title: "Reorder if needed", description: "Drag clips to rearrange. The final file plays them in the order shown." },
+        { title: "Download the combined file", description: "Click join, then download the single output file. Original files stay on your device unchanged." },
+      ],
+      tips: [
+        "Use files with the same sample rate (44.1 or 48 kHz) and bit depth for the cleanest join.",
+        "WAV input → WAV output preserves quality with no re-encoding. MP3 inputs get re-encoded once.",
+        "Mono and stereo files can be mixed — output is stereo by default.",
+        "No fixed file count limit, but very long files (1 GB+) may stall on lower-end mobile.",
+        "For a smooth transition between clips, trim silence from the end of each file first using Audio Trimmer.",
+      ],
+    },
+    faq: [
+      { question: "Which audio formats can I join?", answer: "MP3, WAV, OGG, M4A, and FLAC. You can mix formats — output is a single file in your chosen format." },
+      { question: "Will my audio quality drop after joining?", answer: "If all input files are the same format, files are concatenated directly with no quality loss. Different formats are re-encoded once, which is minimal but not lossless." },
+      { question: "Can I rearrange the order of files?", answer: "Yes. Drag clips up or down before joining. The output plays them in the order shown." },
+      { question: "Is there a file size or count limit?", answer: "No hard limit. The practical cap is your device RAM — typically 1–2 GB total audio works on desktop, less on mobile." },
+      { question: "Do you upload my audio files?", answer: "No. Joining happens entirely in your browser using the Web Audio API. Files never leave your device." },
+    ],
+    alternatives: {
+      intro: "There are several ways to combine audio files. Here is how the common options compare.",
+      tools: [
+        { name: "Audio-Joiner.com", description: "Online audio merger", differentiator: "Uploads files to their servers for processing. 15-minute total length cap on the free tier." },
+        { name: "Audacity", description: "Free open-source audio editor", differentiator: "Powerful but desktop-only. Requires download, install, and a learning curve to join two files." },
+        { name: "Adobe Audition", description: "Professional audio editing software", differentiator: "Subscription required. Overkill if you just want to stitch a few clips together." },
+      ],
+      whyUs: "Join audio files in your browser without uploading them anywhere. Zero installs, zero accounts, no file size caps imposed by us.",
+    },
+    useCases: [
+      { title: "Podcast production", description: "Stitch your intro music, recorded interview, and outro into a single MP3 ready to upload to your hosting platform." },
+      { title: "Voice memo cleanup", description: "Combine multiple short voice notes from your phone into one continuous recording for transcription or sharing." },
+      { title: "Audiobook assembly", description: "Merge chapter recordings into a single file for easier playback in apps that do not support playlists." },
+      { title: "Music demo compilation", description: "Join individual song demos into a single track for collaborators, labels, or portfolio sharing." },
+    ],
+  },
+  "screen-recorder": {
+    toolSlug: "screen-recorder",
+    howTo: {
+      title: "How to Record Your Screen in the Browser Without Installing Software",
+      steps: [
+        { title: "Open the Screen Recorder", description: "Navigate to the tool. No download, no extension, no account." },
+        { title: "Choose what to record", description: "Click record and pick a full screen, application window, or a single browser tab. Optionally enable your microphone." },
+        { title: "Record your session", description: "A small indicator shows recording is active. Stop sharing or click stop when you are done." },
+        { title: "Preview and download", description: "Play back the recording, then download it as a WebM video file." },
+      ],
+      tips: [
+        "Pick browser tab instead of entire screen when demoing a web app — it hides other windows and notifications.",
+        "Enable the microphone for narration. Speak slightly closer than normal to overcome browser input gain.",
+        "On Chrome, tick the share audio option in the picker to include the system audio playing in the tab.",
+        "WebM plays in all modern browsers. Convert to MP4 with our Video Compressor for broader compatibility.",
+        "For sessions over 20 minutes, restart the browser tab beforehand to free up memory.",
+      ],
+    },
+    faq: [
+      { question: "Can I record audio along with my screen?", answer: "Yes. You can include your microphone, the system audio playing on your computer, or both. Audio sources are selected when you grant the recording permission." },
+      { question: "What video format does it output?", answer: "WebM with VP8 or VP9 video and Opus audio — the browser MediaRecorder default. Plays in Chrome, Firefox, Edge, and modern mobile browsers." },
+      { question: "Is there a time limit?", answer: "No imposed limit. In practice, long recordings are constrained by your device memory, since the video is held in RAM until you download it." },
+      { question: "Does it work on iPhone or iPad?", answer: "Safari on iOS has limited support for screen recording through this API. iOS has a built-in screen recorder in Control Center, which is a better option for mobile." },
+      { question: "Are my recordings stored anywhere online?", answer: "No. Recording happens locally and saves straight to your downloads folder. Nothing is uploaded." },
+    ],
+    alternatives: {
+      intro: "Screen recording tools range from quick browser captures to full production software. Here is how the popular options compare.",
+      tools: [
+        { name: "Loom", description: "Cloud-based screen recorder", differentiator: "Requires an account and uploads your recording to Loom servers. Free tier limits videos to 5 minutes." },
+        { name: "OBS Studio", description: "Free open-source streaming and recording software", differentiator: "Extremely powerful but requires installation and configuration. Overkill for quick captures." },
+        { name: "Built-in OS recorders", description: "macOS Screenshot Toolbar, Windows Game Bar", differentiator: "Work well on their own platform but are not cross-platform. No browser-tab-only mode for privacy." },
+      ],
+      whyUs: "Record your screen instantly with nothing to install. No account, no cloud upload, no time cap. Recording stays on your device unless you choose to share it.",
+    },
+    useCases: [
+      { title: "Bug reports", description: "Show developers exactly what is happening on your screen — far clearer than a written description." },
+      { title: "Software tutorials", description: "Record walkthroughs of how to use an app, then share with teammates or post on YouTube." },
+      { title: "Async work updates", description: "Send a recorded screen demo instead of scheduling a meeting. Recipients watch on their own time." },
+      { title: "Presentation capture", description: "Record your own slides plus voiceover for an on-demand version of any presentation." },
+    ],
+  },
+  "video-trimmer": {
+    toolSlug: "video-trimmer",
+    howTo: {
+      title: "How to Trim a Video Online to an Exact Length",
+      steps: [
+        { title: "Open the Video Trimmer", description: "Navigate to the tool. No signup, no software install." },
+        { title: "Upload your video", description: "Drop your MP4, WebM, MOV, or any browser-supported video. The full clip loads as a preview." },
+        { title: "Set start and end points", description: "Drag the timeline handles or type exact timestamps (seconds, with decimals) for precise cuts." },
+        { title: "Download the trimmed clip", description: "Click trim. The new clip downloads in the same format as your input. Original stays unchanged." },
+      ],
+      tips: [
+        "Common social trims: 60s (Instagram Reels), 30s (Twitter or X), 15s (TikTok intro).",
+        "Trimming preserves the original video and audio quality — no re-encoding.",
+        "To trim multiple non-contiguous sections, trim each individually and combine with a video joiner.",
+        "Cut a few hundred milliseconds before and after your target points to avoid clipping speech mid-syllable.",
+        "If your input is a screen recording with awkward pauses at start and end, this is the fastest way to clean it before sharing.",
+      ],
+    },
+    faq: [
+      { question: "What video formats are supported?", answer: "MP4, WebM, MOV, MKV, AVI, and any format your browser can natively play. Output keeps your input format." },
+      { question: "Will trimming reduce my video quality?", answer: "No. Trimming is a lossless operation — the existing video and audio streams are kept intact, just clipped at your chosen points." },
+      { question: "How precise can I trim?", answer: "Timestamps to one decimal place (100 ms precision). For 30fps video, that is about 3-frame accuracy." },
+      { question: "Is there a file size limit?", answer: "No imposed limit. Practical cap is your device memory — 1–2 GB videos work on desktop, smaller on mobile." },
+      { question: "Do my videos get uploaded?", answer: "No. Trimming happens entirely in your browser. Your video never leaves your device." },
+    ],
+    alternatives: {
+      intro: "Video trimming is the simplest video edit, but the tools vary wildly in friction and privacy.",
+      tools: [
+        { name: "Adobe Premiere Pro", description: "Professional video editing suite", differentiator: "Paid subscription. Overkill for a simple trim and hours of learning required." },
+        { name: "iMovie", description: "Apple free video editor", differentiator: "macOS and iOS only. Not available on Windows, Android, or Linux." },
+        { name: "Online Video Cutter", description: "Browser-based video trimmer", differentiator: "Uploads your video to their servers. Free tier caps clips at 500 MB." },
+      ],
+      whyUs: "Trim videos in your browser with no upload, no account, no quality loss, and no file size limit imposed by us.",
+    },
+    useCases: [
+      { title: "Social media clips", description: "Cut a longer recording down to 15s, 30s, or 60s to fit platform limits without re-encoding." },
+      { title: "Highlight extraction", description: "Pull a single moment from a long meeting recording, gameplay session, or interview." },
+      { title: "Pre-compression cleanup", description: "Remove silent intro and outro before compressing — smaller input means a smaller compressed output." },
+      { title: "Quick previews", description: "Create a short teaser clip from a longer video for emails, landing pages, or social previews." },
+    ],
+  },
+  "voice-recorder": {
+    toolSlug: "voice-recorder",
+    howTo: {
+      title: "How to Record Your Voice Online From Any Device",
+      steps: [
+        { title: "Open the Voice Recorder", description: "Navigate to the tool. No app to download — works in any modern browser." },
+        { title: "Grant microphone access", description: "The browser asks permission to use your mic. Permission is per-session by default." },
+        { title: "Record your audio", description: "Click record, speak, and hit stop. You can pause and resume mid-recording." },
+        { title: "Preview and download", description: "Play back the recording to check it, then download as a WebM (Opus) audio file." },
+      ],
+      tips: [
+        "Sites must be served over HTTPS for browsers to allow mic access. Bookmark the HTTPS URL.",
+        "External USB or 3.5mm microphones produce noticeably cleaner results than built-in laptop mics.",
+        "Record in a small, soft-furnished room (carpet, curtains, sofa) — hard surfaces create echo that is hard to remove later.",
+        "Do a quick test recording first to check input level. The level should not peak into the red.",
+        "For podcasts and serious voiceover work, do short test clips and tweak mic position until you find the cleanest pickup.",
+      ],
+    },
+    faq: [
+      { question: "What audio format does it record?", answer: "WebM with Opus codec — a modern compressed format that plays in most browsers and media apps. Use our MP3 Converter if you need MP3 specifically." },
+      { question: "Where are my recordings stored?", answer: "Only on your device. The recording is held in browser memory while you work with it, and saved to your local downloads when you click save." },
+      { question: "Can I record longer than an hour?", answer: "Yes, but long recordings consume RAM. For multi-hour sessions, record in 30–60 minute chunks and join them afterwards with our Audio Joiner." },
+      { question: "Does it work on iPhone?", answer: "Yes, in Safari on iOS 14.5+. The first time you record, iOS asks for mic permission system-wide for that browser." },
+      { question: "Why does it ask for microphone permission every time?", answer: "Browsers grant mic access per-session for privacy. You can change this in your browser site settings to remember the permission." },
+    ],
+    alternatives: {
+      intro: "Voice recording options range from built-in OS apps to full audio editors. Here is how the common ones compare.",
+      tools: [
+        { name: "Voice Memos / Recorder", description: "Built-in iOS and Android recording apps", differentiator: "Convenient on their platform but not cross-device. You cannot record on a desktop browser and continue on a phone." },
+        { name: "Audacity", description: "Free open-source audio editor", differentiator: "Powerful but requires installing software. Slower for a one-off quick recording." },
+        { name: "Otter.ai", description: "Recording plus AI transcription service", differentiator: "Uploads to their servers and requires an account. Free tier has monthly transcription limits." },
+      ],
+      whyUs: "Record from any device with a browser — laptop, phone, tablet — in seconds. No app, no account, your audio stays on your device unless you choose to share it.",
+    },
+    useCases: [
+      { title: "Voice memos and notes", description: "Capture quick ideas, reminders, or to-dos faster than typing them out." },
+      { title: "Podcast snippets and demos", description: "Record short solo segments or test concepts before booking proper studio time." },
+      { title: "Pronunciation practice", description: "Record yourself speaking foreign languages or rehearsing presentations, then listen back to spot what to improve." },
+      { title: "Quick voiceover", description: "Record narration for a video, slideshow, or social post and download it ready to drop into your editor." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
