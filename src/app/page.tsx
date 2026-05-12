@@ -529,12 +529,12 @@ export default function HomePage() {
                 const s = searchIconStyle[tool.category];
                 const vis = categoryVisuals[tool.category];
                 return (
-                  <Link key={tool.id} href={"/tools/" + tool.slug} className="group relative flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:shadow-xl hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-300">
+                  <Link key={tool.id} href={"/tools/" + tool.slug} className="group relative flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:shadow-xl hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-300 min-w-0">
                     <div className={"flex h-12 w-12 items-center justify-center rounded-xl flex-shrink-0 " + s.bg + " " + s.text + " group-hover:scale-110 transition-transform duration-300"}>
                       <svg width="22" height="22" viewBox="0 0 24 24">{vis.icon}</svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
                         <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors truncate">{tool.name}</h3>
                         <span className="flex items-center gap-0.5 rounded-full bg-amber-50 px-1.5 py-0.5 text-[8px] font-bold text-amber-600 uppercase whitespace-nowrap flex-shrink-0"><svg className="h-2 w-2" fill="currentColor" viewBox="0 0 24 24"><path d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /></svg>Hot</span>
                       </div>
