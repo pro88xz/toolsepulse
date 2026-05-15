@@ -605,7 +605,7 @@ export default function HomePage() {
       {/* ===== PRIVACY PROMISE ===== */}
       <section className="border-t border-slate-100 bg-slate-900 text-white py-14 sm:py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/10 rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/10 rounded-full blur-3xl" />
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
           <div className="text-center mb-12">
