@@ -574,8 +574,8 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ===== PRIVACY PROMISE ===== */}
-      <section className="border-t border-slate-100 bg-slate-900 text-white py-14 sm:py-20 relative overflow-hidden">
+      {/* ===== PRIVACY PROMISE (TEMPORARILY HIDDEN — diagnosing mobile GPU corruption) ===== */}
+      {false && (<section className="border-t border-slate-100 bg-slate-900 text-white py-14 sm:py-20 relative overflow-hidden">
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 mb-5">
@@ -606,7 +606,7 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section>)}
 
       {/* ===== ALL TOOLS ===== */}
       {!search.trim() && (
