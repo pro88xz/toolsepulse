@@ -34,10 +34,19 @@ export default function BackgroundRemoverPage() {
 
       setProgress("Processing image — this may take a moment...");
       const blob = await removeBg(file, {
+        // isnet_fp16: 16-bit floating point ISNet model. ~40MB download (one-time, cached).
+        // Dramatically better edge quality than the default isnet_quint8.
+        model: "isnet_fp16",
+        output: {
+          format: "image/png",
+          quality: 1,
+        },
         progress: (key: string, current: number, total: number) => {
-          if (key === "compute:inference") {
+          if (key.startsWith("compute:inference")) {
             const pct = Math.round((current / total) * 100);
             setProgress(`Removing background... ${pct}%`);
+          } else if (key.startsWith("fetch:")) {
+            setProgress("Loading model (one-time download)...");
           }
         },
       });
@@ -45,7 +54,7 @@ export default function BackgroundRemoverPage() {
       setResultUrl(URL.createObjectURL(blob));
     } catch (err) {
       console.error(err);
-      setError("Failed to remove background. Please try a different image.");
+      setError("Failed to remove background: " + (err instanceof Error ? err.message : String(err)));
     } finally {
       setProcessing(false);
       setProgress("");
