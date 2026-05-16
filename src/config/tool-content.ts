@@ -2106,6 +2106,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Email tracking links", description: "Encode unsubscribe URLs or click-tracking URLs that get wrapped inside a redirect URL with its own query string." },
     ],
   },
+  "hash-generator": {
+    toolSlug: "hash-generator",
+    howTo: {
+      title: "How to Generate SHA-1, SHA-256, SHA-384, SHA-512 Hashes from Text",
+      steps: [
+        { title: "Open the Hash Generator", description: "Navigate to the tool. Browser-side hashing \u2014 no signup, no server." },
+        { title: "Paste your input text", description: "Drop any text into the input box: a password, an API key, a file\u2019s contents, any string." },
+        { title: "See all hashes at once", description: "The tool computes SHA-1, SHA-256, SHA-384, and SHA-512 in parallel. Results appear as you type." },
+        { title: "Copy the hash you need", description: "Click any hash row to copy it to your clipboard. The hex digest is ready to paste anywhere." },
+      ],
+      tips: [
+        "SHA-256 is the modern default \u2014 used in TLS certificates, Bitcoin, JWT signing, and most checksum scenarios.",
+        "SHA-1 is broken for security but still used for non-security checksums (Git commit IDs, legacy systems). Do not use it for passwords or signing.",
+        "MD5 is intentionally excluded \u2014 it is cryptographically broken and should not be used. If a system requires MD5, push to upgrade.",
+        "Hashes are one-way: you cannot recover the original input. Salt + hash + slow KDF (bcrypt, argon2) is the right pattern for passwords \u2014 plain SHA-256 is not.",
+        "For file verification: hash a downloaded file\u2019s contents and compare against the published hash on the release page.",
+      ],
+    },
+    faq: [
+      { question: "What is a hash function?", answer: "A function that takes any input and produces a fixed-length output (the digest). Same input always gives the same output, but you cannot reverse the digest back to the input." },
+      { question: "Which SHA algorithm should I use?", answer: "SHA-256 for almost everything in 2025+. SHA-384 and SHA-512 only when explicitly required by a spec or for extra-paranoid systems. SHA-1 only for compatibility with legacy non-security uses." },
+      { question: "Why is MD5 not included?", answer: "MD5 has known collisions and is unsuitable for any security purpose. Including it would encourage misuse. If you need MD5 for legacy compatibility, openssl or md5 from the command line will do." },
+      { question: "Is hashing the same as encryption?", answer: "No. Encryption is reversible with a key. Hashing is one-way \u2014 designed so you cannot recover the input from the output." },
+      { question: "Where does the hashing happen?", answer: "Entirely in your browser using the Web Crypto API (crypto.subtle.digest). Your input text never leaves your device." },
+    ],
+    alternatives: {
+      intro: "Hash generation is a one-line operation in most environments, but a quick web tool is convenient for spot-checks.",
+      tools: [
+        { name: "openssl / shasum (CLI)", description: "Built into macOS and Linux", differentiator: "Fast for files but requires terminal access and remembering flags. Hashing arbitrary text from the command line is awkward." },
+        { name: "Other online hash sites", description: "Many ad-heavy", differentiator: "Some compute only one algorithm at a time. Privacy varies \u2014 some send input to a server." },
+        { name: "Editor extensions", description: "VS Code, Sublime plugins", differentiator: "Requires installing extensions and remembering hotkeys. Not portable across machines." },
+      ],
+      whyUs: "All four SHA variants computed in parallel, live updates as you type, secure Web Crypto API, nothing sent to a server.",
+    },
+    useCases: [
+      { title: "Checksum verification", description: "Verify a downloaded file or string matches an expected hash from a documentation page or release notes." },
+      { title: "API key fingerprints", description: "Generate a hash fingerprint of an API key or secret for logging and audit trails without exposing the key itself." },
+      { title: "Cache key generation", description: "Hash a long input (URL, query, payload) into a fixed-length cache key suitable for filesystem paths or cache lookups." },
+      { title: "Git and version control", description: "Compute SHA-1 of file contents the same way Git does to verify commit or blob identifiers." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

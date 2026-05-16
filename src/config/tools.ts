@@ -806,6 +806,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["url encoder", "url decoder", "uri encoder", "encodeURIComponent online", "percent encoding"],
   },
+  {
+    id: "hash-generator",
+    name: "Hash Generator",
+    description: "Generate SHA-1, SHA-256, SHA-384, and SHA-512 hashes from any text. Uses the browser Web Crypto API — secure, instant, no server.",
+    shortDescription: "Generate SHA hashes from text",
+    slug: "hash-generator",
+    relatedTools: ["uuid-generator", "base64-encoder", "jwt-decoder"],
+    category: "developer",
+    icon: "Lock",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["hash generator", "sha256 generator", "sha512 generator", "sha1 hash", "text to hash"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
