@@ -2270,6 +2270,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Event and conference pages", description: "Build slugs for conference talk pages or event landing pages that read naturally in URL form." },
     ],
   },
+  "lorem-ipsum-generator": {
+    toolSlug: "lorem-ipsum-generator",
+    howTo: {
+      title: "How to Generate Lorem Ipsum Placeholder Text for Design Mockups",
+      steps: [
+        { title: "Open the Lorem Ipsum Generator", description: "Navigate to the tool. No signup required." },
+        { title: "Choose paragraph count", description: "Pick how many paragraphs of placeholder text you need \u2014 from 1 to 50." },
+        { title: "Adjust sentence and word length", description: "Fine-tune sentences per paragraph and average words per sentence to match your real content rhythm." },
+        { title: "Copy the generated text", description: "Hit Copy to grab the text. Hit Regenerate for a different random sample at the same settings." },
+      ],
+      tips: [
+        "Lorem Ipsum is scrambled Latin from a 1st-century BC text \u2014 it is used because it looks like real text without being readable, so designers focus on layout instead of content.",
+        "Match the rhythm of your real content: 5 sentences x 12 words per sentence approximates standard paragraphs.",
+        "Always replace Lorem Ipsum with real content before shipping. There are documented cases of Lorem Ipsum text accidentally going live on production sites.",
+        "Do not use Lorem Ipsum in client-facing demos when you can use plausible real text \u2014 clients sometimes mistake placeholder for actual content.",
+        "For internationalization testing, longer placeholder text (German is around 30% longer than English) helps reveal layout issues with translated content.",
+      ],
+    },
+    faq: [
+      { question: "Where does Lorem Ipsum come from?", answer: "It is scrambled from Cicero\u2019s \"De finibus bonorum et malorum\" written in 45 BC. The standard \"Lorem ipsum dolor sit amet\" passage has been used in design for over 500 years." },
+      { question: "Is the text random?", answer: "Yes \u2014 each generation produces a fresh random ordering of the standard Lorem Ipsum word pool. Hit Regenerate for a new sample." },
+      { question: "Can I get other types of placeholder text?", answer: "This tool focuses on classic Latin Lorem Ipsum. For test names, emails, and addresses, see our Fake Data Generator. For different languages, search for localized placeholder text generators." },
+      { question: "Why not just use real content as placeholder?", answer: "Real text is distracting \u2014 readers focus on the words rather than the design. Lorem Ipsum looks like text without being readable, which forces attention on typography and layout." },
+      { question: "Is there a maximum length?", answer: "We cap at 50 paragraphs to keep things sensible, but each paragraph can have up to 20 sentences of 30 words each \u2014 plenty for any mockup." },
+    ],
+    alternatives: {
+      intro: "Lorem Ipsum generators are everywhere, but they vary in quality and configurability.",
+      tools: [
+        { name: "Lipsum.com", description: "The original Lorem Ipsum site", differentiator: "Functional but dated UI. Counts by sentences / paragraphs / bytes but limited configurability." },
+        { name: "Editor extensions (Sublime, VS Code)", description: "Lorem Ipsum plugins", differentiator: "Great if you are already in an editor, but require installation and configuration. Limited control over output rhythm." },
+        { name: "Hipster Ipsum / Bacon Ipsum", description: "Joke variant generators", differentiator: "Fun for personal projects but unprofessional for client work or production mockups." },
+      ],
+      whyUs: "Live preview, full control over paragraph and sentence rhythm, single-click copy. No ads, no tracking.",
+    },
+    useCases: [
+      { title: "Design mockups", description: "Fill Figma, Sketch, or web design comps with realistic-looking copy before final content arrives." },
+      { title: "CMS development", description: "Test how your CMS theme handles long-form articles, including pagination and reading time calculations." },
+      { title: "Layout testing", description: "Verify that varying content lengths do not break your designs \u2014 some sections need 50 words, others 500." },
+      { title: "Print and editorial design", description: "Lay out magazine pages, brochures, and printed materials before final copy is approved." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

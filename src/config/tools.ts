@@ -862,6 +862,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["slug generator", "url slug maker", "permalink generator", "seo slug", "slugify online"],
   },
+  {
+    id: "lorem-ipsum-generator",
+    name: "Lorem Ipsum Generator",
+    description: "Generate placeholder Lorem Ipsum text for designs and mockups. Control paragraph count, sentences per paragraph, and word length.",
+    shortDescription: "Generate Lorem Ipsum placeholder text",
+    slug: "lorem-ipsum-generator",
+    relatedTools: ["word-counter", "case-converter", "slug-generator"],
+    category: "text",
+    icon: "AlignLeft",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["lorem ipsum generator", "placeholder text", "dummy text generator", "lorem ipsum online", "filler text"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
