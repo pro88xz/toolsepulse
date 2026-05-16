@@ -65,31 +65,47 @@ export default function WordToPDFPage() {
   );
 
   const downloadPDF = async () => {
-    if (!previewRef.current) return;
+    if (!htmlContent) return;
     setProcessing(true);
     setError("");
+
+    // Tailwind 4 outputs oklch() colors which html2canvas cannot parse.
+    // Build an off-screen clone with plain inline CSS instead of capturing the React DOM directly.
+    const captureDiv = document.createElement("div");
+    captureDiv.style.cssText = [
+      "position: absolute",
+      "left: -9999px",
+      "top: 0",
+      "width: 794px",
+      "padding: 40px",
+      "background: #ffffff",
+      "color: #111111",
+      "font-family: 'Segoe UI', Calibri, Arial, sans-serif",
+      "font-size: 14px",
+      "line-height: 1.6",
+    ].join("; ");
+    captureDiv.innerHTML = htmlContent;
+    document.body.appendChild(captureDiv);
+
     try {
-      // Dynamic import — html2pdf is a heavy lib, only load when actually needed
       const html2pdfModule = await import("html2pdf.js");
       const html2pdf = html2pdfModule.default;
-
       const baseName = fileName.replace(/\.(docx|doc)$/i, "");
-      // html2pdf.js types are weak; using a loose shape is the standard workaround
       const opt = {
         margin: 0.75,
         filename: `${baseName}.pdf`,
         image: { type: "jpeg", quality: 0.95 },
-        html2canvas: { scale: 2, useCORS: true, letterRendering: true, backgroundColor: "#ffffff" },
+        html2canvas: { scale: 2, backgroundColor: "#ffffff" },
         jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
         pagebreak: { mode: ["avoid-all", "css", "legacy"] },
       };
-
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (html2pdf() as any).set(opt).from(previewRef.current).save();
+      await (html2pdf() as any).set(opt).from(captureDiv).save();
     } catch (err) {
       console.error(err);
-      setError("Failed to generate PDF. Try a smaller document or different file.");
+      setError("Failed to generate PDF: " + (err instanceof Error ? err.message : String(err)));
     } finally {
+      document.body.removeChild(captureDiv);
       setProcessing(false);
     }
   };
