@@ -309,37 +309,6 @@ function RecentlyUsed() {
 }
 
 
-function ParticlesBg() {
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    left: Math.random() * 100,
-    top: Math.random() * 100,
-    size: 3 + Math.random() * 5,
-    duration: 8 + Math.random() * 12,
-    delay: Math.random() * 8,
-    opacity: 0.1 + Math.random() * 0.2,
-  }));
-
-  return (
-    <div className="particles-bg">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="particle"
-          style={{
-            left: p.left + "%",
-            top: p.top + "%",
-            width: p.size + "px",
-            height: p.size + "px",
-            animationDuration: p.duration + "s",
-            animationDelay: p.delay + "s",
-            opacity: p.opacity,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
 
 export default function HomePage() {
   const [search, setSearch] = useState("");
@@ -358,7 +327,14 @@ export default function HomePage() {
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden border-b border-slate-100">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white" />
-        <ParticlesBg />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.12), transparent 50%), radial-gradient(circle at 80% 30%, rgba(139, 92, 246, 0.10), transparent 50%), radial-gradient(circle at 50% 90%, rgba(236, 72, 153, 0.08), transparent 50%)",
+          }}
+        />
         <div className="absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
         <div className="relative mx-auto max-w-5xl px-4 pt-10 pb-8 sm:pt-20 sm:pb-14">
