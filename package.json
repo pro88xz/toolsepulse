@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@breezystack/lamejs": "^1.2.7",
+    "@faker-js/faker": "^10.4.0",
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
     "@imgly/background-removal": "^1.7.0",

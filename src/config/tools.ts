@@ -876,6 +876,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["lorem ipsum generator", "placeholder text", "dummy text generator", "lorem ipsum online", "filler text"],
   },
+  {
+    id: "fake-data-generator",
+    name: "Fake Data Generator",
+    description: "Generate realistic dummy data for testing — names, emails, addresses, companies, phone numbers, and more. Export as JSON or CSV.",
+    shortDescription: "Generate test data: names, emails, addresses",
+    slug: "fake-data-generator",
+    relatedTools: ["lorem-ipsum-generator", "uuid-generator", "password-generator", "csv-to-json"],
+    category: "generator",
+    icon: "Database",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["fake data generator", "test data generator", "dummy data generator", "mock data", "faker online"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

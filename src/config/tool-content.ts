@@ -2311,6 +2311,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Print and editorial design", description: "Lay out magazine pages, brochures, and printed materials before final copy is approved." },
     ],
   },
+  "fake-data-generator": {
+    toolSlug: "fake-data-generator",
+    howTo: {
+      title: "How to Generate Realistic Test Data for Development and QA",
+      steps: [
+        { title: "Open the Fake Data Generator", description: "Navigate to the tool. No signup, nothing to install." },
+        { title: "Pick the fields you need", description: "Tap the fields you want \u2014 names, emails, addresses, phones, companies, credit cards, UUIDs. Selected fields highlight in blue." },
+        { title: "Set row count and format", description: "Choose how many rows (1\u20131000), then output format: Table for preview, JSON for code, CSV for spreadsheets." },
+        { title: "Generate, copy, or download", description: "Hit Generate. Use Copy for clipboard or Download to save the file. Use the rows directly in your tests or fixtures." },
+      ],
+      tips: [
+        "Credit card numbers pass the Luhn checksum but are NOT real cards \u2014 safe to use in test forms, will fail at real payment gateways.",
+        "Emails look real but use generic test domains so you cannot accidentally email a real person from your test environment.",
+        "For database seeding, the JSON output drops straight into a seed file or migration. The CSV works with most spreadsheet imports.",
+        "Do not use generated fake data in production user-facing copy \u2014 it is for testing, mockups, and demos only.",
+        "Need 10,000+ rows? Use the faker library directly in your test setup \u2014 generation in the browser is capped at 1000 for UX.",
+      ],
+    },
+    faq: [
+      { question: "Is the generated data real?", answer: "No. All names, emails, addresses, and other identifiable fields are randomly generated and do not correspond to real people. The structure is realistic; the content is fabricated." },
+      { question: "Can I use the credit cards in real payments?", answer: "No. The numbers pass Luhn validation (basic credit-card check), but they are not associated with any real account and will fail at any payment processor." },
+      { question: "What if I need a custom field type?", answer: "Open a feature request \u2014 we add fields based on demand. The underlying library (Faker.js) supports dozens of types; we expose the most-requested ones." },
+      { question: "Is the data deterministic?", answer: "No, each generation is fresh and random. Hit Generate again for a different set. If you need deterministic data, use Faker.js directly in your code with a seed." },
+      { question: "Does the data leave my browser?", answer: "No \u2014 generation happens locally using Faker.js. Generated rows are downloaded directly from your browser to your device." },
+    ],
+    alternatives: {
+      intro: "Test data generation has several options depending on whether you are in code, a CLI, or a browser.",
+      tools: [
+        { name: "Faker.js / faker-py / equivalent", description: "Native test data libraries", differentiator: "Powerful for generating data inside test code, but requires writing code. Slower for ad-hoc needs." },
+        { name: "Mockaroo", description: "Cloud-based test data service", differentiator: "Excellent but requires account, free tier limited to 1000 rows and 5 schemas, sends your schema config to their servers." },
+        { name: "Excel / Google Sheets formulas", description: "Spreadsheet-based random data", differentiator: "Works for small amounts but limited to what RAND() and INDEX() can do \u2014 hard to generate realistic names or addresses." },
+      ],
+      whyUs: "Browser-side generation with no account, choice of 16 field types, JSON / CSV / table output, no upload limits or schema caps.",
+    },
+    useCases: [
+      { title: "Database seeding", description: "Generate JSON fixtures or CSV imports for populating dev and staging databases with realistic but fake data." },
+      { title: "QA and UX testing", description: "Test how your UI handles 100+ users with varying name lengths, international addresses, and realistic email formats." },
+      { title: "Demo environments", description: "Populate sales demos and pitch decks with realistic-looking customer data without using real customer PII." },
+      { title: "Load testing scripts", description: "Generate input data for k6, Locust, or other load-testing tools that send synthetic traffic to your APIs." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
