@@ -3,7 +3,6 @@
 import { useState, useRef, useCallback } from "react";
 import mammoth from "mammoth";
 import { getToolBySlug } from "@/config/tools";
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { saveAs } from "file-saver";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
 
@@ -67,51 +66,32 @@ export default function WordToPDFPage() {
 
   const downloadPDF = async () => {
     if (!previewRef.current) return;
+    setProcessing(true);
+    setError("");
+    try {
+      // Dynamic import — html2pdf is a heavy lib, only load when actually needed
+      const html2pdfModule = await import("html2pdf.js");
+      const html2pdf = html2pdfModule.default;
 
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) {
-      setError("Please allow popups to download the PDF");
-      return;
+      const baseName = fileName.replace(/\.(docx|doc)$/i, "");
+      // html2pdf.js types are weak; using a loose shape is the standard workaround
+      const opt = {
+        margin: 0.75,
+        filename: `${baseName}.pdf`,
+        image: { type: "jpeg", quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true, backgroundColor: "#ffffff" },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (html2pdf() as any).set(opt).from(previewRef.current).save();
+    } catch (err) {
+      console.error(err);
+      setError("Failed to generate PDF. Try a smaller document or different file.");
+    } finally {
+      setProcessing(false);
     }
-
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>${fileName.replace(/\.(docx|doc)$/i, "")}</title>
-          <style>
-            @page { margin: 1in; size: A4; }
-            body {
-              font-family: 'Segoe UI', Calibri, Arial, sans-serif;
-              font-size: 12pt;
-              line-height: 1.6;
-              color: #1a1a1a;
-              max-width: 100%;
-              padding: 0;
-              margin: 0;
-            }
-            h1 { font-size: 24pt; margin: 0 0 12pt 0; color: #111; }
-            h2 { font-size: 18pt; margin: 18pt 0 8pt 0; color: #222; }
-            h3 { font-size: 14pt; margin: 14pt 0 6pt 0; color: #333; }
-            p { margin: 0 0 8pt 0; }
-            table { border-collapse: collapse; width: 100%; margin: 12pt 0; }
-            td, th { border: 1px solid #ccc; padding: 6pt 8pt; text-align: left; }
-            th { background: #f5f5f5; font-weight: 600; }
-            ul, ol { margin: 0 0 8pt 0; padding-left: 24pt; }
-            li { margin-bottom: 4pt; }
-            img { max-width: 100%; height: auto; }
-            strong, b { font-weight: 600; }
-          </style>
-        </head>
-        <body>${htmlContent}</body>
-      </html>
-    `);
-
-    printWindow.document.close();
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 500);
   };
 
   const reset = () => {
