@@ -2188,6 +2188,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Print to web", description: "Convert print-spec colors (HSV or named colors) to HEX or RGB for web use, verifying visually with the swatch." },
     ],
   },
+  "case-converter": {
+    toolSlug: "case-converter",
+    howTo: {
+      title: "How to Convert Text Between 11 Different Case Formats",
+      steps: [
+        { title: "Open the Case Converter", description: "Navigate to the tool. No signup, nothing to install." },
+        { title: "Paste or type your text", description: "Enter any text in the input box. The 11 case variants update live as you type." },
+        { title: "Find the format you need", description: "Scroll through UPPERCASE, lowercase, Title Case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and more." },
+        { title: "Copy with one click", description: "Hit the Copy button on the variant you want. Done." },
+      ],
+      tips: [
+        "camelCase is standard for JavaScript variables; PascalCase for class names and React components.",
+        "snake_case is the Python convention for variables and functions; CONSTANT_CASE for constants in many languages.",
+        "kebab-case is used for HTML attributes, CSS class names, and URL slugs.",
+        "Title Case capitalizes every word; Sentence case only capitalizes the first word and proper nouns.",
+        "If your input has special characters or accents, they are stripped during snake / kebab / camel / Pascal conversion to keep identifiers valid.",
+      ],
+    },
+    faq: [
+      { question: "What is the difference between camelCase and PascalCase?", answer: "Both capitalize each word after the first, but camelCase keeps the first letter lowercase (myVariableName) while PascalCase capitalizes it too (MyClassName). camelCase is for variables and functions; PascalCase is for classes and types." },
+      { question: "Why does Title Case capitalize every word?", answer: "Title Case is the strict version used in formal style. Real AP or Chicago title casing also lowercases certain short words (a, an, of, the) but rules vary, so we use the simpler all-caps-first-letter version." },
+      { question: "Does the converter handle accented characters?", answer: "Yes for case changes (UPPERCASE / lowercase / Title / Sentence). For programming cases (camel / Pascal / snake / kebab / CONSTANT) accents are removed since they are not valid in most identifiers." },
+      { question: "Can I convert just part of a document?", answer: "Yes \u2014 paste only the section you want converted, copy the result back into your document. The tool works on whatever you give it." },
+      { question: "Is there a character limit?", answer: "No \u2014 it works on any length. Conversions are done in your browser, so the only limit is your device memory." },
+    ],
+    alternatives: {
+      intro: "Case conversion is built into most code editors, but standalone tools are often faster for quick conversions.",
+      tools: [
+        { name: "VS Code commands", description: "Built-in transform commands", differentiator: "Powerful but limited to UPPER, lower, Title in the default install. snake / camel / kebab require extensions." },
+        { name: "Excel UPPER / LOWER / PROPER", description: "Spreadsheet text functions", differentiator: "Only three case formats. No camel / snake / kebab support. Requires writing formulas." },
+        { name: "Other online case converters", description: "Various single-purpose sites", differentiator: "Most show only 3\u20134 formats and lack live preview. Some show ads or require email." },
+      ],
+      whyUs: "Eleven case formats in one view with one-click copy for each. Live updates, no ads, nothing tracked.",
+    },
+    useCases: [
+      { title: "Writing code from prose", description: "Take a feature description and instantly produce camelCase variable names or PascalCase class names from the same source words." },
+      { title: "Naming files and assets", description: "Convert design names to kebab-case for filenames or CSS classes that will not break on case-sensitive file systems." },
+      { title: "Editing user-submitted text", description: "Normalize ALL CAPS rants or all-lowercase submissions into proper Sentence case for publishing." },
+      { title: "Quick formatting fixes", description: "Convert a section of a doc to Title Case for headings or UPPERCASE for callout boxes without manually retyping." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

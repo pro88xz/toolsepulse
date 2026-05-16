@@ -834,6 +834,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["color converter", "hex to rgb", "rgb to hex", "hsl converter", "color code converter"],
   },
+  {
+    id: "case-converter",
+    name: "Case Converter",
+    description: "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, CONSTANT_CASE, and more. One-click copy for each format.",
+    shortDescription: "Convert text between 11 case formats",
+    slug: "case-converter",
+    relatedTools: ["word-counter", "text-diff-checker", "grammar-checker"],
+    category: "text",
+    icon: "CaseSensitive",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["case converter", "uppercase to lowercase", "camelcase converter", "snake case converter", "title case converter"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
