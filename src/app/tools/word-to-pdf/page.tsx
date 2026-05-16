@@ -69,22 +69,28 @@ export default function WordToPDFPage() {
     setProcessing(true);
     setError("");
 
-    // Tailwind 4 outputs oklch() colors which html2canvas cannot parse.
-    // Build an off-screen clone with plain inline CSS instead of capturing the React DOM directly.
+    // Tailwind 4 outputs oklch() and lab() colors which html2canvas cannot parse.
+    // Strip Tailwind from the capture subtree with `all: revert`, then layer back our own plain CSS.
     const captureDiv = document.createElement("div");
-    captureDiv.style.cssText = [
-      "position: absolute",
-      "left: -9999px",
-      "top: 0",
-      "width: 794px",
-      "padding: 40px",
-      "background: #ffffff",
-      "color: #111111",
-      "font-family: 'Segoe UI', Calibri, Arial, sans-serif",
-      "font-size: 14px",
-      "line-height: 1.6",
-    ].join("; ");
-    captureDiv.innerHTML = htmlContent;
+    captureDiv.style.cssText = "position:absolute;left:-9999px;top:0;width:794px";
+    const styleBlock = '<style>'
+      + '.tp-pdf-root, .tp-pdf-root * { all: revert; }'
+      + '.tp-pdf-root { font-family: \'Segoe UI\', Calibri, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #111; background: #fff; padding: 40px; width: 794px; box-sizing: border-box; }'
+      + '.tp-pdf-root h1 { font-size: 22pt; margin: 0 0 12pt 0; font-weight: 700; color: #111; }'
+      + '.tp-pdf-root h2 { font-size: 18pt; margin: 16pt 0 8pt 0; font-weight: 700; color: #222; }'
+      + '.tp-pdf-root h3 { font-size: 14pt; margin: 12pt 0 6pt 0; font-weight: 600; color: #333; }'
+      + '.tp-pdf-root p { margin: 0 0 8pt 0; }'
+      + '.tp-pdf-root strong, .tp-pdf-root b { font-weight: 700; }'
+      + '.tp-pdf-root em, .tp-pdf-root i { font-style: italic; }'
+      + '.tp-pdf-root table { border-collapse: collapse; width: 100%; margin: 10pt 0; }'
+      + '.tp-pdf-root td, .tp-pdf-root th { border: 1px solid #999; padding: 4pt 6pt; text-align: left; vertical-align: top; }'
+      + '.tp-pdf-root th { background: #f0f0f0; font-weight: 600; }'
+      + '.tp-pdf-root ul, .tp-pdf-root ol { margin: 0 0 8pt 0; padding-left: 24pt; }'
+      + '.tp-pdf-root li { margin-bottom: 2pt; }'
+      + '.tp-pdf-root img { max-width: 100%; height: auto; }'
+      + '.tp-pdf-root a { color: #1e40af; text-decoration: underline; }'
+      + '</style>';
+    captureDiv.innerHTML = styleBlock + '<div class="tp-pdf-root">' + htmlContent + '</div>';
     document.body.appendChild(captureDiv);
 
     try {
@@ -99,8 +105,9 @@ export default function WordToPDFPage() {
         jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
         pagebreak: { mode: ["avoid-all", "css", "legacy"] },
       };
+      const captureTarget = captureDiv.querySelector(".tp-pdf-root") as HTMLElement;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (html2pdf() as any).set(opt).from(captureDiv).save();
+      await (html2pdf() as any).set(opt).from(captureTarget).save();
     } catch (err) {
       console.error(err);
       setError("Failed to generate PDF: " + (err instanceof Error ? err.message : String(err)));
