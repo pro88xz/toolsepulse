@@ -360,18 +360,38 @@ export default function HomePage() {
             </p>
 
             {/* Animated Search */}
-            <div className="mx-auto mt-8 max-w-lg">
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
+            <div className="mx-auto mt-8 max-w-xl">
+              <div className="relative flex items-center rounded-2xl border border-slate-200 bg-white pl-5 pr-1.5 py-1.5 shadow-md focus-within:border-violet-400 focus-within:ring-2 focus-within:ring-violet-100 transition-all">
                 <svg className="h-5 w-5 text-slate-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
-                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-transparent text-sm text-slate-900 placeholder-slate-400 outline-none" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full bg-transparent text-sm text-slate-900 placeholder-slate-400 outline-none py-2"
+                />
                 {!search && <AnimatedPlaceholder />}
                 {search && (
-                  <button onClick={() => setSearch("")} className="text-slate-400 hover:text-slate-600 ml-2">
+                  <button onClick={() => setSearch("")} className="text-slate-400 hover:text-slate-600 mr-2" aria-label="Clear search">
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
                   </button>
                 )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById("all-tools");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow-lg hover:scale-[1.02] active:scale-100 transition-all"
+                  style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}
+                  aria-label="Search tools"
+                >
+                  Search
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </button>
               </div>
             </div>
 
