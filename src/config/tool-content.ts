@@ -2065,6 +2065,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Security review", description: "Verify that JWTs do not contain sensitive data they should not \u2014 the payload is readable by anyone with the token." },
     ],
   },
+  "url-encoder": {
+    toolSlug: "url-encoder",
+    howTo: {
+      title: "How to URL-Encode and Decode Strings and URLs",
+      steps: [
+        { title: "Open the URL Encoder/Decoder", description: "Navigate to the tool. No signup, nothing to install." },
+        { title: "Pick a mode", description: "Toggle between Encode (plain text \u2192 percent-encoded) and Decode (percent-encoded \u2192 plain text)." },
+        { title: "Choose scope", description: "Component encodes everything including / and ?. Full URL preserves structural characters. Use Component for query values, Full for whole URLs." },
+        { title: "Paste your input", description: "The output appears live in the second box. Hit Swap to send output to input for round-trip testing, or Copy to clipboard." },
+      ],
+      tips: [
+        "Use Component scope (encodeURIComponent) for query string values \u2014 it encodes & and = so they do not break the URL structure.",
+        "Use Full URL scope (encodeURI) only when encoding an entire URL that already has structure \u2014 it leaves /, ?, &, = intact.",
+        "Spaces become %20 in URL paths, but + in form-encoded query strings. We use %20 since it works in both contexts.",
+        "Decoding throws clear errors on malformed escape sequences (like a stray % followed by non-hex). The tool reports the failure explicitly.",
+        "For API debugging: paste a failing URL into Decode to see exactly what characters your client encoded incorrectly.",
+      ],
+    },
+    faq: [
+      { question: "What does URL encoding actually do?", answer: "It replaces characters that have special meaning in URLs (like &, =, ?, #, space) with their percent-encoded equivalents (%26, %3D, %3F, %23, %20) so they can be safely passed in URL paths or query strings." },
+      { question: "When should I encode a URL vs a URL component?", answer: "Encode a component when you are embedding user input or a value into a query string. Encode a full URL when you have a complete URL with structure (scheme, host, path) that needs to survive being passed as a string." },
+      { question: "Why does decoding sometimes fail?", answer: "Decoding fails if the input has invalid escape sequences \u2014 like a % followed by characters that are not valid hex digits. Common cause: double-encoded URLs or copy-paste artifacts." },
+      { question: "What is the difference between + and %20 for spaces?", answer: "+ for spaces is specific to application/x-www-form-urlencoded form bodies and query strings. %20 works everywhere including URL paths. We always use %20 to avoid ambiguity." },
+      { question: "Is my data sent anywhere?", answer: "No. Encoding and decoding happen entirely in your browser using JavaScript built-in encodeURIComponent / decodeURIComponent. Nothing leaves your device." },
+    ],
+    alternatives: {
+      intro: "URL encoding is a common dev task. Here is how various options stack up.",
+      tools: [
+        { name: "Command-line tools", description: "curl, jq, python -c", differentiator: "Powerful but requires installing tools and remembering exact flags. Slower for quick one-offs." },
+        { name: "Browser DevTools console", description: "encodeURIComponent() in Console", differentiator: "Works fine but requires opening DevTools, typing the function, escaping quotes for special characters." },
+        { name: "Other online URL encoders", description: "Many ad-supported sites", differentiator: "Usually missing the encode-vs-decode toggle and the component-vs-full scope choice. Some inject ads into copied text." },
+      ],
+      whyUs: "Live encode/decode toggle, scope selector for component vs full URL, swap button for round-trips, no ads.",
+    },
+    useCases: [
+      { title: "Debugging broken URLs", description: "Decode a failing API URL to see exactly which characters your client over-encoded or got wrong." },
+      { title: "Building query strings", description: "Encode special characters in user input (search terms, filter values) before stuffing them into a URL." },
+      { title: "OAuth and redirect URIs", description: "OAuth flows pass URLs as query parameters \u2014 those parameter values must be encoded so & and = do not break the wrapping URL." },
+      { title: "Email tracking links", description: "Encode unsubscribe URLs or click-tracking URLs that get wrapped inside a redirect URL with its own query string." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

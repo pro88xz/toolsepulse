@@ -792,6 +792,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["jwt decoder", "jwt parser", "json web token decoder", "decode jwt online", "jwt inspector"],
   },
+  {
+    id: "url-encoder",
+    name: "URL Encoder/Decoder",
+    description: "Encode and decode URLs and URI components. Handles query strings, special characters, and full URLs. Instant bidirectional conversion.",
+    shortDescription: "Encode and decode URLs instantly",
+    slug: "url-encoder",
+    relatedTools: ["base64-encoder", "jwt-decoder", "json-formatter"],
+    category: "developer",
+    icon: "Link",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["url encoder", "url decoder", "uri encoder", "encodeURIComponent online", "percent encoding"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
