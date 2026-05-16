@@ -1983,6 +1983,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Quick voiceover", description: "Record narration for a video, slideshow, or social post and download it ready to drop into your editor." },
     ],
   },
+  "uuid-generator": {
+    toolSlug: "uuid-generator",
+    howTo: {
+      title: "How to Generate UUIDs in Bulk (v4 Random) for Testing and Production",
+      steps: [
+        { title: "Open the UUID Generator", description: "Navigate to the tool. No signup, nothing to install." },
+        { title: "Choose how many", description: "Pick a count between 1 and 1000. Default is 1 for quick single-UUID needs." },
+        { title: "Pick a format", description: "Standard lowercase-hyphenated, uppercase, no-hyphens (32 hex chars), or wrapped in braces (Microsoft GUID style)." },
+        { title: "Generate and copy", description: "Hit Generate, then click any individual UUID to copy it, or Copy All to grab the whole batch." },
+      ],
+      tips: [
+        "v4 UUIDs have 122 bits of entropy \u2014 collision-resistant enough for any practical use, including primary keys in distributed systems.",
+        "In code, use crypto.randomUUID() directly \u2014 it is native, fast, and cryptographically secure. We use it under the hood.",
+        "Microsoft\u2019s GUID format is the same data as a UUID, just usually written with braces and uppercase: {XXXXXXXX-XXXX-...}.",
+        "Avoid UUIDs as URL slugs unless you need opacity \u2014 they are long, ugly, and bad for SEO.",
+        "If you need sequential UUIDs for database insert performance (v7), generate them server-side \u2014 v7 is not in the browser API yet.",
+      ],
+    },
+    faq: [
+      { question: "What is a UUID v4?", answer: "A 128-bit identifier, 122 bits of which are random. It looks like xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx \u2014 the 4 marks the version, y is one of 8, 9, a, or b. Effectively unique forever." },
+      { question: "Can two UUIDs ever collide?", answer: "Mathematically possible, practically never. You would need to generate billions per second for centuries to hit a collision. Safe to use as primary keys without checking for duplicates." },
+      { question: "What is the difference between UUID and GUID?", answer: "None \u2014 GUID is Microsoft\u2019s name for the same standard, often written with braces and uppercase. Pick the format that matches your system\u2019s convention." },
+      { question: "Are these UUIDs cryptographically secure?", answer: "Yes \u2014 we use crypto.randomUUID() and crypto.getRandomValues() under the hood, which pull from the browser\u2019s cryptographic random number generator." },
+      { question: "Why is the maximum 1000?", answer: "To keep the UI usable. Beyond 1000 you should generate UUIDs in code as needed rather than copy-paste from a web tool." },
+    ],
+    alternatives: {
+      intro: "UUID generation is built into most languages, but a quick web tool is handy when you need one outside of code.",
+      tools: [
+        { name: "uuidgen (CLI)", description: "macOS and Linux built-in", differentiator: "Generates one UUID per invocation \u2014 awkward for bulk and not available on Windows by default." },
+        { name: "Online single-UUID tools", description: "Various web pages", differentiator: "Most generate only one UUID at a time without bulk support or format options." },
+        { name: "Code in Node / Python / etc.", description: "Native language UUIDs", differentiator: "Perfect if you are already in code. Slower for one-off generation when you just need a UUID for a test config." },
+      ],
+      whyUs: "Bulk generation up to 1000, four format options, copy individual or copy all, all browser-side with cryptographically secure randomness.",
+    },
+    useCases: [
+      { title: "Database primary keys", description: "Pre-generate UUIDs for inserting test data or seeding a database without round-tripping to the DB for each ID." },
+      { title: "API request tracing", description: "Grab a few request IDs or trace IDs for testing logging and observability pipelines." },
+      { title: "Feature flag rollouts", description: "Generate user IDs or session IDs for testing percentage-based feature flag bucketing." },
+      { title: "Test fixtures", description: "Populate test fixtures and mock data with realistic UUID values instead of hardcoded placeholder strings." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

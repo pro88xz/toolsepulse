@@ -764,6 +764,20 @@ export const tools: Tool[] = [
     tier: 1,
     keywords: ["paragraph generator free", "write a paragraph for me", "ai paragraph writer", "generate paragraph about topic", "free paragraph generator online", "auto paragraph writer"],
   },
+  {
+    id: "uuid-generator",
+    name: "UUID Generator",
+    description: "Generate v4 (random) UUIDs in bulk. Configurable case, hyphens, and braces. Generate up to 1000 at once and copy with one click.",
+    shortDescription: "Generate v4 UUIDs in bulk",
+    slug: "uuid-generator",
+    relatedTools: ["password-generator", "json-formatter", "base64-encoder"],
+    category: "developer",
+    icon: "Fingerprint",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["uuid generator", "guid generator", "v4 uuid", "random uuid", "bulk uuid generator"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
