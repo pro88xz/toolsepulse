@@ -69,43 +69,36 @@ export default function WordToPDFPage() {
     setProcessing(true);
     setError("");
     try {
-      // Use pdfmake + html-to-pdfmake. Produces a real PDF with selectable text,
-      // does NOT rasterize the DOM, so Tailwind 4 oklch/lab colors are irrelevant.
-      const [{ default: pdfMake }, { default: pdfFonts }, htmlToPdfmakeMod] = await Promise.all([
-        import("pdfmake/build/pdfmake"),
-        import("pdfmake/build/vfs_fonts"),
-        import("html-to-pdfmake"),
-      ]);
-      // pdfmake font loading varies by version — try every known shape
+      // Load pdfmake from CDN — bypasses Next bundling issues with the VFS
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const pf = pdfFonts as any;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const pm = pdfMake as any;
-      pm.vfs = pf.vfs || pf.default?.vfs || pf.pdfMake?.vfs || pf.default?.pdfMake?.vfs;
-      if (!pm.vfs) throw new Error("pdfmake font VFS could not be loaded");
-      const htmlToPdfmake = htmlToPdfmakeMod.default;
+      const w = window as any;
+      if (!w.pdfMake) {
+        await new Promise<void>((resolve, reject) => {
+          const s1 = document.createElement("script");
+          s1.src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js";
+          s1.onload = () => {
+            const s2 = document.createElement("script");
+            s2.src = "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.js";
+            s2.onload = () => resolve();
+            s2.onerror = () => reject(new Error("Failed to load pdfmake fonts"));
+            document.head.appendChild(s2);
+          };
+          s1.onerror = () => reject(new Error("Failed to load pdfmake"));
+          document.head.appendChild(s1);
+        });
+      }
 
-      const content = htmlToPdfmake(htmlContent, {
-        window,
-        defaultStyles: {
-          h1: { fontSize: 22, bold: true, marginBottom: 8, color: "#111111" },
-          h2: { fontSize: 18, bold: true, marginTop: 12, marginBottom: 6, color: "#222222" },
-          h3: { fontSize: 14, bold: true, marginTop: 10, marginBottom: 4, color: "#333333" },
-          p: { fontSize: 11, marginBottom: 6, color: "#111111" },
-          a: { color: "#1e40af", decoration: "underline" },
-          strong: { bold: true },
-          em: { italics: true },
-        },
-      });
+      const htmlToPdfmakeMod = await import("html-to-pdfmake");
+      const htmlToPdfmake = htmlToPdfmakeMod.default;
+      const content = htmlToPdfmake(htmlContent, { window });
 
       const baseName = fileName.replace(/\.(docx|doc)$/i, "");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (pdfMake as any).createPdf({
+      w.pdfMake.createPdf({
         content,
         pageSize: "LETTER",
         pageMargins: [50, 60, 50, 60],
         defaultStyle: { fontSize: 11, lineHeight: 1.4 },
-      }).download(`${baseName}.pdf`);
+      }).download(baseName + ".pdf");
     } catch (err) {
       console.error(err);
       setError("Failed to generate PDF: " + (err instanceof Error ? err.message : String(err)));
