@@ -68,51 +68,43 @@ export default function WordToPDFPage() {
     if (!htmlContent) return;
     setProcessing(true);
     setError("");
-
-    // Tailwind 4 outputs oklch() and lab() colors which html2canvas cannot parse.
-    // Strip Tailwind from the capture subtree with `all: revert`, then layer back our own plain CSS.
-    const captureDiv = document.createElement("div");
-    captureDiv.style.cssText = "position:absolute;left:-9999px;top:0;width:794px";
-    const styleBlock = '<style>'
-      + '.tp-pdf-root, .tp-pdf-root * { all: revert; }'
-      + '.tp-pdf-root { font-family: \'Segoe UI\', Calibri, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #111; background: #fff; padding: 40px; width: 794px; box-sizing: border-box; }'
-      + '.tp-pdf-root h1 { font-size: 22pt; margin: 0 0 12pt 0; font-weight: 700; color: #111; }'
-      + '.tp-pdf-root h2 { font-size: 18pt; margin: 16pt 0 8pt 0; font-weight: 700; color: #222; }'
-      + '.tp-pdf-root h3 { font-size: 14pt; margin: 12pt 0 6pt 0; font-weight: 600; color: #333; }'
-      + '.tp-pdf-root p { margin: 0 0 8pt 0; }'
-      + '.tp-pdf-root strong, .tp-pdf-root b { font-weight: 700; }'
-      + '.tp-pdf-root em, .tp-pdf-root i { font-style: italic; }'
-      + '.tp-pdf-root table { border-collapse: collapse; width: 100%; margin: 10pt 0; }'
-      + '.tp-pdf-root td, .tp-pdf-root th { border: 1px solid #999; padding: 4pt 6pt; text-align: left; vertical-align: top; }'
-      + '.tp-pdf-root th { background: #f0f0f0; font-weight: 600; }'
-      + '.tp-pdf-root ul, .tp-pdf-root ol { margin: 0 0 8pt 0; padding-left: 24pt; }'
-      + '.tp-pdf-root li { margin-bottom: 2pt; }'
-      + '.tp-pdf-root img { max-width: 100%; height: auto; }'
-      + '.tp-pdf-root a { color: #1e40af; text-decoration: underline; }'
-      + '</style>';
-    captureDiv.innerHTML = styleBlock + '<div class="tp-pdf-root">' + htmlContent + '</div>';
-    document.body.appendChild(captureDiv);
-
     try {
-      const html2pdfModule = await import("html2pdf.js");
-      const html2pdf = html2pdfModule.default;
-      const baseName = fileName.replace(/\.(docx|doc)$/i, "");
-      const opt = {
-        margin: 0.75,
-        filename: `${baseName}.pdf`,
-        image: { type: "jpeg", quality: 0.95 },
-        html2canvas: { scale: 2, backgroundColor: "#ffffff" },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
-      };
-      const captureTarget = captureDiv.querySelector(".tp-pdf-root") as HTMLElement;
+      // Use pdfmake + html-to-pdfmake. Produces a real PDF with selectable text,
+      // does NOT rasterize the DOM, so Tailwind 4 oklch/lab colors are irrelevant.
+      const [{ default: pdfMake }, { default: pdfFonts }, htmlToPdfmakeMod] = await Promise.all([
+        import("pdfmake/build/pdfmake"),
+        import("pdfmake/build/vfs_fonts"),
+        import("html-to-pdfmake"),
+      ]);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (html2pdf() as any).set(opt).from(captureTarget).save();
+      (pdfMake as any).vfs = (pdfFonts as any).vfs || (pdfFonts as any).pdfMake?.vfs;
+      const htmlToPdfmake = htmlToPdfmakeMod.default;
+
+      const content = htmlToPdfmake(htmlContent, {
+        window,
+        defaultStyles: {
+          h1: { fontSize: 22, bold: true, marginBottom: 8, color: "#111111" },
+          h2: { fontSize: 18, bold: true, marginTop: 12, marginBottom: 6, color: "#222222" },
+          h3: { fontSize: 14, bold: true, marginTop: 10, marginBottom: 4, color: "#333333" },
+          p: { fontSize: 11, marginBottom: 6, color: "#111111" },
+          a: { color: "#1e40af", decoration: "underline" },
+          strong: { bold: true },
+          em: { italics: true },
+        },
+      });
+
+      const baseName = fileName.replace(/\.(docx|doc)$/i, "");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (pdfMake as any).createPdf({
+        content,
+        pageSize: "LETTER",
+        pageMargins: [50, 60, 50, 60],
+        defaultStyle: { fontSize: 11, lineHeight: 1.4 },
+      }).download(`${baseName}.pdf`);
     } catch (err) {
       console.error(err);
       setError("Failed to generate PDF: " + (err instanceof Error ? err.message : String(err)));
     } finally {
-      document.body.removeChild(captureDiv);
       setProcessing(false);
     }
   };
