@@ -14,7 +14,7 @@ export default function Header() {
           <img src="/logo.png" alt="ToolsePulse" className="h-10 w-auto object-contain" width={120} height={36} />
           <span className="text-xl font-bold tracking-tight">
             <span className="text-slate-900">Toolse</span>
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899)" }}>Pulse</span>
+            <span className="bg-clip-text text-transparent font-extrabold" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}>Pulse</span>
           </span>
         </Link>
 
