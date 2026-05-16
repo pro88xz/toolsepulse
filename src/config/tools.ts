@@ -778,6 +778,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["uuid generator", "guid generator", "v4 uuid", "random uuid", "bulk uuid generator"],
   },
+  {
+    id: "jwt-decoder",
+    name: "JWT Decoder",
+    description: "Decode and inspect JSON Web Tokens. View header, payload, signature, and decoded timestamps. Spot expired tokens instantly.",
+    shortDescription: "Decode and inspect JWT tokens",
+    slug: "jwt-decoder",
+    relatedTools: ["base64-encoder", "json-formatter", "uuid-generator"],
+    category: "developer",
+    icon: "KeyRound",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["jwt decoder", "jwt parser", "json web token decoder", "decode jwt online", "jwt inspector"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

@@ -2024,6 +2024,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Test fixtures", description: "Populate test fixtures and mock data with realistic UUID values instead of hardcoded placeholder strings." },
     ],
   },
+  "jwt-decoder": {
+    toolSlug: "jwt-decoder",
+    howTo: {
+      title: "How to Decode and Inspect a JWT (JSON Web Token)",
+      steps: [
+        { title: "Open the JWT Decoder", description: "Navigate to the tool. No signup, no logs." },
+        { title: "Paste your JWT", description: "Drop in any JWT \u2014 typically a long base64url string with two dots like xxxxxx.yyyyyy.zzzzzz." },
+        { title: "Read the decoded header and payload", description: "The header (algorithm, key ID) and payload (claims like sub, iat, exp) appear as readable JSON." },
+        { title: "Check expiration and timestamps", description: "Standard claims (exp, iat, nbf) are shown as readable dates with how long ago or until \u2014 catch expired tokens at a glance." },
+      ],
+      tips: [
+        "JWTs have three parts: header.payload.signature \u2014 separated by dots, all base64url-encoded.",
+        "exp is the expiration time in seconds since 1970. iat is when the token was issued. nbf is \"not before\" \u2014 the earliest time it is valid.",
+        "The signature cannot be verified without the signing key \u2014 this decoder shows you the contents only. Never trust a JWT\u2019s claims without verifying the signature server-side.",
+        "If your payload has nested JSON inside a claim (like permissions), it displays as a string \u2014 paste the inner JSON into the JSON Formatter tool to pretty-print it.",
+        "For Authorization headers, paste just the part after \"Bearer \" \u2014 the decoder handles whitespace and prefixes leniently.",
+      ],
+    },
+    faq: [
+      { question: "Does the decoder verify the signature?", answer: "No. Signature verification requires the secret or public key, which we do not and should not have. Use this tool to inspect contents \u2014 always verify signatures server-side with the real key." },
+      { question: "Can I decode any JWT?", answer: "Yes, as long as it follows the standard header.payload.signature structure and uses base64url encoding (which all JWTs do)." },
+      { question: "What if my token is not valid?", answer: "The decoder shows a clear error pointing to which part failed (header parse, payload parse, base64 decode). Most often it is a copy-paste truncation or extra whitespace." },
+      { question: "Is it safe to paste a production token?", answer: "Decoding happens entirely in your browser \u2014 nothing is sent to a server. That said, a JWT is a credential. If your screen is shared or recorded, the decoded payload is visible." },
+      { question: "Why are my dates showing as numbers?", answer: "JWT timestamps (iat, exp, nbf) are stored as seconds since 1970. The decoder converts them to human-readable dates with relative time (\"expires in 2h\") next to the raw values." },
+    ],
+    alternatives: {
+      intro: "JWT decoding is a routine debugging task. Popular options vary in privacy and convenience.",
+      tools: [
+        { name: "jwt.io", description: "Auth0\u2019s JWT debugger", differentiator: "Excellent, but the token is pasted into a third-party site \u2014 not ideal for production tokens. Adds signature verification UI which can be useful." },
+        { name: "Command-line decoding", description: "echo TOKEN | cut -d. -f2 | base64 -d", differentiator: "Works but awkward, does not handle base64url properly without flags, no human-readable date formatting." },
+        { name: "Browser DevTools", description: "atob() in console", differentiator: "Fine for one part at a time, but requires manual splitting and url-safe base64 fixes." },
+      ],
+      whyUs: "Decode in your browser, see all three parts at once, human-readable timestamps, no third-party logging of your tokens.",
+    },
+    useCases: [
+      { title: "Debugging auth failures", description: "Paste the rejected token to see if it is expired, has the wrong audience claim, or is missing a required permission." },
+      { title: "Inspecting OAuth tokens", description: "Decode access tokens from OAuth flows to understand the scopes and claims your identity provider is issuing." },
+      { title: "API integration", description: "When integrating with a service that issues JWTs, decode samples to learn the exact claim names and value formats." },
+      { title: "Security review", description: "Verify that JWTs do not contain sensitive data they should not \u2014 the payload is readable by anyone with the token." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
