@@ -890,6 +890,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["fake data generator", "test data generator", "dummy data generator", "mock data", "faker online"],
   },
+  {
+    id: "character-counter",
+    name: "Character Counter",
+    description: "Count characters, words, lines, sentences, and paragraphs in real time. Track limits for Twitter, SMS, meta descriptions, and more. Free and private.",
+    shortDescription: "Count characters with live platform limits",
+    slug: "character-counter",
+    relatedTools: ["word-counter", "case-converter", "text-diff-checker", "grammar-checker"],
+    category: "text",
+    icon: "Hash",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["character counter", "letter count", "twitter character count", "sms character count", "count characters online"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

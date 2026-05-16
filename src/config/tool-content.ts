@@ -2352,6 +2352,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Load testing scripts", description: "Generate input data for k6, Locust, or other load-testing tools that send synthetic traffic to your APIs." },
     ],
   },
+  "character-counter": {
+    toolSlug: "character-counter",
+    howTo: {
+      title: "How to Count Characters Online with Platform Limit Indicators",
+      steps: [
+        { title: "Open the Character Counter", description: "Navigate to the tool. Nothing to install, no signup." },
+        { title: "Type or paste your text", description: "The count updates live as you type \u2014 characters, words, lines, sentences, paragraphs." },
+        { title: "Watch the platform limit bars", description: "Each platform bar (Twitter, SMS, meta description) shows how much room you have left, turning red when you go over." },
+        { title: "Edit until you fit", description: "Trim or expand your text right in the editor. Counts update in real time, no submit button needed." },
+      ],
+      tips: [
+        "Twitter / X allows 280 characters per post \u2014 links count as 23 regardless of actual length.",
+        "SMS messages over 160 characters get split into multiple parts on most carriers, costing more to send.",
+        "Meta descriptions over 160 characters get truncated in Google search results with an ellipsis.",
+        "Title tags should stay under 60 characters to avoid being cut off in mobile search.",
+        "Instagram captions allow up to 2,200 characters but only the first 125 show before the More tap.",
+      ],
+    },
+    faq: [
+      { question: "How is the character count calculated?", answer: "We count every character including spaces, line breaks, and punctuation. The \"No Spaces\" stat strips out all whitespace if you need that variant." },
+      { question: "Does it count emojis correctly?", answer: "Yes \u2014 emojis are counted as single characters, matching how Twitter and most platforms count them." },
+      { question: "Why does my Twitter character count look different?", answer: "Twitter counts URLs as 23 characters regardless of actual length, and counts certain emojis as 2. Our count reflects raw character length; Twitter\u2019s official count may differ slightly for those edge cases." },
+      { question: "Can I use this offline?", answer: "Once the page is loaded, yes \u2014 all counting happens in your browser. No network required." },
+      { question: "Is my text stored or sent anywhere?", answer: "No. All counting is local. Your text stays in your browser tab and is gone when you close it." },
+    ],
+    alternatives: {
+      intro: "Most character counters work fine for basic counts. Here is what makes this one different.",
+      tools: [
+        { name: "Generic online text counters", description: "Various sites", differentiator: "Usually show just word and character count, no platform-specific limit bars or live updates." },
+        { name: "Built-in editor counters", description: "Word, Google Docs, etc.", differentiator: "Hidden in menus, no platform-specific guidance, can be slow to update on long documents." },
+        { name: "Twitter\u2019s in-app counter", description: "Native Twitter compose box", differentiator: "Only works in Twitter\u2019s UI. No use for drafting elsewhere first, no other platform context." },
+      ],
+      whyUs: "Live updates, six different counts at once, and six platform limit indicators in one view. Nothing leaves your browser.",
+    },
+    useCases: [
+      { title: "Social media drafting", description: "Write tweets, LinkedIn posts, and Instagram captions while watching each platform\u2019s limit bar so you never get cut off mid-thought." },
+      { title: "SEO meta tags", description: "Craft title tags and meta descriptions that fit Google\u2019s display limits, avoiding embarrassing truncation in search results." },
+      { title: "SMS marketing", description: "Keep promotional SMS messages under 160 characters to avoid multi-part costs and ensure clean delivery on every carrier." },
+      { title: "Academic writing", description: "Check character or word counts against essay or abstract limits for journals, applications, and assignments." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
