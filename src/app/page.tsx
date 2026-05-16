@@ -362,9 +362,6 @@ export default function HomePage() {
             {/* Animated Search */}
             <div className="mx-auto mt-8 max-w-xl">
               <div className="relative flex items-center rounded-2xl border border-slate-200 bg-white pl-5 pr-1.5 py-1.5 shadow-md focus-within:border-violet-400 focus-within:ring-2 focus-within:ring-violet-100 transition-all">
-                <svg className="h-5 w-5 text-slate-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                </svg>
                 <input
                   type="text"
                   value={search}
