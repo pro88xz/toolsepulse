@@ -820,6 +820,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["hash generator", "sha256 generator", "sha512 generator", "sha1 hash", "text to hash"],
   },
+  {
+    id: "color-converter",
+    name: "Color Code Converter",
+    description: "Convert colors between HEX, RGB, HSL, and HSV. Live preview swatch and one-click copy for any format. Designed for designers and developers.",
+    shortDescription: "Convert between HEX, RGB, HSL, HSV",
+    slug: "color-converter",
+    relatedTools: ["color-picker", "favicon-generator"],
+    category: "developer",
+    icon: "Palette",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["color converter", "hex to rgb", "rgb to hex", "hsl converter", "color code converter"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

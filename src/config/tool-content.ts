@@ -2147,6 +2147,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Git and version control", description: "Compute SHA-1 of file contents the same way Git does to verify commit or blob identifiers." },
     ],
   },
+  "color-converter": {
+    toolSlug: "color-converter",
+    howTo: {
+      title: "How to Convert Color Codes Between HEX, RGB, HSL, and HSV",
+      steps: [
+        { title: "Open the Color Code Converter", description: "Navigate to the tool. No installs, no signup." },
+        { title: "Enter any color format", description: "Type or paste a HEX (#3b82f6), RGB (rgb(59, 130, 246)), HSL, or HSV value. The tool detects the format automatically." },
+        { title: "See all formats at once", description: "The other formats compute live. A color swatch shows the actual color so you can verify visually." },
+        { title: "Copy what you need", description: "Click any format to copy. Use HEX for HTML and CSS, RGB for transparency support, HSL for theme variations." },
+      ],
+      tips: [
+        "HEX is the most compact format and ideal for CSS \u2014 except when you need transparency (use rgba() instead).",
+        "HSL is best for color theming: change the H (hue) to get analogous colors, tweak L (lightness) for tints and shades.",
+        "RGB and HEX are mathematically identical \u2014 just different notations. #ff0000 is the same as rgb(255, 0, 0).",
+        "HSV (also called HSB) is preferred by Photoshop and most color picker UIs because it maps better to picker controls.",
+        "Three-character HEX shortcuts (#f00) expand to six (#ff0000) \u2014 each character is duplicated.",
+      ],
+    },
+    faq: [
+      { question: "What is the difference between HSL and HSV?", answer: "Both use Hue (0\u2013360 degrees) as the first value. HSL Lightness goes from black through the color to white. HSV Value goes from black to the pure color (no white at top). Designers often prefer HSV for picking; developers prefer HSL for theming." },
+      { question: "When should I use HEX vs RGB?", answer: "HEX is shorter (#f00 vs rgb(255, 0, 0)) and slightly faster for CSS parsers. Use RGB when you need transparency (rgba) or want to do math on color channels in CSS variables." },
+      { question: "Can I convert with transparency?", answer: "This converter handles solid colors only. For alpha, append /50 (Tailwind) or use rgba() / hsla() directly \u2014 the alpha channel is independent of conversion." },
+      { question: "Why does the same color look different in different programs?", answer: "Different color profiles and gamma settings. RGB values are device-independent in spec but rendered through the display profile, so the same hex value may look slightly different on different screens." },
+      { question: "Is there a max length on input?", answer: "No \u2014 but only the first valid color in the input is parsed." },
+    ],
+    alternatives: {
+      intro: "Color conversion is built into most design tools, but standalone web tools are convenient for quick checks.",
+      tools: [
+        { name: "Color pickers in Figma / Sketch", description: "Built-in design tool color UI", differentiator: "Excellent but locked to that tool. Awkward for converting a color you got from an email or doc." },
+        { name: "DevTools color editor", description: "Browser DevTools inspector", differentiator: "Works inside DevTools \u2014 fine when you are already there, but slow for ad-hoc conversions." },
+        { name: "Other online color converters", description: "Many ad-supported sites", differentiator: "Most show only 2\u20133 formats. Some do not auto-detect input format and require picking it manually." },
+      ],
+      whyUs: "Auto-detects input format, shows all four formats live with a color swatch, one-click copy.",
+    },
+    useCases: [
+      { title: "Matching brand colors", description: "Translate a brand HEX color into the RGB or HSL your design tool requires while keeping it identical." },
+      { title: "CSS theming", description: "Get HSL values from a brand HEX to build a theme system where you adjust lightness for hover, focus, and disabled states." },
+      { title: "Designer-developer handoff", description: "When designers give you HSV (Photoshop default) but you need HEX for CSS, convert in one step without translation errors." },
+      { title: "Print to web", description: "Convert print-spec colors (HSV or named colors) to HEX or RGB for web use, verifying visually with the swatch." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
