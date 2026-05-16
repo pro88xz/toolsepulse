@@ -332,10 +332,10 @@ export default function HomePage() {
           className="absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.12), transparent 50%), radial-gradient(circle at 80% 30%, rgba(139, 92, 246, 0.10), transparent 50%), radial-gradient(circle at 50% 90%, rgba(236, 72, 153, 0.08), transparent 50%)",
+              "radial-gradient(60% 50% at 15% 15%, rgba(29, 78, 216, 0.18), transparent 70%), radial-gradient(50% 50% at 85% 20%, rgba(109, 40, 217, 0.18), transparent 70%), radial-gradient(70% 60% at 50% 100%, rgba(219, 39, 119, 0.14), transparent 70%)",
           }}
         />
-        <div className="absolute inset-0 opacity-[0.3]" style={{ backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+        <div aria-hidden="true" className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
 
         <div className="relative mx-auto max-w-5xl px-4 pt-10 pb-8 sm:pt-20 sm:pb-14">
           <div className="text-center">
@@ -350,7 +350,7 @@ export default function HomePage() {
             <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.08]">
               The tools you need,
               <br />
-              <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-500 bg-clip-text text-transparent">
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}>
                 <RotatingText />
               </span>
             </h1>
@@ -375,8 +375,15 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Brand tagline */}
+            <div className="mt-7 flex items-center justify-center gap-3">
+              <span className="h-px w-8 bg-gradient-to-r from-transparent to-slate-300" />
+              <span className="text-[10px] uppercase tracking-[0.25em] font-semibold text-slate-500">All Tools. One Pulse.</span>
+              <span className="h-px w-8 bg-gradient-to-l from-transparent to-slate-300" />
+            </div>
+
             {/* Trust signals */}
-            <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-xs text-slate-500 font-medium">
+            <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-xs text-slate-500 font-medium">
               {["No file uploads", "No signup needed", "No watermarks", "100% free", "Works offline"].map((t) => (
                 <span key={t} className="flex items-center gap-1.5">
                   <svg className="h-3.5 w-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
