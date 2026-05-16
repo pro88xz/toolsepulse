@@ -848,6 +848,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["case converter", "uppercase to lowercase", "camelcase converter", "snake case converter", "title case converter"],
   },
+  {
+    id: "slug-generator",
+    name: "Slug Generator",
+    description: "Generate clean, URL-safe slugs from any title. Handles accents, special characters, and emojis. Configurable separator and casing.",
+    shortDescription: "Turn titles into clean URL slugs",
+    slug: "slug-generator",
+    relatedTools: ["case-converter", "url-encoder", "word-counter"],
+    category: "text",
+    icon: "Link2",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["slug generator", "url slug maker", "permalink generator", "seo slug", "slugify online"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

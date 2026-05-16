@@ -2229,6 +2229,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Quick formatting fixes", description: "Convert a section of a doc to Title Case for headings or UPPERCASE for callout boxes without manually retyping." },
     ],
   },
+  "slug-generator": {
+    toolSlug: "slug-generator",
+    howTo: {
+      title: "How to Generate Clean URL Slugs from Titles",
+      steps: [
+        { title: "Open the Slug Generator", description: "Navigate to the tool. No signup required." },
+        { title: "Type your title or heading", description: "Paste in a blog post title, product name, or any phrase you want to become a URL slug." },
+        { title: "Pick separator and casing", description: "Default is lowercase hyphens \u2014 standard for SEO. Switch to underscores or dots if your stack requires it." },
+        { title: "Copy your slug", description: "The clean slug appears below in real time. Click Copy and paste it into your CMS or framework." },
+      ],
+      tips: [
+        "Hyphens are Google\u2019s recommended slug separator. Underscores are treated as letter-joiners (so foo_bar reads as foobar).",
+        "Shorter slugs rank slightly better. Aim for 3\u20135 meaningful words and drop articles like \"the\" and \"a\".",
+        "Numbers in slugs are fine, but avoid dates if you ever want to update the post \u2014 dated URLs feel stale even when content is fresh.",
+        "Once a slug is live and ranking, do not change it. If you must, set up a 301 redirect from the old URL.",
+        "Accents (caf\u00e9 \u2192 cafe) and symbols (& \u2192 and) are converted automatically so the slug works in any URL.",
+      ],
+    },
+    faq: [
+      { question: "Why do URLs need slugs?", answer: "Slugs let humans and search engines read URLs at a glance. /how-to-make-coffee is far better for SEO and shareability than /post/12345 or /p?id=12345." },
+      { question: "Does the slug generator handle special characters?", answer: "Yes. Accents are normalized (caf\u00e9 \u2192 cafe), emojis are stripped, ampersands become \"and\", and anything else non-alphanumeric becomes a separator." },
+      { question: "Can I use uppercase letters in URLs?", answer: "Technically yes, but lowercase is standard. Mixed-case URLs cause issues on case-sensitive servers (Linux) and look messy. Keep them lowercase." },
+      { question: "What separator should I use?", answer: "Hyphens for SEO (Google\u2019s recommendation). Underscores only if your framework specifically requires them. Avoid dots in path segments \u2014 they can confuse routers." },
+      { question: "Are my titles uploaded anywhere?", answer: "No. Slug generation is pure string manipulation in your browser. Nothing leaves your device." },
+    ],
+    alternatives: {
+      intro: "Some CMSs auto-generate slugs from titles, but the quality varies and edge cases (accents, emojis, symbols) often break them.",
+      tools: [
+        { name: "WordPress auto-slug", description: "Built-in CMS slug generation", differentiator: "Works for English but butchers accented characters and non-Latin scripts. Locked to WordPress." },
+        { name: "Ghost / Hugo / Jekyll", description: "Static site generator slugs", differentiator: "Each handles slugs differently. Useful only if you are already in their ecosystem." },
+        { name: "lodash kebabCase", description: "JS library function", differentiator: "Great for developers but requires writing code. Does not normalize accents or handle special characters by default." },
+      ],
+      whyUs: "Works in your browser, handles accents and special characters cleanly, lets you preview before pasting into any CMS.",
+    },
+    useCases: [
+      { title: "Blog post URLs", description: "Turn a long post title into a tight, SEO-friendly URL that is easy to share and remember." },
+      { title: "Product page slugs", description: "Generate clean URLs for e-commerce product pages that include the product name for SEO." },
+      { title: "Documentation paths", description: "Create consistent kebab-case URLs for documentation site sections that match the underlying file structure." },
+      { title: "Event and conference pages", description: "Build slugs for conference talk pages or event landing pages that read naturally in URL form." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
