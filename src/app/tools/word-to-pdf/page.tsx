@@ -76,8 +76,13 @@ export default function WordToPDFPage() {
         import("pdfmake/build/vfs_fonts"),
         import("html-to-pdfmake"),
       ]);
+      // pdfmake font loading varies by version — try every known shape
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (pdfMake as any).vfs = (pdfFonts as any).vfs || (pdfFonts as any).pdfMake?.vfs;
+      const pf = pdfFonts as any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const pm = pdfMake as any;
+      pm.vfs = pf.vfs || pf.default?.vfs || pf.pdfMake?.vfs || pf.default?.pdfMake?.vfs;
+      if (!pm.vfs) throw new Error("pdfmake font VFS could not be loaded");
       const htmlToPdfmake = htmlToPdfmakeMod.default;
 
       const content = htmlToPdfmake(htmlContent, {
