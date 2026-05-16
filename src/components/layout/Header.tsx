@@ -11,20 +11,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <svg className="h-9 w-9" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="tp-header" x1="36" y1="36" x2="220" y2="220" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#3B82F6" />
-                <stop offset="0.5" stopColor="#8B5CF6" />
-                <stop offset="1" stopColor="#EC4899" />
-              </linearGradient>
-            </defs>
-            <g fill="url(#tp-header)">
-              <rect x="28" y="48" width="172" height="38" rx="19" />
-              <rect x="86" y="58" width="38" height="154" rx="19" />
-              <path d="M124 66 L124 158 L172 158 A46 46 0 0 0 172 66 Z" />
-            </g>
-          </svg>
+          <img src="/logo-original.png" alt="ToolsePulse" className="h-9 w-9 object-contain" width={36} height={36} />
           <span className="text-xl font-bold tracking-tight">
             <span className="text-slate-900">Toolse</span>
             <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899)" }}>Pulse</span>
