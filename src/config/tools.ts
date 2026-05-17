@@ -974,6 +974,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["gif maker", "create gif", "images to gif", "make gif online", "animated gif generator"],
   },
+  {
+    id: "meme-generator",
+    name: "Meme Generator",
+    description: "Create memes with top and bottom text in classic Impact font. Add stroke, color, and custom positioning. Upload any image, no signup, instant download.",
+    shortDescription: "Make memes with top and bottom text",
+    slug: "meme-generator",
+    relatedTools: ["watermark-image", "image-cropper", "image-resizer", "gif-maker"],
+    category: "image",
+    icon: "Smile",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["meme generator", "make meme online", "meme maker free", "top bottom text meme", "create meme image"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

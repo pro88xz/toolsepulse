@@ -2598,6 +2598,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Animated marketing assets", description: "Create simple animated banners, button states, or icon transitions for emails and lightweight web content." },
     ],
   },
+  "meme-generator": {
+    toolSlug: "meme-generator",
+    howTo: {
+      title: "How to Create Memes with Top and Bottom Text Online",
+      steps: [
+        { title: "Open the Meme Generator", description: "Navigate to the tool. No signup, no upload to any server." },
+        { title: "Upload your image", description: "Drag and drop or click to select \u2014 any JPG, PNG, or WebP. Classic meme templates, photos, or your own art." },
+        { title: "Add your text", description: "Type the top and bottom captions. The classic Impact font is automatically applied with white fill and black stroke." },
+        { title: "Customize and download", description: "Adjust text size, stroke thickness, or color. Hit Download to save the finished meme as a high-resolution PNG." },
+      ],
+      tips: [
+        "Use ALL CAPS for the classic meme look \u2014 Impact font was designed for impact, not subtlety.",
+        "Keep text short (3\u20136 words per line). Longer captions get crowded and lose punch.",
+        "Increase stroke thickness for busy backgrounds. Default works for most images.",
+        "Save the source image too \u2014 you can come back and make new variations with different captions easily.",
+        "For viral potential, fewer words usually win. The best memes are punchy and immediate.",
+      ],
+    },
+    faq: [
+      { question: "What font is used for the text?", answer: "Impact, the classic meme font. We fall back to system bold sans-serif if Impact is unavailable on your device, but the styling and stroke replicate the classic meme look." },
+      { question: "Can I move the text around?", answer: "Top and bottom are the classic meme positions. Use the size slider to control how prominent they appear. Custom drag-positioning is on the roadmap." },
+      { question: "Is my image uploaded?", answer: "No. The entire meme is composed in your browser using Canvas. Your image and text stay on your device." },
+      { question: "What output quality should I expect?", answer: "Output preserves your input image\u2019s full resolution. PNG format, lossless quality. Great for both web sharing and printing." },
+      { question: "Can I add more than two lines of text?", answer: "Currently top and bottom only \u2014 the classic meme format. For multi-panel memes or speech bubbles, use our Image Cropper to stitch frames together first." },
+    ],
+    alternatives: {
+      intro: "Meme makers are everywhere online, but they vary in privacy, quality, and watermark policies.",
+      tools: [
+        { name: "imgflip.com", description: "Most popular meme generator", differentiator: "Massive template library but free tier adds watermark, and your meme is posted to their public gallery by default." },
+        { name: "Kapwing", description: "Online video and image editor", differentiator: "Polished UI with templates, but requires upload, has free tier limits, and inserts \"Made with Kapwing\" on free exports." },
+        { name: "Phone built-in apps", description: "iOS Markup, Android markup tools", differentiator: "Basic text overlay only \u2014 no Impact font, no stroke, no proper meme styling." },
+      ],
+      whyUs: "Browser-only (no uploads), no watermarks, no meme posted publicly, full resolution output. Classic Impact styling out of the box.",
+    },
+    useCases: [
+      { title: "Social media reactions", description: "Quick custom memes for Twitter, Reddit, Instagram, WhatsApp \u2014 ride trending formats with your own captions." },
+      { title: "Group chat humor", description: "Inside-joke memes for your friend group, family chat, or work Slack. Faster than searching Giphy for the perfect existing meme." },
+      { title: "Marketing and brand humor", description: "Modern brands use memes for relatable marketing. Generate on-brand visual content fast without hiring a designer." },
+      { title: "Tutorials and content creation", description: "Add captioned screenshots to documentation or blog posts \u2014 the meme format makes complex points memorable." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
