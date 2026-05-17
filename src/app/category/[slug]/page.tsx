@@ -20,7 +20,7 @@ const categoryMeta: Record<
   }
 > = {
   pdf: {
-    headerBg: "from-red-500 via-rose-500 to-red-600",
+    headerBg: "from-[#dc2626] via-[#be123c] to-[#9f1239]",
     accent: "text-white/60",
     accentDark: "text-white",
     iconBg: "bg-white/20",
@@ -44,7 +44,7 @@ const categoryMeta: Record<
     ),
   },
   image: {
-    headerBg: "from-emerald-500 via-green-500 to-teal-600",
+    headerBg: "from-[#059669] via-[#047857] to-[#134e4a]",
     accent: "text-white/60",
     accentDark: "text-white",
     iconBg: "bg-white/20",
@@ -72,12 +72,12 @@ const categoryMeta: Record<
     ),
   },
   converter: {
-    headerBg: "from-sky-50 via-blue-50 to-cyan-50",
-    accent: "text-blue-600",
-    accentDark: "text-blue-700",
-    iconBg: "bg-blue-100",
-    badgeBg: "bg-blue-50 border-blue-200",
-    badgeText: "text-blue-700",
+    headerBg: "from-[#1d4ed8] via-[#1e40af] to-[#1e3a8a]",
+    accent: "text-white/70",
+    accentDark: "text-white",
+    iconBg: "bg-white/15",
+    badgeBg: "bg-white/15 border-white/25",
+    badgeText: "text-white",
     longDescription:
       "Convert between image, document, and media formats without compatibility headaches. Whether you need to turn iPhone HEIC photos into JPGs, create PDFs from images, or switch between PNG and SVG — it all happens in your browser.",
     howTo: [
@@ -96,7 +96,7 @@ const categoryMeta: Record<
     ),
   },
   audio: {
-    headerBg: "from-orange-500 via-amber-500 to-orange-600",
+    headerBg: "from-[#ea580c] via-[#c2410c] to-[#9a3412]",
     accent: "text-white/60",
     accentDark: "text-white",
     iconBg: "bg-white/20",
@@ -121,12 +121,12 @@ const categoryMeta: Record<
     ),
   },
   text: {
-    headerBg: "from-amber-50 via-yellow-50 to-lime-50",
-    accent: "text-amber-600",
-    accentDark: "text-amber-700",
-    iconBg: "bg-amber-100",
-    badgeBg: "bg-amber-50 border-amber-200",
-    badgeText: "text-amber-700",
+    headerBg: "from-[#1e293b] via-[#334155] to-[#0f172a]",
+    accent: "text-white/70",
+    accentDark: "text-white",
+    iconBg: "bg-white/15",
+    badgeBg: "bg-white/15 border-white/25",
+    badgeText: "text-white",
     longDescription:
       "Extract text from images and screenshots using OCR, count words and characters, or process text data. Perfect for digitizing printed content, analyzing writing, and working with text across different formats.",
     howTo: [
@@ -150,12 +150,12 @@ const categoryMeta: Record<
     ),
   },
   generator: {
-    headerBg: "from-indigo-50 via-blue-50 to-violet-50",
-    accent: "text-indigo-600",
-    accentDark: "text-indigo-700",
-    iconBg: "bg-indigo-100",
-    badgeBg: "bg-indigo-50 border-indigo-200",
-    badgeText: "text-indigo-700",
+    headerBg: "from-[#7e22ce] via-[#a21caf] to-[#c026d3]",
+    accent: "text-white/70",
+    accentDark: "text-white",
+    iconBg: "bg-white/15",
+    badgeBg: "bg-white/15 border-white/25",
+    badgeText: "text-white",
     longDescription:
       "Generate the things you need in seconds: QR codes for your links, professional invoices, polished resumes, strong passwords, and more. Every generator produces download-ready output with no signup required.",
     howTo: [
@@ -175,12 +175,12 @@ const categoryMeta: Record<
     ),
   },
   developer: {
-    headerBg: "from-violet-50 via-purple-50 to-fuchsia-50",
-    accent: "text-violet-600",
-    accentDark: "text-violet-700",
-    iconBg: "bg-violet-100",
-    badgeBg: "bg-violet-50 border-violet-200",
-    badgeText: "text-violet-700",
+    headerBg: "from-[#1d4ed8] via-[#6d28d9] to-[#db2777]",
+    accent: "text-white/70",
+    accentDark: "text-white",
+    iconBg: "bg-white/15",
+    badgeBg: "bg-white/15 border-white/25",
+    badgeText: "text-white",
     longDescription:
       "Essential utilities for web developers and designers. Format and validate JSON, pick colors and generate palettes, create favicons — lightweight tools that do one job well, right in your browser tab.",
     howTo: [
@@ -200,7 +200,7 @@ const categoryMeta: Record<
     ),
   },
   video: {
-    headerBg: "from-rose-500 via-pink-500 to-rose-600",
+    headerBg: "from-[#db2777] via-[#be185d] to-[#9d174d]",
     accent: "text-white/60",
     accentDark: "text-white",
     iconBg: "bg-white/20",
@@ -225,7 +225,7 @@ const categoryMeta: Record<
     ),
   },
   ai: {
-    headerBg: "from-pink-500 via-fuchsia-500 to-purple-600",
+    headerBg: "from-[#7c3aed] via-[#6d28d9] to-[#5b21b6]",
     accent: "text-white/60",
     accentDark: "text-white",
     iconBg: "bg-white/20",
