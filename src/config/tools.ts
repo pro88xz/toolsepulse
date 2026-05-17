@@ -960,6 +960,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["remove exif", "strip metadata photo", "remove gps from photo", "exif remover online", "photo privacy tool"],
   },
+  {
+    id: "gif-maker",
+    name: "GIF Maker",
+    description: "Create animated GIFs from multiple images. Control frame rate, quality, and looping. Works entirely in your browser — no uploads, no watermarks, no signup.",
+    shortDescription: "Make animated GIFs from images",
+    slug: "gif-maker",
+    relatedTools: ["image-rotator", "image-cropper", "image-compressor", "watermark-image"],
+    category: "image",
+    icon: "Film",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["gif maker", "create gif", "images to gif", "make gif online", "animated gif generator"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

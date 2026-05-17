@@ -2557,6 +2557,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Real estate and Airbnb listings", description: "Property photos can reveal location and camera details. Strip before listing to keep clean professional listings." },
     ],
   },
+  "gif-maker": {
+    toolSlug: "gif-maker",
+    howTo: {
+      title: "How to Create Animated GIFs from Multiple Images Online",
+      steps: [
+        { title: "Open the GIF Maker", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your frames", description: "Drag and drop multiple images, or click to select. Order matters \u2014 the first image is the first frame." },
+        { title: "Adjust speed and quality", description: "Set frame delay (lower = faster animation) and quality (1 = best, 10 = smaller file). Reorder frames by dragging." },
+        { title: "Generate and download", description: "Hit Create GIF and wait a few seconds. The encoded GIF is ready for download \u2014 ready to share anywhere." },
+      ],
+      tips: [
+        "10\u201320 frames at 100ms delay produces a smooth 1\u20132 second loop \u2014 the sweet spot for social media.",
+        "Quality 1\u20133 is best for screenshots and simple animations. Quality 5\u201310 makes much smaller files but adds noticeable dithering on photos.",
+        "Match frame dimensions to avoid weird scaling. Resize images first if they have different sizes.",
+        "GIFs are limited to 256 colors per frame \u2014 photo gradients will show banding. For best results, use frames with flat colors or graphics.",
+        "Large GIFs (10+ MB) won\u2019t auto-play on Twitter/X. Keep under 5MB for reliable inline playback on social platforms.",
+      ],
+    },
+    faq: [
+      { question: "Why does the GIF look pixelated or banded?", answer: "GIF is an old format limited to 256 colors total. Smooth gradients and photos will always show some banding. This is the format\u2019s ceiling \u2014 every GIF maker hits it. For higher quality, consider MP4 or WebP video instead." },
+      { question: "Is my photo uploaded?", answer: "No. The entire GIF encoding happens in your browser using a Web Worker. Your images never leave your device." },
+      { question: "What\u2019s the maximum file size?", answer: "There\u2019s no hard limit, but generating GIFs over 50MB will be slow and may exceed browser memory. For best performance, keep total source images under 100MB." },
+      { question: "Can I add text or stickers to my GIF?", answer: "Not in this tool \u2014 it focuses on frame assembly. For overlays, edit your source images first (use our Watermark Image tool for text, then drop into GIF Maker)." },
+      { question: "Does it support transparent backgrounds?", answer: "Yes, but only 1-bit transparency (fully on or fully off) due to the GIF format. Semi-transparent edges will be quantized to fully transparent or fully opaque." },
+    ],
+    alternatives: {
+      intro: "GIF making has plenty of options online \u2014 here\u2019s where this one fits.",
+      tools: [
+        { name: "ezgif.com", description: "Popular online GIF editor", differentiator: "Feature-rich (effects, cropping, optimization) but requires uploads, shows ads, and free tier has size limits." },
+        { name: "Photoshop / GIMP", description: "Professional image editors", differentiator: "Best-in-class quality and control, but expensive and requires installation. Overkill for simple GIFs." },
+        { name: "Giphy GIF maker", description: "Online GIF builder", differentiator: "Polished UI but uploads to Giphy\u2019s servers and inserts your GIF into their public library. Not private." },
+      ],
+      whyUs: "Browser-only encoding (no uploads), max-quality settings, full input resolution preserved, no watermarks. Free forever.",
+    },
+    useCases: [
+      { title: "Product demos and tutorials", description: "Stitch screenshots into a quick how-to GIF for documentation, README files, or support articles." },
+      { title: "Reaction memes and social posts", description: "Create custom reaction GIFs that go beyond the standard library. Personal expressions, niche references, inside jokes." },
+      { title: "Photo slideshows", description: "Turn a series of vacation, event, or product photos into a quick animated montage for Instagram or Twitter." },
+      { title: "Animated marketing assets", description: "Create simple animated banners, button states, or icon transitions for emails and lightweight web content." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
