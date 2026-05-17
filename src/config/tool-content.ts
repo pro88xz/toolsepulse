@@ -2639,6 +2639,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Tutorials and content creation", description: "Add captioned screenshots to documentation or blog posts \u2014 the meme format makes complex points memorable." },
     ],
   },
+  "image-metadata-viewer": {
+    toolSlug: "image-metadata-viewer",
+    howTo: {
+      title: "How to View EXIF and Hidden Metadata in Photos Online",
+      steps: [
+        { title: "Open the Image Metadata Viewer", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your photo", description: "Drag and drop or click to select \u2014 JPG, PNG, or WebP." },
+        { title: "Review the metadata", description: "The tool displays everything embedded in the image \u2014 camera, GPS, timestamps, software, dimensions, file size, and more." },
+        { title: "Take action if needed", description: "If you find sensitive data (GPS coordinates, identifying details), use our EXIF Remover to strip it before sharing." },
+      ],
+      tips: [
+        "GPS coordinates in EXIF reveal exactly where a photo was taken \u2014 with house-level precision. Always check before posting publicly.",
+        "Compare metadata between two photos to verify they were taken with the same camera at the same time \u2014 useful for authenticity checks.",
+        "Photos from messaging apps (WhatsApp, Telegram) usually have stripped metadata. Photos directly from your camera roll usually do not.",
+        "Some metadata can include the photographer\u2019s name, copyright, and even GPS altitude \u2014 important for journalism, real estate, and legal documents.",
+        "Most social platforms (Twitter, Instagram, Facebook) strip metadata automatically. But before posting elsewhere, double-check.",
+      ],
+    },
+    faq: [
+      { question: "Is my photo uploaded anywhere?", answer: "No. The metadata is read entirely in your browser. Your photo never leaves your device." },
+      { question: "What kinds of metadata can this read?", answer: "Standard JPEG EXIF tags including Camera Make/Model, Date/Time, GPS coordinates, Software, Orientation, Artist, Copyright, and more. Some PNG and WebP metadata is also displayed." },
+      { question: "Why doesn\u2019t my photo show GPS data?", answer: "Either your camera didn\u2019t embed location (location services off, or privacy settings), or the photo was shared through a platform that stripped it. Both are common." },
+      { question: "Can I edit the metadata here?", answer: "Not in this tool \u2014 it\u2019s read-only. To strip metadata, use our EXIF Remover. To add or change metadata, use a desktop tool like ExifTool." },
+      { question: "Is this forensic-grade accurate?", answer: "For standard EXIF tags, yes. For deep forensic analysis (XMP packets, maker notes, embedded thumbnails), use a dedicated tool like ExifTool which supports thousands of tags." },
+    ],
+    alternatives: {
+      intro: "Several tools can read image metadata, but most either upload your file or require technical knowledge.",
+      tools: [
+        { name: "ExifTool (command line)", description: "Pro-grade metadata reader", differentiator: "The gold standard for thoroughness, but requires terminal use and command-line skills." },
+        { name: "Right-click \u2192 Properties (Windows)", description: "Built-in file inspector", differentiator: "Shows basic metadata but misses GPS coordinates and many EXIF fields. Limited and inconsistent across formats." },
+        { name: "Online viewers with uploads", description: "Various web services", differentiator: "Convenient but require sending the image to their servers \u2014 risky for photos that may contain GPS or other private data." },
+      ],
+      whyUs: "Read EXIF in your browser, never upload, see GPS and sensitive fields highlighted. Built for quick privacy checks before sharing.",
+    },
+    useCases: [
+      { title: "Before posting online", description: "Quick check whether a photo contains GPS or other identifying data before posting to dating apps, Marketplace, or social media." },
+      { title: "Journalism and source verification", description: "Inspect photos from sources to verify capture time, location, and camera \u2014 essential for newsroom workflows." },
+      { title: "Real estate and listings", description: "Verify property photos have appropriate metadata (or have been stripped) before publishing on Zillow, Airbnb, or your own site." },
+      { title: "Forensic and legal review", description: "Check provenance of photos used as evidence or documentation. Camera details and timestamps can corroborate or refute claims." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

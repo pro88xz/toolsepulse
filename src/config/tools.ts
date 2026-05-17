@@ -988,6 +988,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["meme generator", "make meme online", "meme maker free", "top bottom text meme", "create meme image"],
   },
+  {
+    id: "image-metadata-viewer",
+    name: "Image Metadata Viewer",
+    description: "View hidden EXIF, GPS, and metadata in photos without uploading. See camera details, location data, timestamps, and software info baked into images.",
+    shortDescription: "Inspect EXIF and hidden photo data",
+    slug: "image-metadata-viewer",
+    relatedTools: ["exif-remover", "image-blur", "image-compressor", "watermark-image"],
+    category: "image",
+    icon: "Info",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["image metadata viewer", "view exif online", "photo metadata", "image info viewer", "check exif data"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
