@@ -904,6 +904,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["character counter", "letter count", "twitter character count", "sms character count", "count characters online"],
   },
+  {
+    id: "image-blur",
+    name: "Image Blur",
+    description: "Blur images, photos, or specific regions in your browser. Adjust intensity from subtle to heavy. Perfect for hiding faces, license plates, or sensitive details before sharing.",
+    shortDescription: "Blur photos or hide sensitive details",
+    slug: "image-blur",
+    relatedTools: ["image-compressor", "background-remover", "image-resizer", "image-cropper"],
+    category: "image",
+    icon: "Droplet",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["blur image", "blur photo online", "blur faces in photo", "blur background", "censor image"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

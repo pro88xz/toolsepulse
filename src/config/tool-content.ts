@@ -2393,6 +2393,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Academic writing", description: "Check character or word counts against essay or abstract limits for journals, applications, and assignments." },
     ],
   },
+  "image-blur": {
+    toolSlug: "image-blur",
+    howTo: {
+      title: "How to Blur Images and Hide Sensitive Details Online",
+      steps: [
+        { title: "Open the Image Blur tool", description: "Navigate to the tool. No signup, no uploads to a server." },
+        { title: "Upload your image", description: "Drag and drop or click to select \u2014 JPG, PNG, or WebP." },
+        { title: "Adjust the blur intensity", description: "Slide from light (subtle background blur) to heavy (full censor). Preview updates in real time." },
+        { title: "Download the result", description: "Hit Download to save the blurred image. Your original never leaves your device." },
+      ],
+      tips: [
+        "Use heavy blur (40+ pixels) to fully censor faces, license plates, or screen contents that should not be readable.",
+        "Light blur (5\u201315 pixels) works great for background blur to make subjects pop.",
+        "The blurred image is a NEW file \u2014 EXIF data and metadata from the original are stripped automatically.",
+        "Blur is irreversible \u2014 anyone receiving the image cannot un-blur the sensitive parts. Safer than redaction with rectangles, which can sometimes be reverse-engineered.",
+        "For region-only blur (just the face, not the whole image), use the Background Remover instead, then layer with photo editing.",
+      ],
+    },
+    faq: [
+      { question: "Is my photo uploaded anywhere?", answer: "No. The blur is applied entirely in your browser using Canvas. Your image never touches any server." },
+      { question: "Can someone reverse the blur?", answer: "No, properly applied Gaussian blur is mathematically lossy \u2014 information is permanently destroyed. Unlike a black rectangle, there is no way to recover the original pixels." },
+      { question: "What image formats are supported?", answer: "JPG, PNG, WebP, GIF (first frame). Output is PNG by default to preserve transparency where applicable." },
+      { question: "Will the output be the same quality?", answer: "The non-blurred parts retain full original quality. The blurred regions intentionally lose detail \u2014 that\u2019s the point." },
+      { question: "Can I blur multiple photos at once?", answer: "Not in this tool \u2014 it is designed for single-image precision. For bulk blurring, contact us about a batch tool, or use a desktop tool like ImageMagick." },
+    ],
+    alternatives: {
+      intro: "Image blurring is offered by many tools, but most either upload your photo or are buried inside complex photo editors.",
+      tools: [
+        { name: "Photoshop / GIMP", description: "Desktop photo editors", differentiator: "Powerful but slow to launch and complex for a simple blur. Overkill for hiding a face before sharing." },
+        { name: "iOS / Android built-in markup", description: "Phone photo editor blur", differentiator: "Limited blur intensity, no preview before saving, and quality varies by device." },
+        { name: "Online blur sites with uploads", description: "Various cloud tools", differentiator: "Convenient but they receive your image \u2014 risky for sensitive photos (medical, legal, ID documents)." },
+      ],
+      whyUs: "Live in-browser preview, full intensity control, instant download, zero uploads. Built specifically for the \"I need to blur this before sharing\" use case.",
+    },
+    useCases: [
+      { title: "Hide faces and identities", description: "Blur faces in group photos before posting to social, or for journalism where sources need protection." },
+      { title: "Censor license plates and addresses", description: "Hide identifying info from photos of your car, home, or packages before sharing online or selling secondhand." },
+      { title: "Redact sensitive documents", description: "Blur account numbers, signatures, or sensitive text in document photos before emailing or uploading." },
+      { title: "Artistic background blur", description: "Apply subtle background blur to make subjects pop in product photography or portraits." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
