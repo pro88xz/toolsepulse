@@ -1,42 +1,46 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { categories } from "@/config/tools";
+import { categories, getPopularTools } from "@/config/tools";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const popularTools = getPopularTools().slice(0, 5);
 
   return (
     <footer className="relative bg-slate-900 text-slate-300">
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400" />
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      {/* Brand gradient accent strip */}
+      <div
+        className="absolute top-0 left-0 right-0 h-1"
+        style={{ background: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}
+      />
+
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400">
-                <svg
-                  className="h-4 w-4 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <img src="/logo.png" alt="ToolsePulse" className="h-9 w-auto object-contain" width={108} height={36} />
+              <span className="text-lg font-bold tracking-tight">
+                <span className="text-white">Toolse</span>
+                <span
+                  className="bg-clip-text text-transparent font-extrabold"
+                  style={{ backgroundImage: "linear-gradient(90deg, #60A5FA 0%, #A78BFA 50%, #F472B6 100%)" }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                  />
-                </svg>
-              </div>
-              <span className="text-lg font-bold text-slate-900">
-                {siteConfig.name}
+                  Pulse
+                </span>
               </span>
             </Link>
-            <p className="mt-3 text-sm text-slate-400">
-              Free online tools that respect your privacy. No uploads, no
-              signups, no limits.
+
+            <p className="mt-3 text-[10px] uppercase tracking-[0.25em] font-semibold text-slate-500">
+              All Tools. One Pulse.
+            </p>
+
+            <p className="mt-4 text-sm text-slate-400 leading-relaxed">
+              Free online tools that respect your privacy. No uploads, no signups, no limits.
             </p>
           </div>
 
+          {/* Categories */}
           <div>
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Categories</h3>
             <ul className="mt-4 space-y-2">
@@ -53,67 +57,44 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Popular Tools (dynamic) */}
           <div>
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Popular Tools</h3>
             <ul className="mt-4 space-y-2">
-              <li>
-                <Link href="/tools/pdf-to-word" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  PDF to Word
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/image-compressor" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Image Compressor
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/qr-code-generator" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  QR Code Generator
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/merge-pdf" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Merge PDF
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/background-remover" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Background Remover
-                </Link>
-              </li>
+              {popularTools.map((tool) => (
+                <li key={tool.slug}>
+                  <Link
+                    href={`/tools/${tool.slug}`}
+                    className="text-sm text-slate-400 hover:text-white transition-colors"
+                  >
+                    {tool.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Legal */}
           <div>
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Legal</h3>
             <ul className="mt-4 space-y-2">
-              <li>
-                <Link href="/privacy" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Contact
-                </Link>
-              </li>
+              <li><Link href="/privacy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link></li>
+              <li><Link href="/about" className="text-sm text-slate-400 hover:text-white transition-colors">About</Link></li>
+              <li><Link href="/contact" className="text-sm text-slate-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
         </div>
-        <div className="mt-10 border-t border-slate-700/50 pt-6">
-          <p className="text-center text-sm text-slate-500">
-            &copy; {currentYear} {siteConfig.name}. All rights reserved. All
-            processing happens locally in your browser.
+
+        <div className="mt-12 border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-slate-500">
+            &copy; {currentYear} {siteConfig.name}. All rights reserved.
+          </p>
+          <p className="text-xs text-slate-500">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              All processing happens locally in your browser
+            </span>
           </p>
         </div>
       </div>
