@@ -946,6 +946,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["rotate image", "rotate photo online", "rotate image 90 degrees", "image rotator free", "turn photo"],
   },
+  {
+    id: "exif-remover",
+    name: "EXIF Remover",
+    description: "Strip hidden metadata from photos including GPS location, camera model, and timestamps. Protect your privacy before sharing images online. Works entirely in your browser.",
+    shortDescription: "Strip GPS and metadata from photos",
+    slug: "exif-remover",
+    relatedTools: ["image-metadata-viewer", "image-blur", "image-compressor", "watermark-image"],
+    category: "image",
+    icon: "ShieldCheck",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["remove exif", "strip metadata photo", "remove gps from photo", "exif remover online", "photo privacy tool"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

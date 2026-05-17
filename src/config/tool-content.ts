@@ -2516,6 +2516,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Document scanning fixes", description: "Rotate scanned documents that came out upside-down or sideways before saving as final PDFs or sharing." },
     ],
   },
+  "exif-remover": {
+    toolSlug: "exif-remover",
+    howTo: {
+      title: "How to Remove EXIF Data and Hidden Metadata from Photos",
+      steps: [
+        { title: "Open the EXIF Remover", description: "Navigate to the tool. No signup, no uploads, no accounts." },
+        { title: "Upload your photo", description: "Drag and drop or click to select \u2014 JPG, PNG, or WebP." },
+        { title: "Review what was hidden", description: "The tool shows you exactly what metadata was buried in your photo \u2014 GPS coordinates, camera model, timestamps, software used." },
+        { title: "Download the clean version", description: "Hit Download. The output is identical to the original visually but with all hidden metadata wiped." },
+      ],
+      tips: [
+        "GPS coordinates from your phone reveal your home address with house-level precision. ALWAYS strip them before posting photos publicly.",
+        "Dating apps, Craigslist, Facebook Marketplace, real estate listings, and 'Free Stuff' posts are the top sources of accidental GPS leaks.",
+        "Most social platforms (Instagram, Twitter, Facebook) strip metadata automatically \u2014 but Telegram, WhatsApp, Discord, and email do NOT.",
+        "Camera make/model in metadata can be enough to identify which user took an anonymous photo if combined with other leaked data.",
+        "Screenshots usually have no EXIF, but photos taken directly with your camera app always do.",
+      ],
+    },
+    faq: [
+      { question: "What is EXIF data?", answer: "EXIF (Exchangeable Image File Format) is hidden metadata that cameras and phones embed in JPEG and other image files. It includes GPS location, camera make/model, exposure settings, timestamps, and sometimes the device serial number." },
+      { question: "Is my photo uploaded anywhere?", answer: "No. The tool reads and strips metadata entirely in your browser. Your photo never leaves your device." },
+      { question: "Does this work on PNGs and WebPs?", answer: "Yes. PNG has less metadata than JPEG by default but can still contain text chunks, color profiles, and timestamps. WebP can carry EXIF and XMP metadata. The tool strips them all." },
+      { question: "Will stripping metadata change image quality?", answer: "No. The image pixels are unchanged \u2014 only the metadata sidecar is removed. The output looks identical to the original." },
+      { question: "How do I check if a photo has GPS data?", answer: "After uploading, this tool shows you exactly what metadata exists. You can also use our Image Metadata Viewer to inspect without stripping." },
+    ],
+    alternatives: {
+      intro: "Privacy-focused metadata removal is available in several places, but quality and trust vary.",
+      tools: [
+        { name: "Right-click \u2192 Properties (Windows)", description: "Built-in Windows metadata removal", differentiator: "Works but only for some formats, hidden behind multiple clicks, doesn\u2019t preview what was removed." },
+        { name: "ExifTool (command line)", description: "Pro CLI tool", differentiator: "The gold standard for forensic-level metadata work, but requires terminal use and command-line knowledge." },
+        { name: "Online uploaders", description: "Web services that strip EXIF", differentiator: "Defeats the purpose \u2014 you\u2019re sending the very photo you wanted to keep private to an unknown server." },
+      ],
+      whyUs: "Browser-only, shows you exactly what metadata exists before stripping, one-click clean output. Privacy-first means nothing leaves your device.",
+    },
+    useCases: [
+      { title: "Selling on Marketplace / Craigslist", description: "Strip GPS before posting photos of items for sale \u2014 don\u2019t let buyers find your home before you meet them." },
+      { title: "Dating apps and social profiles", description: "Photos posted to Tinder, Bumble, and similar apps can leak GPS coordinates to anyone who downloads the original." },
+      { title: "Journalism and source protection", description: "Strip metadata from photos taken by sources before publishing to protect identity and location." },
+      { title: "Real estate and Airbnb listings", description: "Property photos can reveal location and camera details. Strip before listing to keep clean professional listings." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
