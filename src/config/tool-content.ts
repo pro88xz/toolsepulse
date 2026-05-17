@@ -2434,6 +2434,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Artistic background blur", description: "Apply subtle background blur to make subjects pop in product photography or portraits." },
     ],
   },
+  "watermark-image": {
+    toolSlug: "watermark-image",
+    howTo: {
+      title: "How to Add Text Watermarks to Photos for Free",
+      steps: [
+        { title: "Open the Watermark Image tool", description: "Navigate to the tool. No signup, no upload to any server." },
+        { title: "Upload your image", description: "Drag and drop or click to select \u2014 JPG, PNG, or WebP." },
+        { title: "Type your watermark", description: "Enter the text (your name, brand, copyright, or URL). Choose color, size, position, and opacity from the controls." },
+        { title: "Download the watermarked image", description: "Hit Download to save the result. The original stays untouched on your device." },
+      ],
+      tips: [
+        "Diagonal watermarks centered across the image are hardest to remove \u2014 best for high-value or original work.",
+        "Use 30\u201350% opacity for visible-but-not-overwhelming watermarks. 100% opacity is too aggressive for most uses.",
+        "White text with a slight shadow reads on most backgrounds. Try larger sizes (40\u2013100px) for hero images.",
+        "Add your URL or social handle, not just your name \u2014 anyone who screenshots the image can find you back.",
+        "Watermarks deter casual theft but won\u2019t stop determined cropping. For real protection, combine watermarks with lower-resolution previews.",
+      ],
+    },
+    faq: [
+      { question: "Is my image uploaded anywhere?", answer: "No. The watermark is applied entirely in your browser using Canvas. Your image never leaves your device." },
+      { question: "Can someone remove the watermark?", answer: "Faint or corner watermarks can sometimes be cropped or content-aware-filled out. Diagonal or center watermarks across the image are much harder to remove cleanly." },
+      { question: "What fonts are available?", answer: "Common web-safe fonts that work in every browser: Arial, Helvetica, Times, Georgia, Courier, and Impact. Custom font upload is not currently supported." },
+      { question: "Can I add a logo image as watermark?", answer: "Not yet \u2014 this tool focuses on text watermarks. For image-on-image watermarks, use a desktop tool like GIMP or contact us about adding the feature." },
+      { question: "Will the watermark resize with the image?", answer: "The watermark is baked into the image at the pixel size you choose, so it scales naturally with any future resize. Pick a size that looks good at the original dimensions." },
+    ],
+    alternatives: {
+      intro: "Watermarking tools range from professional photo editors to one-click online services.",
+      tools: [
+        { name: "Photoshop / Lightroom", description: "Adobe photo editing suite", differentiator: "Pro-grade watermarking with batch processing, but requires subscription and is overkill for a single image." },
+        { name: "Watermark.ws / Watermarkly", description: "Dedicated online watermark services", differentiator: "Feature-rich but require uploads to their servers. Free tiers are limited and add their own watermark to your image." },
+        { name: "Phone built-in editors", description: "iOS / Android photo apps", differentiator: "Basic text overlay only \u2014 limited control over opacity, position, and font. Not designed for protective watermarking." },
+      ],
+      whyUs: "Live preview, full control over position and opacity, no watermark of OUR brand added, no uploads. Free forever.",
+    },
+    useCases: [
+      { title: "Photography portfolios", description: "Protect proofs and sample work before delivering full-resolution files to clients. Discourages screenshot-and-reuse." },
+      { title: "Original artwork and designs", description: "Watermark digital paintings, illustrations, and graphic designs before posting to Instagram, Behance, or your website." },
+      { title: "Real estate listings", description: "Brand your property photos with your agency name before they appear on Zillow or any portal that pulls images." },
+      { title: "Stock photos and previews", description: "Add a visible watermark on free preview images, sell unwatermarked versions through your own store." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

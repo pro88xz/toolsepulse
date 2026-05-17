@@ -918,6 +918,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["blur image", "blur photo online", "blur faces in photo", "blur background", "censor image"],
   },
+  {
+    id: "watermark-image",
+    name: "Watermark Image",
+    description: "Add text watermarks to photos and images. Choose position, color, size, and opacity. Protect your work before sharing online — runs entirely in your browser.",
+    shortDescription: "Add text watermarks to protect images",
+    slug: "watermark-image",
+    relatedTools: ["image-blur", "image-compressor", "image-resizer", "image-cropper"],
+    category: "image",
+    icon: "Type",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["watermark image", "add watermark to photo", "watermark photos online", "image watermark", "protect images watermark"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
