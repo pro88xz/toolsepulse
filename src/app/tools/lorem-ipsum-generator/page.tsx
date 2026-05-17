@@ -129,7 +129,7 @@ export default function LoremIpsumGeneratorPage() {
             </label>
             <button
               onClick={() => setTick((t) => t + 1)}
-              className="ml-auto rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 text-sm font-medium transition-colors"
+              className="ml-auto rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-lg hover:scale-[1.02] active:scale-100 transition-all" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}
             >
               Regenerate
             </button>

@@ -165,7 +165,7 @@ export default function FakeDataGeneratorPage() {
             <button
               onClick={generate}
               disabled={loading || selected.size === 0}
-              className="ml-auto rounded-lg bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-4 py-2 text-sm font-medium transition-colors"
+              className="ml-auto rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-lg hover:scale-[1.02] active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}
             >
               {loading ? "Generating..." : "Generate"}
             </button>

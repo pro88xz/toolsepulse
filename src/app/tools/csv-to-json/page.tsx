@@ -141,7 +141,7 @@ export default function CSVToJSONPage() {
               <h3 className="font-semibold text-gray-900">JSON Output <span className="text-sm font-normal text-gray-500">({rowCount} rows)</span></h3>
               <div className="flex gap-2">
                 <button onClick={copyJSON} className="text-xs font-medium text-blue-600 hover:text-blue-700 px-3 py-1.5 rounded-lg border border-blue-200 hover:bg-blue-50 transition-colors">Copy</button>
-                <button onClick={downloadJSON} className="text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition-colors">Download .json</button>
+                <button onClick={downloadJSON} className="text-xs font-semibold text-white px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md transition-all" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}>Download .json</button>
               </div>
             </div>
             <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 max-h-80 overflow-auto">

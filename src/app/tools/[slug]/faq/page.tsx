@@ -81,7 +81,7 @@ export default async function FaqPage({ params }: { params: Promise<{ slug: stri
         <div className="mt-10 rounded-2xl border border-blue-200 bg-blue-50 p-6 sm:p-8">
           <h2 className="text-lg font-bold text-slate-900">Try {tool.name} now</h2>
           <p className="mt-1 text-sm text-slate-600">{tool.shortDescription}. Free, no signup, 100% private.</p>
-          <Link href={`/tools/${slug}`} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
+          <Link href={`/tools/${slug}`} className="mt-4 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow-lg hover:scale-[1.02] active:scale-100 transition-all" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}>
             Open {tool.name}
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
           </Link>

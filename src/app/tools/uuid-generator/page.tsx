@@ -85,7 +85,7 @@ export default function UuidGeneratorPage() {
           <div className="mt-4 flex items-center gap-3">
             <button
               onClick={regenerate}
-              className="rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 text-sm font-medium transition-colors"
+              className="rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-lg hover:scale-[1.02] active:scale-100 transition-all" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}
             >
               Generate
             </button>
