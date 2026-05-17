@@ -3,6 +3,7 @@ import { type Tool, categories, getToolBySlug } from "@/config/tools";
 import ToolJsonLd from "./ToolJsonLd";
 import ToolUseTracker from "./ToolUseTracker";
 import BugReport from "./BugReport";
+import WhatsNext from "./WhatsNext";
 import AdBanner from "../ads/AdBanner";
 import { getToolContent } from "@/config/tool-content";
 
@@ -397,6 +398,9 @@ export default function ToolPageLayout({ tool, children }: ToolPageLayoutProps) 
                 <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-blue-600 group-hover:gap-2 transition-all">Compare now <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
               </Link>
             </div>
+
+            {/* Workflow: What to do next */}
+            <WhatsNext currentTool={tool.slug} />
 
             {/* Related Tools */}
             {tool.relatedTools && tool.relatedTools.length > 0 && (
