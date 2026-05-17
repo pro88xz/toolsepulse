@@ -19,7 +19,7 @@ const categoryVisuals: Record<
   }
 > = {
   pdf: {
-    cardBg: "bg-gradient-to-br from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700",
+    cardBg: "bg-gradient-to-br from-[#dc2626] to-[#9f1239] hover:from-[#b91c1c] hover:to-[#881337]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -27,7 +27,7 @@ const categoryVisuals: Record<
     icon: <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zm-5 9h8m-8 4h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />,
   },
   image: {
-    cardBg: "bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700",
+    cardBg: "bg-gradient-to-br from-[#059669] to-[#134e4a] hover:from-[#047857] hover:to-[#115e59]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -41,7 +41,7 @@ const categoryVisuals: Record<
     ),
   },
   converter: {
-    cardBg: "bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700",
+    cardBg: "bg-gradient-to-br from-[#1d4ed8] to-[#1e3a8a] hover:from-[#1e40af] hover:to-[#172554]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -49,7 +49,7 @@ const categoryVisuals: Record<
     icon: <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />,
   },
   audio: {
-    cardBg: "bg-gradient-to-br from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700",
+    cardBg: "bg-gradient-to-br from-[#ea580c] to-[#9a3412] hover:from-[#c2410c] hover:to-[#7c2d12]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -57,7 +57,7 @@ const categoryVisuals: Record<
     icon: <path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12-2a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" strokeWidth="1.5" fill="none" />,
   },
   text: {
-    cardBg: "bg-gradient-to-br from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700",
+    cardBg: "bg-gradient-to-br from-[#7c3aed] to-[#5b21b6] hover:from-[#6d28d9] hover:to-[#4c1d95]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -70,7 +70,7 @@ const categoryVisuals: Record<
     ),
   },
   generator: {
-    cardBg: "bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700",
+    cardBg: "bg-gradient-to-br from-[#7e22ce] to-[#c026d3] hover:from-[#6b21a8] hover:to-[#a21caf]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -78,7 +78,7 @@ const categoryVisuals: Record<
     icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round" />,
   },
   developer: {
-    cardBg: "bg-gradient-to-br from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700",
+    cardBg: "bg-gradient-to-br from-[#334155] to-[#0f172a] hover:from-[#1e293b] hover:to-[#020617]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -86,7 +86,7 @@ const categoryVisuals: Record<
     icon: <path d="M8 10l-3 2 3 2m8-4l3 2-3 2m-5-8l-2 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />,
   },
   video: {
-    cardBg: "bg-gradient-to-br from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700",
+    cardBg: "bg-gradient-to-br from-[#db2777] to-[#9d174d] hover:from-[#be185d] hover:to-[#831843]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
@@ -94,7 +94,7 @@ const categoryVisuals: Record<
     icon: <path d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" stroke="currentColor" strokeWidth="1.5" fill="none" />,
   },
   ai: {
-    cardBg: "bg-gradient-to-br from-pink-500 to-fuchsia-600 hover:from-pink-600 hover:to-fuchsia-700",
+    cardBg: "bg-gradient-to-br from-[#1d4ed8] to-[#db2777] hover:from-[#1e40af] hover:to-[#be185d]",
     borderColor: "border-transparent",
     iconBg: "bg-white/20",
     iconColor: "text-white",
