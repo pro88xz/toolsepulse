@@ -932,6 +932,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["watermark image", "add watermark to photo", "watermark photos online", "image watermark", "protect images watermark"],
   },
+  {
+    id: "image-rotator",
+    name: "Image Rotator",
+    description: "Rotate images by 90, 180, 270 degrees or any custom angle. Auto-fits the canvas so nothing gets cropped. JPG, PNG, WebP supported. All in your browser.",
+    shortDescription: "Rotate photos by any angle",
+    slug: "image-rotator",
+    relatedTools: ["image-cropper", "image-resizer", "image-compressor", "image-blur"],
+    category: "image",
+    icon: "RotateCw",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["rotate image", "rotate photo online", "rotate image 90 degrees", "image rotator free", "turn photo"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

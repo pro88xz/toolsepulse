@@ -2475,6 +2475,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Stock photos and previews", description: "Add a visible watermark on free preview images, sell unwatermarked versions through your own store." },
     ],
   },
+  "image-rotator": {
+    toolSlug: "image-rotator",
+    howTo: {
+      title: "How to Rotate Images Online by Any Angle",
+      steps: [
+        { title: "Open the Image Rotator", description: "Navigate to the tool. No signup, no uploads to a server." },
+        { title: "Upload your image", description: "Drag and drop or click to select \u2014 JPG, PNG, or WebP." },
+        { title: "Choose your rotation", description: "Click 90\u00b0, 180\u00b0, or 270\u00b0 for quick presets, or drag the slider for any custom angle." },
+        { title: "Download the rotated image", description: "Hit Download to save the result. The canvas auto-fits the rotated bounds so nothing gets cropped." },
+      ],
+      tips: [
+        "Use 90\u00b0 or 270\u00b0 for landscape \u2194 portrait conversion \u2014 most common rotation need.",
+        "180\u00b0 flips the image upside down \u2014 useful for photos taken with the phone held wrong way.",
+        "Custom angle rotations (like 5\u00b0 or 15\u00b0) are perfect for fixing slightly tilted horizons.",
+        "The output is PNG by default to preserve transparency \u2014 areas outside the rotated image are fully transparent.",
+        "Rotation is non-destructive on JPEGs that have EXIF orientation flags \u2014 but applying a manual rotation bakes the new orientation in permanently.",
+      ],
+    },
+    faq: [
+      { question: "Is my image uploaded anywhere?", answer: "No. The rotation is applied entirely in your browser using Canvas. Your image never leaves your device." },
+      { question: "Will rotation lose image quality?", answer: "90\u00b0, 180\u00b0, and 270\u00b0 rotations are lossless \u2014 pixels are simply repositioned. Free-angle rotations require interpolation, which is high-quality but very slightly softens the image." },
+      { question: "Why does my rotated image have transparent corners?", answer: "When you rotate a rectangle by a non-90\u00b0 angle, the new bounding box is larger \u2014 the corners that would be empty are transparent. To get a clean rectangular result, crop after rotating, or stick to 90/180/270." },
+      { question: "What image formats are supported?", answer: "JPG, PNG, WebP. Output is always PNG to preserve any transparency created by the rotation." },
+      { question: "Can I rotate multiple images at once?", answer: "Not in this tool \u2014 it focuses on single-image rotation with live preview. For batch rotation, contact us or use a desktop tool like ImageMagick." },
+    ],
+    alternatives: {
+      intro: "Most image editors can rotate, but few do it cleanly in the browser without uploads.",
+      tools: [
+        { name: "Photoshop / Lightroom", description: "Pro photo editors", differentiator: "Overkill and expensive for a simple rotation. Requires install and subscription." },
+        { name: "Phone built-in editors", description: "iOS / Android markup tools", differentiator: "Easy for 90\u00b0 rotations but limited custom angle control and inconsistent quality across devices." },
+        { name: "Online rotators with uploads", description: "Various cloud tools", differentiator: "Convenient but they receive your image \u2014 unnecessary risk for personal photos or sensitive documents." },
+      ],
+      whyUs: "Live preview, both preset and custom angles, auto-fit canvas to prevent cropping. Nothing uploads, ever.",
+    },
+    useCases: [
+      { title: "Fix sideways phone photos", description: "Quick 90\u00b0 rotation when you grabbed your phone the wrong way. Works on any image format." },
+      { title: "Straighten tilted horizons", description: "Small custom-angle rotations (1\u00b0\u20135\u00b0) fix slightly crooked landscape and architectural photos." },
+      { title: "Prepare images for social media", description: "Different platforms prefer different orientations \u2014 rotate before uploading instead of relying on auto-rotation that varies by app." },
+      { title: "Document scanning fixes", description: "Rotate scanned documents that came out upside-down or sideways before saving as final PDFs or sharing." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
