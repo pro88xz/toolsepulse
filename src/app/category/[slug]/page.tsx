@@ -121,7 +121,7 @@ const categoryMeta: Record<
     ),
   },
   text: {
-    headerBg: "from-[#1e293b] via-[#334155] to-[#0f172a]",
+    headerBg: "from-[#7c3aed] via-[#6d28d9] to-[#5b21b6]",
     accent: "text-white/70",
     accentDark: "text-white",
     iconBg: "bg-white/15",
@@ -175,7 +175,7 @@ const categoryMeta: Record<
     ),
   },
   developer: {
-    headerBg: "from-[#1d4ed8] via-[#6d28d9] to-[#db2777]",
+    headerBg: "from-[#1e293b] via-[#334155] to-[#0f172a]",
     accent: "text-white/70",
     accentDark: "text-white",
     iconBg: "bg-white/15",
@@ -225,7 +225,7 @@ const categoryMeta: Record<
     ),
   },
   ai: {
-    headerBg: "from-[#7c3aed] via-[#6d28d9] to-[#5b21b6]",
+    headerBg: "from-[#1d4ed8] via-[#6d28d9] to-[#db2777]",
     accent: "text-white/60",
     accentDark: "text-white",
     iconBg: "bg-white/20",
