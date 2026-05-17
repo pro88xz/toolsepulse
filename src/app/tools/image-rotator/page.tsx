@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("image-rotator")!;
 
@@ -97,7 +98,7 @@ export default function ImageRotatorPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!sourceImage ? (
           <div
@@ -176,6 +177,8 @@ export default function ImageRotatorPage() {
             </div>
           </>
         )}
+
+        <WhatsNext currentTool="image-rotator" />
 
         {error && (
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>

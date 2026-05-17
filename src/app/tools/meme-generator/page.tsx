@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("meme-generator")!;
 
@@ -137,7 +138,7 @@ export default function MemeGeneratorPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!sourceImage ? (
           <div
@@ -222,6 +223,8 @@ export default function MemeGeneratorPage() {
             </div>
           </>
         )}
+
+        <WhatsNext currentTool="meme-generator" />
 
         {error && (
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>

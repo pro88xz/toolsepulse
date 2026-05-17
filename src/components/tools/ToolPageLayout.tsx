@@ -91,9 +91,11 @@ function getToolIcon(slug: string): string {
 interface ToolPageLayoutProps {
   tool: Tool;
   children: React.ReactNode;
+  /** Set to true if the tool renders WhatsNext inline (e.g. next to its Download button). Suppresses the bottom-of-page version. */
+  hideWhatsNext?: boolean;
 }
 
-export default function ToolPageLayout({ tool, children }: ToolPageLayoutProps) {
+export default function ToolPageLayout({ tool, children, hideWhatsNext = false }: ToolPageLayoutProps) {
   const content = getToolContent(tool.slug);
 
   return (
@@ -400,7 +402,7 @@ export default function ToolPageLayout({ tool, children }: ToolPageLayoutProps) 
             </div>
 
             {/* Workflow: What to do next */}
-            <WhatsNext currentTool={tool.slug} />
+            {!hideWhatsNext && <WhatsNext currentTool={tool.slug} />}
 
             {/* Related Tools */}
             {tool.relatedTools && tool.relatedTools.length > 0 && (
