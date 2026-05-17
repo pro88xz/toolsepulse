@@ -104,15 +104,15 @@ const categoryVisuals: Record<
 };
 
 const searchIconStyle: Record<ToolCategory, { bg: string; text: string }> = {
-  pdf: { bg: "bg-red-100", text: "text-red-600" },
-  image: { bg: "bg-emerald-100", text: "text-emerald-600" },
-  converter: { bg: "bg-blue-100", text: "text-blue-600" },
-  audio: { bg: "bg-orange-100", text: "text-orange-600" },
-  text: { bg: "bg-amber-100", text: "text-amber-600" },
-  generator: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  developer: { bg: "bg-violet-100", text: "text-violet-600" },
-  video: { bg: "bg-rose-100", text: "text-rose-600" },
-  ai: { bg: "bg-pink-100", text: "text-pink-600" },
+  pdf: { bg: "bg-red-100", text: "text-[#dc2626]" },
+  image: { bg: "bg-emerald-100", text: "text-[#059669]" },
+  converter: { bg: "bg-blue-100", text: "text-[#1d4ed8]" },
+  audio: { bg: "bg-orange-100", text: "text-[#ea580c]" },
+  text: { bg: "bg-violet-100", text: "text-[#7c3aed]" },
+  generator: { bg: "bg-fuchsia-100", text: "text-[#a21caf]" },
+  developer: { bg: "bg-slate-200", text: "text-[#334155]" },
+  video: { bg: "bg-pink-100", text: "text-[#db2777]" },
+  ai: { bg: "bg-violet-100", text: "text-[#6D28D9]" },
 };
 
 
