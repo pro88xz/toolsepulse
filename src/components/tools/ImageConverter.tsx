@@ -1,8 +1,12 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 interface ImageConverterProps {
+  toolSlug: string;
   fromFormat: string;
   toFormat: string;
   outputMime: string;
@@ -17,12 +21,14 @@ function formatSize(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
-export default function ImageConverter({ fromFormat, toFormat, outputMime, outputExt, acceptTypes, quality = 0.92 }: ImageConverterProps) {
+export default function ImageConverter({ toolSlug, fromFormat, toFormat, outputMime, outputExt, acceptTypes, quality = 0.92 }: ImageConverterProps) {
   const [results, setResults] = useState<{ name: string; originalSize: number; convertedSize: number; url: string }[]>([]);
   const [processing, setProcessing] = useState(false);
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [inboxFileName, setInboxFileName] = useState("");
 
   const convertImage = useCallback(
     (file: File): Promise<{ name: string; originalSize: number; convertedSize: number; url: string }> => {
@@ -95,8 +101,29 @@ export default function ImageConverter({ fromFormat, toFormat, outputMime, outpu
     link.click();
   };
 
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      setInboxFileName(file.name);
+      handleFiles([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="space-y-6">
+      {inboxSource && inboxFileName && (
+        <InboxBanner
+          sourceToolSlug={inboxSource}
+          fileName={inboxFileName}
+          onStartFresh={() => { setResults([]); setInboxSource(null); setInboxFileName(""); }}
+        />
+      )}
       <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
         <div
           onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
@@ -154,6 +181,16 @@ export default function ImageConverter({ fromFormat, toFormat, outputMime, outpu
           </div>
         </div>
       )}
+      <WhatsNext
+        currentTool={toolSlug}
+        getCurrentResult={async () => {
+          if (results.length === 0) return null;
+          const latest = results[0];
+          const res = await fetch(latest.url);
+          const blob = await res.blob();
+          return { blob, fileName: latest.name };
+        }}
+      />
     </div>
   );
 }

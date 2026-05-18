@@ -4,5 +4,5 @@ import ToolPageLayout from "@/components/tools/ToolPageLayout";
 import ImageConverter from "@/components/tools/ImageConverter";
 const tool = getToolBySlug("jpg-to-png")!;
 export default function Page() {
-  return <ToolPageLayout tool={tool}><ImageConverter fromFormat="JPG/JPEG" toFormat="PNG" outputMime="image/png" outputExt="png" acceptTypes="image/jpeg,.jpg,.jpeg" /></ToolPageLayout>;
+  return <ToolPageLayout tool={tool} hideWhatsNext><ImageConverter toolSlug="jpg-to-png" fromFormat="JPG/JPEG" toFormat="PNG" outputMime="image/png" outputExt="png" acceptTypes="image/jpeg,.jpg,.jpeg" /></ToolPageLayout>;
 }
