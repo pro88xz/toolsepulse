@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
@@ -23,6 +26,8 @@ export default function PDFSplitterPage() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [splitBlob, setSplitBlob] = useState<Blob | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -48,6 +53,20 @@ export default function PDFSplitterPage() {
     const file = Array.from(files).find((f) => f.type === "application/pdf");
     if (file) loadFile(file);
   }, [loadFile]);
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadFile(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function parseRange(input: string, max: number): number[] {
     const pages = new Set<number>();
@@ -96,6 +115,7 @@ export default function PDFSplitterPage() {
         copiedPages.forEach((page) => newPdf.addPage(page));
         const bytes = await newPdf.save();
         const blob = new Blob([bytes as BlobPart], { type: "application/pdf" });
+        setSplitBlob(blob);
         saveAs(blob, `${fileName.replace(".pdf", "")}_pages_${rangeInput.replace(/\s/g, "")}.pdf`);
       }
 
@@ -108,7 +128,16 @@ export default function PDFSplitterPage() {
   }, [pdfData, mode, rangeInput, fileName]);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
+      {inboxSource && pdfData && (
+        <div className="mb-4">
+          <InboxBanner
+            sourceToolSlug={inboxSource}
+            fileName={fileName}
+            onStartFresh={() => { setPdfData(null); setDone(false); setError(""); setInboxSource(null); setSplitBlob(null); }}
+          />
+        </div>
+      )}
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           {!pdfData ? (
@@ -190,6 +219,14 @@ export default function PDFSplitterPage() {
           </div>
         )}
       </div>
+      <WhatsNext
+        currentTool="pdf-splitter"
+        getCurrentResult={async () => {
+          if (!splitBlob) return null;
+          const base = fileName.replace(/\.pdf$/i, "") || "document";
+          return { blob: splitBlob, fileName: `${base}-split.pdf` };
+        }}
+      />
     </ToolPageLayout>
   );
 }
