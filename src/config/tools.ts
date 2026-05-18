@@ -1044,6 +1044,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["sharpen image", "unblur image", "image sharpener", "fix blurry photo", "sharpen photo online"],
   },
+  {
+    id: "pdf-page-numbering",
+    name: "PDF Page Numbering",
+    description: "Add page numbers to any PDF. Choose position (top/bottom, left/center/right), format (1, Page 1, 1 of N), starting number, and font size. Runs in your browser — no upload.",
+    shortDescription: "Add page numbers to PDF documents",
+    slug: "pdf-page-numbering",
+    relatedTools: ["pdf-compressor", "merge-pdf", "pdf-splitter", "pdf-editor"],
+    category: "pdf",
+    icon: "Hash",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["pdf page numbering", "add page numbers to pdf", "number pdf pages", "pdf numbering online", "page numbers pdf"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

@@ -2803,6 +2803,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Make screenshots punchier", description: "App or website screenshots taken at non-native resolution can look blurry \u2014 a sharpening pass restores crisp edges." },
     ],
   },
+  "pdf-page-numbering": {
+    toolSlug: "pdf-page-numbering",
+    howTo: {
+      title: "How to Add Page Numbers to a PDF Online",
+      steps: [
+        { title: "Open the PDF Page Numbering tool", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop a PDF file \u2014 any number of pages works. Files stay in your browser." },
+        { title: "Configure the numbering", description: "Pick position (top or bottom, left/center/right), format (1, Page 1, 1 of N), starting number, and font size. Live preview shows you the placement." },
+        { title: "Download the numbered PDF", description: "Hit Apply \u2014 a new PDF with page numbers is generated and ready to download in seconds." },
+      ],
+      tips: [
+        "For legal or academic documents, the bottom-center position is the most conventional.",
+        "Use the \u201cPage X of Y\u201d format when readers need to know total length \u2014 reports, manuals, theses.",
+        "If your PDF starts with a cover or title page, set the starting number to 0 so the first counted page is the actual content.",
+        "Font size 10\u201312 is standard for body documents. 14\u201316 works better for presentations.",
+        "Page numbers are added as a new layer \u2014 they don\u2019t alter the original PDF content underneath.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. The entire PDF manipulation happens in your browser using pdf-lib. Your document never leaves your device." },
+      { question: "Will it work on password-protected PDFs?", answer: "No \u2014 you need to unlock the PDF first. Use our PDF Unlocker tool, then add page numbers." },
+      { question: "Can I number only specific pages?", answer: "Currently this tool numbers all pages. To skip pages, use our PDF Splitter first to remove them, number the rest, then merge if needed." },
+      { question: "What if my PDF already has page numbers?", answer: "The tool adds new numbers on top \u2014 you may end up with two sets. Either remove the existing layer first (with our PDF Editor) or just keep the original." },
+      { question: "Can I customize the font?", answer: "Currently the tool uses a clean built-in font (Helvetica) for maximum compatibility. Font family selection is on the roadmap." },
+    ],
+    alternatives: {
+      intro: "Adding page numbers to PDFs is a common need \u2014 here\u2019s where this tool fits.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Powerful with extensive customization, but requires a paid subscription. Overkill for adding page numbers to a single doc." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file to their servers \u2014 a privacy risk for sensitive contracts, legal docs, or medical records." },
+        { name: "Microsoft Word + Export", description: "Roundabout approach", differentiator: "Works only if you have the original Word file. Doesn\u2019t help when you receive a PDF you didn\u2019t create." },
+      ],
+      whyUs: "Adds page numbers in your browser, no upload, no signup, multiple format options, instant download. Great for confidential documents.",
+    },
+    useCases: [
+      { title: "Legal briefs and filings", description: "Court rules often require page-numbered exhibits. Add numbers in the right format quickly, without uploading sensitive filings to a third-party service." },
+      { title: "Academic papers and theses", description: "Universities frequently require specific page numbering formats. Apply \u201cPage X of Y\u201d to your final PDF before submission." },
+      { title: "Reports and business documents", description: "Multi-page reports look more professional with consistent page numbering \u2014 essential for printed handouts and reference docs." },
+      { title: "Combined PDF compilations", description: "After merging multiple PDFs, re-number everything sequentially so the combined document reads cleanly from cover to back." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
