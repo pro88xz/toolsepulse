@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
 
@@ -14,6 +17,8 @@ function formatSize(bytes: number): string {
 
 export default function AIImageUpscalerPage() {
   const [sourceUrl, setSourceUrl] = useState<string | null>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [sourceFileName, setSourceFileName] = useState("");
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState({ w: 0, h: 0 });
   const [newSize, setNewSize] = useState({ w: 0, h: 0 });
@@ -25,6 +30,7 @@ export default function AIImageUpscalerPage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const upscaleImage = useCallback((file: File) => {
+    setSourceFileName(file.name);
     setProcessing(true);
     setError("");
     setResultUrl(null);
@@ -100,6 +106,20 @@ export default function AIImageUpscalerPage() {
     [upscaleImage]
   );
 
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      handleFiles([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const downloadResult = () => {
     if (!resultUrl) return;
     const link = document.createElement("a");
@@ -117,8 +137,16 @@ export default function AIImageUpscalerPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
+        {inboxSource && sourceFileName && (
+          <InboxBanner
+            sourceToolSlug={inboxSource}
+            fileName={sourceFileName}
+            onStartFresh={() => { setSourceUrl(null); setResultUrl(null); setInboxSource(null); setSourceFileName(""); setError(""); }}
+          />
+        )}
+
         {!sourceUrl ? (
           <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
             {/* Scale Selection */}
@@ -216,6 +244,16 @@ export default function AIImageUpscalerPage() {
 
         {error && <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-600">{error}</div>}
       </div>
+      <WhatsNext
+        currentTool="ai-image-upscaler"
+        getCurrentResult={async () => {
+          if (!resultUrl) return null;
+          const res = await fetch(resultUrl);
+          const blob = await res.blob();
+          const base = sourceFileName.replace(/\.[^.]+$/, "") || "image";
+          return { blob, fileName: `${base}-upscaled.png` };
+        }}
+      />
     </ToolPageLayout>
   );
 }
