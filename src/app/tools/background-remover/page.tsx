@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
 
@@ -14,6 +17,8 @@ export default function BackgroundRemoverPage() {
   const [error, setError] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const [showComparison, setShowComparison] = useState(true);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [sourceFileName, setSourceFileName] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const removeBackground = useCallback(async (file: File) => {
@@ -23,6 +28,7 @@ export default function BackgroundRemoverPage() {
     }
 
     setError("");
+    setSourceFileName(file.name);
     setResultUrl(null);
     setProcessing(true);
     setProgress("Loading AI model...");
@@ -69,6 +75,20 @@ export default function BackgroundRemoverPage() {
     [removeBackground]
   );
 
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      handleFiles([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const downloadResult = () => {
     if (!resultUrl) return;
     const link = document.createElement("a");
@@ -80,13 +100,23 @@ export default function BackgroundRemoverPage() {
   const reset = () => {
     setSourceUrl(null);
     setResultUrl(null);
+    setSourceFileName("");
+    setInboxSource(null);
     setError("");
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {/* Upload */}
+        {inboxSource && sourceFileName && (
+          <InboxBanner
+            sourceToolSlug={inboxSource}
+            fileName={sourceFileName}
+            onStartFresh={() => reset()}
+          />
+        )}
+
         {!sourceUrl && (
           <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
             <div
@@ -223,6 +253,16 @@ export default function BackgroundRemoverPage() {
           </>
         )}
       </div>
+      <WhatsNext
+        currentTool="background-remover"
+        getCurrentResult={async () => {
+          if (!resultUrl) return null;
+          const res = await fetch(resultUrl);
+          const blob = await res.blob();
+          const base = sourceFileName.replace(/\.[^.]+$/, "") || "image";
+          return { blob, fileName: `${base}-no-bg.png` };
+        }}
+      />
     </ToolPageLayout>
   );
 }
