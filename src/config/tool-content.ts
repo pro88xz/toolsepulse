@@ -2844,6 +2844,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Combined PDF compilations", description: "After merging multiple PDFs, re-number everything sequentially so the combined document reads cleanly from cover to back." },
     ],
   },
+  "pdf-watermark": {
+    toolSlug: "pdf-watermark",
+    howTo: {
+      title: "How to Add a Watermark to a PDF Online",
+      steps: [
+        { title: "Open the PDF Watermark tool", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop any PDF \u2014 contracts, drafts, photographs compiled into a PDF, any document." },
+        { title: "Configure the watermark", description: "Type the text (e.g., CONFIDENTIAL, DRAFT, your name). Adjust opacity, font size, rotation angle, and color. Preview shows the placement live." },
+        { title: "Download the watermarked PDF", description: "Hit Apply \u2014 the watermark is stamped across every page. Download the result instantly." },
+      ],
+      tips: [
+        "Diagonal watermarks (45\u00b0 rotation) are most readable and hardest to crop out \u2014 the classic CONFIDENTIAL or DRAFT look.",
+        "Keep opacity between 15-30% for a subtle stamp that doesn\u2019t obscure the text underneath.",
+        "Use larger font sizes (60-120pt) for full-page watermarks. Smaller sizes (24-48pt) for repeating tiles look professional.",
+        "Pick a color with intent: red for warnings, gray for neutral marking, dark navy for legal documents.",
+        "Watermarks are added as a layer over the original content \u2014 your source PDF is preserved underneath.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. The watermark is added entirely in your browser using pdf-lib. Your document never leaves your device." },
+      { question: "Can I add an image watermark instead of text?", answer: "Currently this tool supports text watermarks only. For image watermarks, use our PDF Editor or convert your image to a logo overlay first." },
+      { question: "Will the watermark show on every page?", answer: "Yes \u2014 the watermark is stamped uniformly across all pages of the PDF for consistent branding or marking." },
+      { question: "Can someone remove the watermark?", answer: "Watermarks are part of the PDF\u2019s page content. Determined users with PDF editors can sometimes remove them, but for casual viewing or print-and-scan workflows, they\u2019re very effective." },
+      { question: "What\u2019s the best font size for full-page watermarks?", answer: "60-120pt at 45\u00b0 rotation typically fills the page nicely. Adjust based on text length \u2014 short words can go larger, long phrases benefit from smaller sizes." },
+    ],
+    alternatives: {
+      intro: "Watermarking PDFs is a common need for legal, business, and creative use \u2014 here\u2019s where this tool fits.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Most flexible watermark options but requires a paid subscription and a learning curve." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file to their servers \u2014 a risk for confidential drafts and signed contracts." },
+        { name: "Microsoft Word watermark + export", description: "Roundabout approach", differentiator: "Only works if you have the original Word source. Doesn\u2019t help when you need to watermark a received PDF." },
+      ],
+      whyUs: "Browser-only processing, full control over opacity/rotation/color, no upload, no signup, instant download. Ideal for sensitive documents.",
+    },
+    useCases: [
+      { title: "Mark drafts and revisions", description: "Stamp DRAFT or REVISION 2 across a document so reviewers know they\u2019re not looking at the final version." },
+      { title: "Confidential business documents", description: "Add CONFIDENTIAL or NOT FOR DISTRIBUTION to internal contracts, financial reports, or strategy docs." },
+      { title: "Copyright protection", description: "Add your name or company copyright across shared PDFs to discourage unauthorized redistribution." },
+      { title: "Sample or watermarked versions", description: "Share preview versions of paid content with a clear PREVIEW or SAMPLE watermark to prevent free distribution." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

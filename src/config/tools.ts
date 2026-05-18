@@ -1058,6 +1058,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["pdf page numbering", "add page numbers to pdf", "number pdf pages", "pdf numbering online", "page numbers pdf"],
   },
+  {
+    id: "pdf-watermark",
+    name: "PDF Watermark",
+    description: "Add text watermarks to every page of a PDF. Adjustable opacity, font size, rotation angle, and color. Perfect for marking documents as DRAFT, CONFIDENTIAL, or with a copyright notice. Runs entirely in your browser.",
+    shortDescription: "Add text watermarks across PDF pages",
+    slug: "pdf-watermark",
+    relatedTools: ["pdf-compressor", "pdf-page-numbering", "pdf-signer", "watermark-image"],
+    category: "pdf",
+    icon: "Stamp",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["pdf watermark", "add watermark to pdf", "pdf watermark online", "diagonal pdf watermark", "confidential pdf stamp"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
