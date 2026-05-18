@@ -3,6 +3,10 @@
 import { useState, useRef, useCallback } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
+import { useEffect } from "react";
 
 const tool = getToolBySlug("image-resizer")!;
 
@@ -43,6 +47,7 @@ export default function ImageResizerPage() {
   const [resizedSize, setResizedSize] = useState(0);
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
 
   const loadImage = useCallback((file: File) => {
     const reader = new FileReader();
@@ -73,6 +78,20 @@ export default function ImageResizerPage() {
     },
     [loadImage]
   );
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadImage(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const updateWidth = (w: number) => {
     setWidth(w);
@@ -129,7 +148,7 @@ export default function ImageResizerPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!image ? (
           <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
@@ -157,6 +176,14 @@ export default function ImageResizerPage() {
             </div>
           </div>
         ) : (
+          <>
+          {inboxSource && image && (
+            <InboxBanner
+              sourceToolSlug={inboxSource}
+              fileName={image.file.name}
+              onStartFresh={() => { setImage(null); setResizedUrl(null); setInboxSource(null); }}
+            />
+          )}
           <div className="grid gap-6 lg:grid-cols-3">
             {/* Controls */}
             <div className="lg:col-span-1 space-y-6">
@@ -303,8 +330,20 @@ export default function ImageResizerPage() {
               )}
             </div>
           </div>
+          </>
         )}
       </div>
+      <WhatsNext
+        currentTool="image-resizer"
+        getCurrentResult={async () => {
+          if (!resizedUrl || !image) return null;
+          const res = await fetch(resizedUrl);
+          const blob = await res.blob();
+          const base = image.file.name.replace(/\.[^.]+$/, "") || "image";
+          const ext = outputFormat === "jpeg" ? "jpg" : outputFormat;
+          return { blob, fileName: `${base}-resized.${ext}` };
+        }}
+      />
     </ToolPageLayout>
   );
 }
