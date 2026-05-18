@@ -1,5 +1,8 @@
 "use client";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 import { PDFDocument } from "pdf-lib";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
@@ -9,6 +12,8 @@ interface UploadedImage { id: string; name: string; url: string; file: File; }
 
 export default function Page() {
   const [images, setImages] = useState<UploadedImage[]>([]);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
   const [processing, setProcessing] = useState(false);
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -19,6 +24,20 @@ export default function Page() {
       name: f.name, url: URL.createObjectURL(f), file: f,
     }));
     setImages((prev) => [...prev, ...imgs]);
+  }, []);
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      handleFiles([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const removeImage = (id: string) => setImages(images.filter((i) => i.id !== id));
@@ -69,7 +88,7 @@ export default function Page() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div onDragOver={(e) => { e.preventDefault(); setDragActive(true); }} onDragLeave={() => setDragActive(false)}
@@ -85,6 +104,14 @@ export default function Page() {
             <p className="text-sm text-gray-400 mt-1">Each image becomes a page in the PDF</p>
           </div>
         </div>
+
+        {inboxSource && images.length > 0 && (
+          <InboxBanner
+            sourceToolSlug={inboxSource}
+            fileName={images[0].name}
+            onStartFresh={() => { setImages([]); setPdfBlob(null); setInboxSource(null); }}
+          />
+        )}
 
         {images.length > 0 && (
           <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
@@ -105,6 +132,13 @@ export default function Page() {
           </div>
         )}
       </div>
+      <WhatsNext
+        currentTool="image-to-pdf"
+        getCurrentResult={async () => {
+          if (!pdfBlob) return null;
+          return { blob: pdfBlob, fileName: "images.pdf" };
+        }}
+      />
     </ToolPageLayout>
   );
 }
