@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 import { PDFDocument } from "pdf-lib";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
@@ -23,6 +26,8 @@ function formatSize(bytes: number): string {
 
 export default function MergePDFPage() {
   const [files, setFiles] = useState<PDFFile[]>([]);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [mergedBlob, setMergedBlob] = useState<Blob | null>(null);
   const [merging, setMerging] = useState(false);
   const [error, setError] = useState("");
   const [dragActive, setDragActive] = useState(false);
@@ -55,6 +60,20 @@ export default function MergePDFPage() {
     }
 
     setFiles((prev) => [...prev, ...newFiles]);
+  }, []);
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadPDFs([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const removeFile = (id: string) => {
@@ -108,6 +127,7 @@ export default function MergePDFPage() {
 
       const mergedBytes = await mergedPdf.save();
       const blob = new Blob([mergedBytes as BlobPart], { type: "application/pdf" });
+      setMergedBlob(blob);
       const url = URL.createObjectURL(blob);
 
       const link = document.createElement("a");
@@ -126,7 +146,16 @@ export default function MergePDFPage() {
   const totalSize = files.reduce((sum, f) => sum + f.size, 0);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
+      {inboxSource && files.length > 0 && (
+        <div className="mb-4">
+          <InboxBanner
+            sourceToolSlug={inboxSource}
+            fileName={files[0].name}
+            onStartFresh={() => { setFiles([]); setMergedBlob(null); setInboxSource(null); }}
+          />
+        </div>
+      )}
       <div className="space-y-6">
         {/* Upload Zone */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
@@ -301,6 +330,13 @@ export default function MergePDFPage() {
           </div>
         )}
       </div>
+      <WhatsNext
+        currentTool="merge-pdf"
+        getCurrentResult={async () => {
+          if (!mergedBlob) return null;
+          return { blob: mergedBlob, fileName: "merged.pdf" };
+        }}
+      />
     </ToolPageLayout>
   );
 }
