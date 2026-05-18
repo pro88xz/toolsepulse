@@ -2680,6 +2680,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Forensic and legal review", description: "Check provenance of photos used as evidence or documentation. Camera details and timestamps can corroborate or refute claims." },
     ],
   },
+  "batch-image-converter": {
+    toolSlug: "batch-image-converter",
+    howTo: {
+      title: "How to Convert Multiple Images at Once Online",
+      steps: [
+        { title: "Open the Batch Image Converter", description: "Navigate to the tool. No signup, no uploads to a server." },
+        { title: "Drop your images", description: "Drag multiple files at once, or click to select \u2014 JPG, PNG, WebP, GIF, BMP all accepted." },
+        { title: "Pick the output format", description: "Choose JPG, PNG, WebP, or AVIF as the target format for ALL files in the batch. Optionally set quality for lossy formats." },
+        { title: "Download as ZIP or individually", description: "Hit Convert All, then download every file at once in a ZIP, or grab them one by one from the results list." },
+      ],
+      tips: [
+        "WebP and AVIF produce dramatically smaller files than JPG \u2014 ideal for web images. Modern browsers all support both.",
+        "Convert from HEIC (iPhone photo format) to JPG to share with non-Apple devices that can\u2019t open HEIC.",
+        "Bulk JPG to PNG conversion preserves quality but multiplies file size \u2014 only use PNG when you need transparency.",
+        "For uploads to email or web forms, batch-convert large PNGs to WebP quality 80 \u2014 reduces size by 60-80% with no visible quality loss.",
+        "Files are processed in your browser \u2014 hundreds of MB total is fine, but very large individual images (50MB+) may slow conversion.",
+      ],
+    },
+    faq: [
+      { question: "Is there a limit on how many files I can convert?", answer: "No hard limit. The tool processes batches in your browser \u2014 dozens of small images convert in seconds, hundreds work fine if you wait. Very large batches (1GB+ total) may run into browser memory limits." },
+      { question: "Are my files uploaded anywhere?", answer: "No. All conversion happens locally in your browser using Canvas. Your images never touch any server." },
+      { question: "What input formats are supported?", answer: "Any format your browser can decode: JPG, PNG, WebP, AVIF, GIF, BMP, and most camera formats including modern HEIC/HEIF on supported browsers." },
+      { question: "Will quality be preserved?", answer: "Lossless conversions (PNG to/from BMP) preserve perfect quality. JPG/WebP/AVIF use a quality setting (default 92) for an excellent visual match \u2014 you can raise it to 100 for max quality at the cost of file size." },
+      { question: "Why does my browser slow down with many files?", answer: "Each conversion uses memory for the decoded image. Processing 50+ large photos at once can pressure your browser. If it stalls, do it in smaller batches." },
+    ],
+    alternatives: {
+      intro: "Batch image conversion is offered by both desktop apps and online services. Here\u2019s where this one fits.",
+      tools: [
+        { name: "ImageMagick / FFmpeg (CLI)", description: "Command-line pros", differentiator: "The gold standard for power users \u2014 but requires installation, terminal skills, and writing the right one-liner." },
+        { name: "Photoshop batch / Lightroom export", description: "Pro photo editors", differentiator: "Excellent if you already have a subscription, but expensive and overkill for a one-off conversion job." },
+        { name: "Online batch services", description: "Various web tools", differentiator: "Convenient but most require uploading hundreds of files to their servers \u2014 slow and a privacy risk for personal photos." },
+      ],
+      whyUs: "Browser-only conversion, drag-drop dozens of files, single ZIP download, no watermarks, no signup, supports modern formats like AVIF.",
+    },
+    useCases: [
+      { title: "Web optimization at scale", description: "Convert a folder of product photos from PNG to WebP \u2014 cuts page load time on your e-commerce store dramatically." },
+      { title: "iPhone HEIC to JPG migration", description: "Bulk convert HEIC photos from your iPhone backup to standard JPG so non-Apple devices, Windows PCs, and older software can open them." },
+      { title: "Asset prep for development", description: "Designers shipping image assets to devs: bulk convert from PSD exports (PNG) to optimized WebP or AVIF for production builds." },
+      { title: "Legacy archive cleanup", description: "Old photo libraries in BMP, TIFF, or proprietary formats \u2014 bulk modernize to JPG or WebP for cloud storage and sharing." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

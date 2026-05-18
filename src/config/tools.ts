@@ -1002,6 +1002,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["image metadata viewer", "view exif online", "photo metadata", "image info viewer", "check exif data"],
   },
+  {
+    id: "batch-image-converter",
+    name: "Batch Image Converter",
+    description: "Convert multiple images at once between JPG, PNG, WebP, and AVIF. Drop dozens of files, pick a target format, download as ZIP. Runs entirely in your browser.",
+    shortDescription: "Convert many images at once, any format",
+    slug: "batch-image-converter",
+    relatedTools: ["image-compressor", "image-resizer", "jpg-to-png", "png-to-jpg", "webp-to-png"],
+    category: "image",
+    icon: "Layers",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["batch image converter", "bulk convert images", "convert multiple images", "batch jpg to png", "bulk image format converter"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
