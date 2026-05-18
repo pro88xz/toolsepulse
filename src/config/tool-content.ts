@@ -3008,6 +3008,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Multi-section reports", description: "After merging multiple PDFs into one, add consistent headers and footers to make the combined document feel cohesive." },
     ],
   },
+  "pdf-crop": {
+    toolSlug: "pdf-crop",
+    howTo: {
+      title: "How to Crop Margins from a PDF Online",
+      steps: [
+        { title: "Open the PDF Crop tool", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop the file \u2014 any size, any number of pages. The tool reads page dimensions immediately." },
+        { title: "Set the crop margins", description: "Enter how much to trim from each side (top, bottom, left, right) in points (72 pt = 1 inch). Live preview shows the new bounding box." },
+        { title: "Apply and download", description: "Hit Crop \u2014 every page is uniformly trimmed. Download the cropped PDF in seconds." },
+      ],
+      tips: [
+        "PDF measurements use points: 1 inch = 72 points, 1 cm \u2248 28.3 points. Most PDFs are 612\u00d7792 (US Letter) or 595\u00d7842 (A4).",
+        "Cropping doesn\u2019t delete content \u2014 it tells PDF viewers to display a smaller visible area. The underlying content is preserved.",
+        "For scanned PDFs with thick black borders or excessive whitespace, cropping makes a much bigger visual difference than expected.",
+        "Crop uniformly across all pages \u2014 if individual pages need different crops, use a dedicated PDF editor.",
+        "Common preset: trim 36 pt (0.5 in) off each side to tighten generous margins without cutting content.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. Cropping happens entirely in your browser using pdf-lib. Your document never leaves your device." },
+      { question: "Does cropping delete content permanently?", answer: "No \u2014 cropping adjusts the visible area (the crop box). The original content stays in the file and can be un-cropped later with PDF tools. For permanent deletion, use a PDF redaction tool." },
+      { question: "What\u2019s the unit of measurement?", answer: "PDF points. 1 inch = 72 points. 1 cm \u2248 28.3 points. The tool shows you the current page size in points." },
+      { question: "Can I crop different amounts on different pages?", answer: "Not in this tool \u2014 the crop applies uniformly across all pages. For per-page cropping, you\u2019d need a dedicated PDF editor." },
+      { question: "Will the file size shrink after cropping?", answer: "Slightly, since metadata changes. But the underlying content is preserved, so the savings are small. For real size reduction, follow up with our PDF Compressor." },
+    ],
+    alternatives: {
+      intro: "Cropping PDFs is common when working with scanned documents and oversized pages.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Visual interactive cropping but requires a paid subscription. Powerful but heavy for one-off jobs." },
+        { name: "Preview (macOS)", description: "Built-in Mac tool", differentiator: "Free and good for Mac users \u2014 but Windows users have no equivalent built-in option." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file \u2014 risky for confidential documents." },
+      ],
+      whyUs: "Browser-only processing, simple numeric inputs, live preview, no upload, no signup, instant download.",
+    },
+    useCases: [
+      { title: "Tighten scanned documents", description: "Old scans often have generous borders. Crop them to focus on content and look more professional in print or sharing." },
+      { title: "Remove sticky note borders", description: "PDFs with annotation tool borders or printer-added margins can be trimmed for a cleaner final document." },
+      { title: "Match presentation aspect ratios", description: "Crop tall PDF pages to widescreen ratios for embedding in slide decks or social media posts." },
+      { title: "Print-shop prep", description: "Match your PDF to specific print bleed or trim sizes by cropping margins before sending to the printer." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

@@ -1114,6 +1114,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["pdf header footer", "add header to pdf", "pdf footer text", "running header pdf", "pdf footer online"],
   },
+  {
+    id: "pdf-crop",
+    name: "PDF Crop",
+    description: "Trim margins off every page of a PDF. Adjust top, bottom, left, and right with live preview. Perfect for tightening scanned documents, removing whitespace, or prepping for print. Runs in your browser.",
+    shortDescription: "Trim margins off PDF pages",
+    slug: "pdf-crop",
+    relatedTools: ["pdf-page-extractor", "pdf-compressor", "pdf-splitter", "pdf-editor"],
+    category: "pdf",
+    icon: "Crop",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["crop pdf pages", "trim pdf margins", "remove white space pdf", "pdf crop online", "shrink pdf margins"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
