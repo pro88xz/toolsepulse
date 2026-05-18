@@ -4,6 +4,9 @@ import { useState, useRef, useCallback } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
 import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
+import { useEffect } from "react";
 
 const tool = getToolBySlug("exif-remover")!;
 
@@ -102,6 +105,7 @@ async function readExif(file: File): Promise<ExifField[]> {
 
 export default function ExifRemoverPage() {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [exifData, setExifData] = useState<ExifField[]>([]);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [resultSize, setResultSize] = useState<number>(0);
@@ -152,6 +156,20 @@ export default function ExifRemoverPage() {
       setProcessing(false);
     }
   }, [resultUrl]);
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadFile(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -206,6 +224,13 @@ export default function ExifRemoverPage() {
           </div>
         ) : (
           <>
+            {inboxSource && sourceFile && (
+              <InboxBanner
+                sourceToolSlug={inboxSource}
+                fileName={sourceFile.name}
+                onStartFresh={() => { reset(); setInboxSource(null); }}
+              />
+            )}
             <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
@@ -247,7 +272,17 @@ export default function ExifRemoverPage() {
           </>
         )}
 
-        <WhatsNext currentTool="exif-remover" />
+        <WhatsNext
+          currentTool="exif-remover"
+          getCurrentResult={async () => {
+            if (!resultUrl || !sourceFile) return null;
+            const res = await fetch(resultUrl);
+            const blob = await res.blob();
+            const base = sourceFile.name.replace(/\.[^.]+$/, "") || "image";
+            const ext = sourceFile.type === "image/png" ? "png" : "jpg";
+            return { blob, fileName: `${base}-clean.${ext}` };
+          }}
+        />
 
         {error && (
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>
