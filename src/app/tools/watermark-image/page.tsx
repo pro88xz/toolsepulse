@@ -4,6 +4,8 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
 import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("watermark-image")!;
 
@@ -30,6 +32,7 @@ export default function WatermarkImagePage() {
   const [error, setError] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const loadImage = useCallback((file: File) => {
@@ -42,6 +45,25 @@ export default function WatermarkImagePage() {
     img.onload = () => { setSourceImage(img); setSourceName(file.name); };
     img.onerror = () => setError("Failed to load image.");
     img.src = URL.createObjectURL(file);
+  }, []);
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      const img = new Image();
+      img.onload = () => {
+        setSourceImage(img);
+        setSourceName(file.name);
+        setInboxSource(item.sourceTool);
+      };
+      img.src = URL.createObjectURL(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -143,6 +165,13 @@ export default function WatermarkImagePage() {
           </div>
         ) : (
           <>
+            {inboxSource && (
+              <InboxBanner
+                sourceToolSlug={inboxSource}
+                fileName={sourceName}
+                onStartFresh={() => { reset(); setInboxSource(null); }}
+              />
+            )}
             <div className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-medium text-gray-500 truncate">{sourceName}</p>
@@ -226,7 +255,16 @@ export default function WatermarkImagePage() {
           </>
         )}
 
-        <WhatsNext currentTool="watermark-image" />
+        <WhatsNext
+          currentTool="watermark-image"
+          getCurrentResult={async () => {
+            if (!resultUrl || !sourceName) return null;
+            const res = await fetch(resultUrl);
+            const blob = await res.blob();
+            const base = sourceName.replace(/\.[^.]+$/, "") || "image";
+            return { blob, fileName: `${base}-watermarked.png` };
+          }}
+        />
 
         {error && (
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>
