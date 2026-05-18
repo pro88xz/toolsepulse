@@ -3132,6 +3132,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Tax and financial review", description: "Annotate tax returns, financial statements, or accounting documents privately. Highlight items that need follow-up without exposing your financials online." },
     ],
   },
+  "pdf-password-protector": {
+    toolSlug: "pdf-password-protector",
+    howTo: {
+      title: "How to Password Protect a PDF Online",
+      steps: [
+        { title: "Open the PDF Password Protector", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop the PDF you want to protect. Files stay in your browser \u2014 critical for sensitive contracts, financial records, or personal documents." },
+        { title: "Set a strong password", description: "Pick a password to encrypt the PDF. Anyone trying to open the file will need this password. Confirm it to avoid typos." },
+        { title: "Download the protected PDF", description: "Hit Encrypt \u2014 a new, password-protected PDF is generated. Download instantly. Share with confidence." },
+      ],
+      tips: [
+        "Use a strong password: 12+ characters, mix of letters, numbers, and symbols. Avoid common words or birthdays.",
+        "Send the password through a different channel than the PDF \u2014 e.g., email the PDF, then text the password.",
+        "Lost passwords cannot be recovered \u2014 the encryption is real. Keep a secure copy in a password manager like 1Password or Bitwarden.",
+        "If you forget the password, you\u2019ll need our PDF Unlocker tool (which only works if the password is provided or, for some files, easy-to-guess legacy ones).",
+        "For maximum security, also strip metadata from the source PDF first \u2014 sensitive details like author name and creation timestamp can leak even from password-protected files.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF or password uploaded?", answer: "No. PDF encryption happens entirely in your browser using pdf-lib. Both the PDF and the password stay on your device \u2014 nothing is sent to any server." },
+      { question: "What kind of encryption is used?", answer: "PDF\u2019s built-in 128-bit AES encryption \u2014 the standard used by Adobe and other PDF viewers. Strong enough for confidential business documents." },
+      { question: "Will the password protect against modification?", answer: "The password gates *opening* the PDF. It also prevents printing/editing in most viewers unless the recipient knows the password. For tamper-proof distribution, use our PDF Signer in addition." },
+      { question: "Can the password be removed later?", answer: "Yes \u2014 with the password, our PDF Unlocker can strip it. Without the password, the file is genuinely locked." },
+      { question: "Why does the PDF look the same after protecting?", answer: "Encryption is invisible until the PDF is closed and reopened. Try sending the file to yourself or a colleague \u2014 they\u2019ll be prompted for the password when opening it." },
+    ],
+    alternatives: {
+      intro: "Password-protecting a PDF is essential for sharing sensitive information.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Excellent encryption options but requires a paid subscription. Overkill for one-off password protection." },
+        { name: "Preview (macOS) password export", description: "Built-in Mac tool", differentiator: "Free and decent for Mac users \u2014 but Windows users have no equivalent built-in option." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file AND your password to their servers. Defeats the purpose if you\u2019re protecting confidential data." },
+      ],
+      whyUs: "Encryption happens in your browser, password never leaves your device, free, no signup, instant. Genuinely private password protection.",
+    },
+    useCases: [
+      { title: "Sharing confidential contracts", description: "Send signed NDAs, employment contracts, or partnership agreements via email with a password \u2014 verbally share the password through a different channel." },
+      { title: "Tax returns and financial records", description: "Email tax PDFs to your accountant or financial advisor with a password \u2014 protects against email interception." },
+      { title: "Medical records and prescriptions", description: "Share patient records, lab results, or prescriptions with healthcare providers while complying with privacy practices." },
+      { title: "Legal documents and wills", description: "Distribute sensitive legal documents, wills, or court papers to family or counsel with a password \u2014 keeps the contents private even if the email is forwarded." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

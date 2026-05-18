@@ -1156,6 +1156,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["annotate pdf online", "highlight pdf", "add notes to pdf", "pdf annotator", "pdf markup tool"],
   },
+  {
+    id: "pdf-password-protector",
+    name: "PDF Password Protector",
+    description: "Add a password to any PDF to protect sensitive content before sharing. Encryption happens entirely in your browser \u2014 your file and your password never touch any server. Open the protected PDF with the password you set.",
+    shortDescription: "Add password protection to PDFs",
+    slug: "pdf-password-protector",
+    relatedTools: ["pdf-unlocker", "pdf-compressor", "pdf-signer", "pdf-watermark"],
+    category: "pdf",
+    icon: "Lock",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["password protect pdf", "encrypt pdf online", "add password to pdf", "secure pdf with password", "lock pdf file"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
