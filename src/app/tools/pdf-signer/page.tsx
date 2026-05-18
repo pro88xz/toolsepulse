@@ -45,13 +45,15 @@ export default function PDFSignerPage() {
     if (file) loadFile(file);
   }, [loadFile]);
 
-  const startDraw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const startDraw = (e: React.PointerEvent<HTMLCanvasElement>) => {
     setIsDrawing(true);
+    // Capture the pointer so we keep receiving move/up events even if the finger leaves the canvas
+    canvasRef.current?.setPointerCapture(e.pointerId);
     const rect = canvasRef.current!.getBoundingClientRect();
     lastPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
   };
 
-  const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const draw = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (!isDrawing || !canvasRef.current) return;
     const ctx = canvasRef.current.getContext("2d")!;
     const rect = canvasRef.current.getBoundingClientRect();
@@ -67,8 +69,11 @@ export default function PDFSignerPage() {
     lastPos.current = { x, y };
   };
 
-  const endDraw = () => {
+  const endDraw = (e?: React.PointerEvent<HTMLCanvasElement>) => {
     setIsDrawing(false);
+    if (e && canvasRef.current?.hasPointerCapture(e.pointerId)) {
+      canvasRef.current.releasePointerCapture(e.pointerId);
+    }
     if (canvasRef.current) {
       setSignatureImage(canvasRef.current.toDataURL("image/png"));
     }
@@ -219,10 +224,11 @@ export default function PDFSignerPage() {
                       height={150}
                       className="w-full cursor-crosshair"
                       style={{ touchAction: "none" }}
-                      onMouseDown={startDraw}
-                      onMouseMove={draw}
-                      onMouseUp={endDraw}
-                      onMouseLeave={endDraw}
+                      onPointerDown={startDraw}
+                      onPointerMove={draw}
+                      onPointerUp={endDraw}
+                      onPointerCancel={endDraw}
+                      onPointerLeave={(e) => endDraw(e)}
                     />
                     <button onClick={clearCanvas} className="absolute top-2 right-2 text-xs text-gray-500 hover:text-gray-700 bg-white rounded px-2 py-1 border border-gray-200">Clear</button>
                   </div>
