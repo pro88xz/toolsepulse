@@ -1170,6 +1170,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["password protect pdf", "encrypt pdf online", "add password to pdf", "secure pdf with password", "lock pdf file"],
   },
+  {
+    id: "pdf-reorder-pages",
+    name: "PDF Reorder Pages",
+    description: "Drag and drop to rearrange pages in any PDF. Move pages around, fix out-of-order scans, or restructure documents. Visual thumbnails make it intuitive. Runs entirely in your browser.",
+    shortDescription: "Drag-and-drop to reorder PDF pages",
+    slug: "pdf-reorder-pages",
+    relatedTools: ["pdf-splitter", "pdf-page-extractor", "merge-pdf", "pdf-page-rotator"],
+    category: "pdf",
+    icon: "ArrowsUpDown",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["reorder pdf pages", "rearrange pdf pages", "move pdf pages", "pdf page order", "shuffle pdf pages"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

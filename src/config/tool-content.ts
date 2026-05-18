@@ -3173,6 +3173,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Legal documents and wills", description: "Distribute sensitive legal documents, wills, or court papers to family or counsel with a password \u2014 keeps the contents private even if the email is forwarded." },
     ],
   },
+  "pdf-reorder-pages": {
+    toolSlug: "pdf-reorder-pages",
+    howTo: {
+      title: "How to Reorder PDF Pages Online",
+      steps: [
+        { title: "Open the PDF Reorder Pages tool", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop the PDF whose pages need rearranging. Each page renders as a thumbnail in your browser." },
+        { title: "Drag pages to reorder", description: "Grab any thumbnail and drag it to a new position. The order updates live. Page numbers update so you can track which page is which." },
+        { title: "Apply and download", description: "Hit Save \u2014 a new PDF is generated with pages in your chosen order. Download instantly." },
+      ],
+      tips: [
+        "Hold and drag a thumbnail \u2014 release in any empty slot to move it. Other pages shift to accommodate.",
+        "Use this after scanning pages out of order \u2014 fix the sequence without rescanning.",
+        "Combine with PDF Splitter and Merge PDF for complex restructuring: split a big PDF, reorder pieces, merge back.",
+        "Page numbers shown on thumbnails are the ORIGINAL positions \u2014 helpful when you need to remember where each page came from.",
+        "Original page formatting, fonts, images, and metadata are all preserved \u2014 only the order changes.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. All page rendering and reordering happens in your browser using pdfjs and pdf-lib. Your document never leaves your device." },
+      { question: "Can I delete pages while reordering?", answer: "This tool focuses on reordering. To remove pages, use our PDF Page Extractor to pull only the pages you want to keep." },
+      { question: "Will quality drop after reordering?", answer: "No \u2014 page content is copied losslessly. The reordered PDF preserves all original formatting, images, and text quality." },
+      { question: "How many pages can I handle at once?", answer: "No hard limit, but very large PDFs (200+ pages) may slow the thumbnail rendering in your browser. For huge documents, split them first with our PDF Splitter, reorder smaller chunks, then merge." },
+      { question: "Can I work with scanned PDFs?", answer: "Yes \u2014 the tool works on any PDF, whether the pages are text-based or scanned images." },
+    ],
+    alternatives: {
+      intro: "Reordering PDF pages is common when fixing scan order or restructuring documents.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Excellent visual reordering, but requires a paid subscription." },
+        { name: "Preview (macOS)", description: "Built-in Mac tool", differentiator: "Free and good for Mac users, but Windows users have no equivalent." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file to their servers \u2014 risky for confidential documents." },
+      ],
+      whyUs: "Visual thumbnails, drag-and-drop, runs in your browser, no upload, no signup, instant download.",
+    },
+    useCases: [
+      { title: "Fix scan order", description: "After scanning a stack of pages out of sequence, drag thumbnails into the correct order without rescanning." },
+      { title: "Restructure a report", description: "Move the executive summary to the front, move appendices to the back, reorder chapters \u2014 visual restructuring without re-exporting from source." },
+      { title: "Compile evidence binders", description: "Reorder evidence pages for legal filings to match the order referenced in the brief." },
+      { title: "Reorganize a slide-style PDF", description: "Restructure slide order in a slides-exported PDF without reopening PowerPoint or Keynote." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
