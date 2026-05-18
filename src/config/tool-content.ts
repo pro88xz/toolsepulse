@@ -2926,6 +2926,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Create a redacted submission", description: "Extract only the public-facing pages of a document, leaving private sections out of the shared version." },
     ],
   },
+  "pdf-text-extractor": {
+    toolSlug: "pdf-text-extractor",
+    howTo: {
+      title: "How to Extract Text from a PDF Online",
+      steps: [
+        { title: "Open the PDF Text Extractor", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop a PDF file. The tool reads it in your browser and starts parsing immediately." },
+        { title: "Review the extracted text", description: "Text appears in a copy-friendly box, with page-by-page breakdown if you want. Layout is approximated; exact formatting isn\u2019t preserved (it\u2019s plain text)." },
+        { title: "Copy or download", description: "Hit Copy All to grab the entire content, or Download as .txt to save it as a plain text file." },
+      ],
+      tips: [
+        "Scanned PDFs (image-based) need OCR first \u2014 use our PDF OCR tool, then come back here. This tool only reads text-layer PDFs.",
+        "Use the page-by-page mode when you need to find a specific section quickly \u2014 each page is clearly delimited.",
+        "Extracted text is useful for AI prompting: paste a contract\u2019s text into ChatGPT/Claude with \u201csummarize this\u201d and skip the PDF upload entirely.",
+        "Searchable text is easier to grep through with command-line tools (grep, ripgrep) once extracted to .txt.",
+        "Multi-column PDFs (academic papers, magazines) may produce slightly mixed reading order \u2014 text content is correct, but flow may need cleanup.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. PDF parsing happens entirely in your browser using pdfjs. Your document never leaves your device." },
+      { question: "Will this work on scanned PDFs?", answer: "No \u2014 scanned PDFs contain images, not searchable text. Use our PDF OCR tool first to make them searchable, then extract." },
+      { question: "Does it preserve formatting?", answer: "Plain text only \u2014 fonts, sizes, colors, and layout are lost. Use our PDF to Word tool if you need formatting preserved." },
+      { question: "Can it extract from password-protected PDFs?", answer: "No \u2014 unlock first with our PDF Unlocker tool, then extract." },
+      { question: "What about embedded images?", answer: "Images are skipped. This tool extracts only the text layer. To pull images, use our PDF Editor." },
+    ],
+    alternatives: {
+      intro: "Extracting text from PDFs is common for AI prompting, search, and content migration.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Excellent fidelity but requires a paid subscription. Overkill for one-off text extraction." },
+        { name: "Online PDF-to-text services", description: "Various web tools", differentiator: "Convenient but require uploading your file to their servers \u2014 risk for confidential contracts and legal documents." },
+        { name: "pdftotext (command line)", description: "Linux/Mac utility", differentiator: "Excellent for pros, but requires terminal skills. Not friendly for one-off use." },
+      ],
+      whyUs: "Browser-only processing, copy or download, no upload of sensitive PDFs, no signup, instant. Perfect for AI prompt workflows.",
+    },
+    useCases: [
+      { title: "Feed PDFs to ChatGPT/Claude", description: "Paste extracted text directly into AI tools that don\u2019t accept PDFs or where you want to control exactly what\u2019s sent." },
+      { title: "Search across many PDFs", description: "Bulk-extract to .txt files, then use grep or any text search tool to find content across an entire folder of documents." },
+      { title: "Migrate PDF content to a CMS or doc", description: "Pull text out of a legacy PDF to paste into Notion, Google Docs, or your CMS \u2014 then reformat cleanly." },
+      { title: "Quote extraction for research", description: "Get clean, copy-able text from research papers and books to use in citations, notes, or literature reviews." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

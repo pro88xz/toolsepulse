@@ -1086,6 +1086,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["pdf page extractor", "extract pages from pdf", "save pdf pages", "pull pages pdf", "pdf page range extractor"],
   },
+  {
+    id: "pdf-text-extractor",
+    name: "PDF Text Extractor",
+    description: "Pull all the readable text out of any PDF and copy or download it as plain text. Useful for analysis, AI prompting, search, or migrating content. Runs entirely in your browser.",
+    shortDescription: "Extract plain text from any PDF",
+    slug: "pdf-text-extractor",
+    relatedTools: ["pdf-to-word", "grammar-checker", "word-counter", "pdf-editor"],
+    category: "pdf",
+    icon: "FileText",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["extract text from pdf", "pdf to text online", "pdf text extractor", "copy text from pdf", "pdf to plain text"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
