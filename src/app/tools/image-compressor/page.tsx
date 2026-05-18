@@ -199,7 +199,8 @@ export default function ImageCompressorPage() {
             </div>
           </div>
 
-          {/* Drop Zone */}
+          {/* Drop Zone — hidden when file arrived via inbox */}
+          {!inboxSource && (
           <div
             onDragOver={(e) => {
               e.preventDefault();
@@ -239,10 +240,27 @@ export default function ImageCompressorPage() {
               </>
             )}
           </div>
+          )}
         </div>
 
-        {/* Results */}
-        {results.length > 0 && (
+        {/* Inbox mode: streamlined single-file success view */}
+        {inboxSource && results.length === 1 && (
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-emerald-700 mb-3">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span className="text-sm font-semibold">Compressed · saved {(((results[0].originalSize - results[0].compressedSize) / results[0].originalSize) * 100).toFixed(0)}%</span>
+            </div>
+            <p className="text-xs text-emerald-600 mb-4">
+              {formatSize(results[0].originalSize)} &rarr; {formatSize(results[0].compressedSize)}
+            </p>
+            <button onClick={() => downloadImage(results[0])} className="btn-primary w-full py-3">
+              Download Compressed Image
+            </button>
+          </div>
+        )}
+
+        {/* Results — bulk view, hidden in inbox single-file mode */}
+        {results.length > 0 && !(inboxSource && results.length === 1) && (
           <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
               <div>
@@ -253,6 +271,7 @@ export default function ImageCompressorPage() {
                   Total saved: {formatSize(totalSaved)}
                 </p>
               </div>
+              {!inboxSource && (
               <div className="flex gap-3">
                 <button onClick={downloadAll} className="btn-primary py-2.5 px-5">
                   <svg className="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -267,6 +286,7 @@ export default function ImageCompressorPage() {
                   Clear
                 </button>
               </div>
+              )}
             </div>
 
             <div className="space-y-4">
