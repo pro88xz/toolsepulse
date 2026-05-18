@@ -4,6 +4,8 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
 import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("image-blur")!;
 
@@ -16,6 +18,7 @@ export default function ImageBlurPage() {
   const [error, setError] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const loadImage = useCallback((file: File) => {
@@ -111,6 +114,13 @@ export default function ImageBlurPage() {
           </div>
         ) : (
           <>
+            {inboxSource && (
+              <InboxBanner
+                sourceToolSlug={inboxSource}
+                fileName={sourceName}
+                onStartFresh={() => { reset(); setInboxSource(null); }}
+              />
+            )}
             <div className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-medium text-gray-500 truncate">{sourceName}</p>
@@ -159,7 +169,16 @@ export default function ImageBlurPage() {
           </>
         )}
 
-        <WhatsNext currentTool="image-blur" />
+        <WhatsNext
+          currentTool="image-blur"
+          getCurrentResult={async () => {
+            if (!resultUrl || !sourceName) return null;
+            const res = await fetch(resultUrl);
+            const blob = await res.blob();
+            const base = sourceName.replace(/\.[^.]+$/, "") || "image";
+            return { blob, fileName: `${base}-blurred.png` };
+          }}
+        />
 
         {error && (
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">

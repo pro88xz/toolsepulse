@@ -3,6 +3,10 @@
 import { useState, useCallback, useRef } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
+import { useEffect } from "react";
 
 const tool = getToolBySlug("image-compressor")!;
 
@@ -29,6 +33,7 @@ export default function ImageCompressorPage() {
   const [dragActive, setDragActive] = useState(false);
   const [outputFormat, setOutputFormat] = useState<"jpeg" | "webp">("jpeg");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
 
   const compressImage = useCallback(
     (file: File): Promise<CompressedImage> => {
@@ -96,6 +101,20 @@ export default function ImageCompressorPage() {
     [compressImage]
   );
 
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      handleFiles([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
@@ -123,7 +142,14 @@ export default function ImageCompressorPage() {
   );
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
+      {inboxSource && results.length > 0 && (
+        <InboxBanner
+          sourceToolSlug={inboxSource}
+          fileName={results[0].name}
+          onStartFresh={() => { setResults([]); setInboxSource(null); }}
+        />
+      )}
       <div className="space-y-6">
         {/* Controls */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
@@ -305,6 +331,18 @@ export default function ImageCompressorPage() {
           </div>
         )}
       </div>
+      <WhatsNext
+        currentTool="image-compressor"
+        getCurrentResult={async () => {
+          if (results.length === 0) return null;
+          const latest = results[0];
+          const res = await fetch(latest.compressedUrl);
+          const blob = await res.blob();
+          const base = latest.name.replace(/\.[^.]+$/, "") || "image";
+          const ext = outputFormat === "webp" ? "webp" : "jpg";
+          return { blob, fileName: `${base}-compressed.${ext}` };
+        }}
+      />
     </ToolPageLayout>
   );
 }
