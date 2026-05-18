@@ -1072,6 +1072,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["pdf watermark", "add watermark to pdf", "pdf watermark online", "diagonal pdf watermark", "confidential pdf stamp"],
   },
+  {
+    id: "pdf-page-extractor",
+    name: "PDF Page Extractor",
+    description: "Pull specific pages out of any PDF into a new file. Enter a range like 1-3, 5, 8-10 — get a fresh PDF with just those pages. Runs entirely in your browser, no upload.",
+    shortDescription: "Extract specific pages into a new PDF",
+    slug: "pdf-page-extractor",
+    relatedTools: ["pdf-splitter", "merge-pdf", "pdf-compressor", "pdf-editor"],
+    category: "pdf",
+    icon: "FilePlus",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["pdf page extractor", "extract pages from pdf", "save pdf pages", "pull pages pdf", "pdf page range extractor"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

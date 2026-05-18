@@ -2885,6 +2885,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Sample or watermarked versions", description: "Share preview versions of paid content with a clear PREVIEW or SAMPLE watermark to prevent free distribution." },
     ],
   },
+  "pdf-page-extractor": {
+    toolSlug: "pdf-page-extractor",
+    howTo: {
+      title: "How to Extract Specific Pages from a PDF Online",
+      steps: [
+        { title: "Open the PDF Page Extractor", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop the PDF file \u2014 any number of pages works. The tool reads page count instantly." },
+        { title: "Specify which pages to extract", description: "Enter a range using common syntax: 1-3 for pages 1 through 3, comma-separated for multiple ranges (e.g., 1-3, 5, 8-10). Spaces are ignored." },
+        { title: "Download the extracted PDF", description: "Hit Extract \u2014 a new PDF with only your selected pages is generated and ready to download in seconds." },
+      ],
+      tips: [
+        "Need to remove a range of pages instead? Easier to extract the parts you want to keep \u2014 same workflow, inverted thinking.",
+        "Use the PDF Splitter tool if you need each page as a separate file instead of one combined extract.",
+        "Page selection respects order: enter \u201c5, 1, 3\u201d to get pages in that order \u2014 useful for reordering content.",
+        "After extracting, optionally use our PDF Compressor to shrink the new file if it\u2019s for emailing or web upload.",
+        "Extracted pages preserve their original formatting, embedded fonts, and images \u2014 no quality loss.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. The extraction happens entirely in your browser using pdf-lib. Your document never leaves your device." },
+      { question: "What\u2019s the syntax for selecting pages?", answer: "Use ranges with dashes (1-5) and commas for separate sections (1-3, 5, 8-10). Single pages just by their number. Spaces are ignored." },
+      { question: "Can I extract pages from a password-protected PDF?", answer: "No \u2014 unlock it first with our PDF Unlocker tool, then extract." },
+      { question: "Will the extracted file look the same as the original?", answer: "Yes. Page extraction preserves all original formatting, embedded fonts, images, and metadata of the selected pages." },
+      { question: "Can I reorder pages while extracting?", answer: "Yes \u2014 enter pages in any order. \u20183, 1, 5\u2019 produces a PDF with page 3 first, then 1, then 5." },
+    ],
+    alternatives: {
+      intro: "Extracting PDF pages is a common need, especially when sharing partial documents.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Powerful but paid \u2014 overkill for one-off page extraction." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file to their servers \u2014 risky for confidential pages." },
+        { name: "Print to PDF (page range)", description: "OS-level workaround", differentiator: "Works but loses original formatting fidelity \u2014 page is rasterized through the print pipeline." },
+      ],
+      whyUs: "Browser-only processing, page range syntax, preserves quality, instant download. No upload of sensitive documents.",
+    },
+    useCases: [
+      { title: "Share specific contract sections", description: "Send only the relevant pages of a 200-page contract instead of the whole document \u2014 cleaner for the recipient, safer for you." },
+      { title: "Extract receipts from bank statements", description: "Pull individual receipt pages from monthly statements for expense reports or tax records." },
+      { title: "Save chapter from an ebook PDF", description: "Extract a single chapter from a textbook or manual for offline reading or sharing with study partners." },
+      { title: "Create a redacted submission", description: "Extract only the public-facing pages of a document, leaving private sections out of the shared version." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
