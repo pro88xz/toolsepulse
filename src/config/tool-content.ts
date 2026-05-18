@@ -3049,6 +3049,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Print-shop prep", description: "Match your PDF to specific print bleed or trim sizes by cropping margins before sending to the printer." },
     ],
   },
+  "pdf-bates-numbering": {
+    toolSlug: "pdf-bates-numbering",
+    howTo: {
+      title: "How to Apply Bates Numbering to a PDF Online",
+      steps: [
+        { title: "Open the PDF Bates Numbering tool", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop the document you need to Bates-stamp \u2014 typically a discovery production, evidence binder, or deposition exhibit." },
+        { title: "Configure the Bates label", description: "Set the prefix (e.g., SMITH or CASE2024), starting number, padding (how many digits, usually 6), and any suffix. Pick a corner position. Live preview shows exactly what each page will look like." },
+        { title: "Apply and download", description: "Hit Apply \u2014 every page gets a unique sequential Bates label. Download the stamped PDF, ready for production." },
+      ],
+      tips: [
+        "Standard legal padding is 6 digits (000001). Some firms use 5 or 7 \u2014 match what opposing counsel or your firm\u2019s style guide specifies.",
+        "For complex productions, use a project-specific prefix (e.g., \u2018PLNT2024-\u2019) to keep documents from different cases distinct.",
+        "Bottom-right is the standard Bates position. Top-right is sometimes preferred to avoid conflict with footer page numbers.",
+        "If you\u2019re re-Bating a previously-stamped PDF, crop or re-bates with the same dimensions to avoid overlap.",
+        "After stamping, follow up with our PDF Compressor if the document is large \u2014 helps for e-filing systems with size limits.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. Bates stamping happens entirely in your browser using pdf-lib. Your document never leaves your device \u2014 important for privileged or confidential legal materials." },
+      { question: "What\u2019s the difference between Bates numbering and page numbering?", answer: "Bates numbering is sequential across an entire production with custom prefixes (SMITH-000001, SMITH-000002...). Page numbering just adds page count per file. Bates labels are legally unique identifiers; page numbers reset per file." },
+      { question: "Can I number across multiple PDFs in one production?", answer: "Currently, each upload starts fresh. To Bates-number across multiple files, merge them first with our Merge PDF tool, then apply Bates numbering, then split if needed." },
+      { question: "How many digits should I use?", answer: "6 is most common in US litigation. For very large productions (100,000+ pages), use 7. For smaller cases, 5 is fine. The padding determines how the numbers display: 6 digits means 1 displays as 000001." },
+      { question: "Does this work for image-based PDFs?", answer: "Yes \u2014 Bates numbers are added as a layer over the existing content, regardless of whether the underlying content is text or image-based." },
+    ],
+    alternatives: {
+      intro: "Bates numbering is essential in legal practice. Most options are expensive subscription tools.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Excellent Bates support but costs $20+/month \u2014 expensive for solo practitioners or paralegals doing occasional Bates work." },
+        { name: "Specialized legal tools (Bates Pro, etc.)", description: "Industry-specific software", differentiator: "Powerful for high-volume Bates work, but expensive subscriptions and complex installs for what should be a simple task." },
+        { name: "Online legal services", description: "Various web tools", differentiator: "Convenient but require uploading privileged or attorney-client material to third-party servers \u2014 a real risk in litigation." },
+      ],
+      whyUs: "Free, browser-only, attorney-client privilege preserved (no upload), proper padding and prefix support, instant. Great for solo practitioners.",
+    },
+    useCases: [
+      { title: "Discovery production", description: "Apply unique Bates numbers to every page of a document production before sending to opposing counsel." },
+      { title: "Evidence binders", description: "Stamp every page of an evidence binder so exhibits can be referenced precisely in briefs and oral argument." },
+      { title: "Deposition exhibits", description: "Pre-number deposition exhibits with consistent Bates ranges so the court reporter and deponent track easily." },
+      { title: "Internal document management", description: "Apply Bates-style numbering to internal client files for organization, even outside formal discovery." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

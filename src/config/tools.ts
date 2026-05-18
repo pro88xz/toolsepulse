@@ -1128,6 +1128,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["crop pdf pages", "trim pdf margins", "remove white space pdf", "pdf crop online", "shrink pdf margins"],
   },
+  {
+    id: "pdf-bates-numbering",
+    name: "PDF Bates Numbering",
+    description: "Apply legal-style Bates numbering to PDF pages: sequential, zero-padded identifiers with custom prefix and suffix. Standard for legal discovery, litigation, evidence binders, and document production. Runs entirely in your browser.",
+    shortDescription: "Bates stamp PDFs for legal discovery",
+    slug: "pdf-bates-numbering",
+    relatedTools: ["pdf-page-numbering", "pdf-watermark", "merge-pdf", "pdf-header-footer"],
+    category: "pdf",
+    icon: "Scale",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["bates numbering", "pdf bates stamp", "legal pdf numbering", "bates labels pdf", "discovery pdf numbering"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
