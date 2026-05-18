@@ -1142,6 +1142,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["bates numbering", "pdf bates stamp", "legal pdf numbering", "bates labels pdf", "discovery pdf numbering"],
   },
+  {
+    id: "pdf-annotator",
+    name: "PDF Annotator",
+    description: "Add highlights, text notes, and freehand drawings to any PDF. Mark up contracts, papers, and reports right in your browser \u2014 no upload to any server, no signup. Download the annotated PDF with annotations baked in.",
+    shortDescription: "Highlight, note, and draw on PDFs",
+    slug: "pdf-annotator",
+    relatedTools: ["pdf-editor", "pdf-watermark", "pdf-page-numbering", "pdf-signer"],
+    category: "pdf",
+    icon: "Highlighter",
+    isNew: true,
+    isPopular: true,
+    tier: 3,
+    keywords: ["annotate pdf online", "highlight pdf", "add notes to pdf", "pdf annotator", "pdf markup tool"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

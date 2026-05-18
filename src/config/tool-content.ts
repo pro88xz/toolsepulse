@@ -3090,6 +3090,48 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Internal document management", description: "Apply Bates-style numbering to internal client files for organization, even outside formal discovery." },
     ],
   },
+  "pdf-annotator": {
+    toolSlug: "pdf-annotator",
+    howTo: {
+      title: "How to Annotate a PDF Online",
+      steps: [
+        { title: "Open the PDF Annotator", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop the PDF you want to mark up. Each page renders directly in your browser for annotation." },
+        { title: "Pick an annotation tool", description: "Choose Highlight for yellow marker on text, Text Note for sticky-note style comments, or Draw for freehand pen marks." },
+        { title: "Click, drag, and annotate", description: "Click and drag on the page to add highlights or text boxes. With the draw tool, hold and move your mouse like a pen. Navigate between pages with the arrows." },
+        { title: "Download the annotated PDF", description: "Hit Save to PDF \u2014 all annotations are baked into the file. Download instantly." },
+      ],
+      tips: [
+        "Highlights are translucent so the underlying text remains readable \u2014 ideal for review and note-taking on PDFs.",
+        "Text notes are placed where you click \u2014 keep them short for clarity. Long notes work better as a separate document.",
+        "Hold and drag the draw tool slowly for precise lines \u2014 great for circling specific words or drawing arrows to comments.",
+        "Use \u2018Undo\u2019 to step back through your annotations if you make a mistake.",
+        "Annotations are baked into the PDF on download \u2014 they\u2019re permanent once you save. Keep an original copy if you want to re-edit later.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. PDF rendering and annotation happens entirely in your browser using pdfjs and pdf-lib. Your document never leaves your device." },
+      { question: "Can I edit annotations after saving?", answer: "Annotations are baked into the downloaded PDF \u2014 they become part of the document content. To re-edit, work with the original PDF and re-annotate. Future versions of the tool may support editable annotation layers." },
+      { question: "Will my annotations show in other PDF viewers?", answer: "Yes. Since the annotations are drawn directly onto the page content, every PDF viewer (Adobe Reader, Preview, Chrome, mobile apps) displays them identically." },
+      { question: "Can I annotate scanned PDFs?", answer: "Yes \u2014 the tool works on any PDF regardless of whether it\u2019s text-based or scanned. Annotations are drawn over the page image." },
+      { question: "How many annotations can I add?", answer: "No hard limit. Most users add 5-20 per document, which works well. Very large numbers (hundreds) may slow your browser." },
+    ],
+    alternatives: {
+      intro: "Annotating PDFs is a daily need for students, lawyers, reviewers, and researchers.",
+      tools: [
+        { name: "Adobe Acrobat", description: "Industry standard", differentiator: "Powerful with editable annotation layers, but requires a paid subscription. Overkill for simple highlighting and notes." },
+        { name: "Preview (macOS)", description: "Built-in Mac tool", differentiator: "Free and good for Mac users, but Windows users have no equivalent built-in option." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file to their servers \u2014 a real privacy concern for contracts, legal docs, or medical records." },
+      ],
+      whyUs: "Browser-only processing, no upload, no signup, three core annotation tools that cover 90% of use cases, instant PDF download.",
+    },
+    useCases: [
+      { title: "Contract review", description: "Highlight key clauses and add notes for negotiation points before sending back to counsel \u2014 without uploading sensitive contracts to third-party servers." },
+      { title: "Academic paper annotation", description: "Highlight key findings, add notes about citations, draw arrows to specific data points \u2014 essential for literature reviews and thesis work." },
+      { title: "Document feedback", description: "Mark up drafts with highlights and comments before sending back to the author. Faster than typing a separate review document." },
+      { title: "Tax and financial review", description: "Annotate tax returns, financial statements, or accounting documents privately. Highlight items that need follow-up without exposing your financials online." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
