@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBlogPostBySlug, getBlogPosts } from "@/config/blog";
 import { getToolBySlug, categories, type ToolCategory } from "@/config/tools";
-import AdBanner from "@/components/ads/AdBanner";
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
   pdf: { bg: "bg-red-100", text: "text-red-700" },
@@ -69,7 +68,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Ad after intro */}
         <div className="mt-6 mb-2">
-          <AdBanner type="native" />
         </div>
 
         {/* Ad after intro */}

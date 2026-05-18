@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { tools, categories, type ToolCategory, getToolBySlug } from "@/config/tools";
 import { siteConfig } from "@/config/site";
-import AdBanner from "@/components/ads/AdBanner";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 const categoryVisuals: Record<
@@ -517,7 +516,6 @@ export default function HomePage() {
       {!search.trim() && (
         <section className="py-4">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <AdBanner type="native" />
           </div>
         </section>
       )}
@@ -649,8 +647,6 @@ export default function HomePage() {
       {!search.trim() && (
         <section className="py-4 border-t border-slate-100">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 flex justify-center">
-            <AdBanner type="728x90" className="hidden sm:flex" />
-            <AdBanner type="300x250" className="flex sm:hidden" />
           </div>
         </section>
       )}
