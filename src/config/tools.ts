@@ -1030,6 +1030,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["thumbnail creator", "generate thumbnails", "image thumbnails online", "multiple thumbnail sizes", "thumbnail generator"],
   },
+  {
+    id: "sharpen-image",
+    name: "Sharpen Image",
+    description: "Make blurry or soft photos crisper with an adjustable sharpening filter. Live preview, intensity slider, instant download. No upload to a server.",
+    shortDescription: "Sharpen blurry photos with adjustable intensity",
+    slug: "sharpen-image",
+    relatedTools: ["image-blur", "image-compressor", "image-resizer", "watermark-image"],
+    category: "image",
+    icon: "Aperture",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["sharpen image", "unblur image", "image sharpener", "fix blurry photo", "sharpen photo online"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

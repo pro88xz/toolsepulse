@@ -2762,6 +2762,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Social media kits", description: "Same image as Instagram square, story 9:16, Twitter Card, LinkedIn post \u2014 generate all variants in one batch." },
     ],
   },
+  "sharpen-image": {
+    toolSlug: "sharpen-image",
+    howTo: {
+      title: "How to Sharpen a Blurry Image Online",
+      steps: [
+        { title: "Open the Sharpen Image tool", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your image", description: "Drop a JPG, PNG, or WebP file \u2014 anything that displays in your browser will work." },
+        { title: "Adjust the intensity slider", description: "Slide right for stronger sharpening, left for milder. The preview updates live so you can see the effect immediately." },
+        { title: "Download the sharpened image", description: "Hit Download when the result looks good. Output is a high-quality PNG \u2014 perfect for printing or further editing." },
+      ],
+      tips: [
+        "Mild sharpening (intensity 1-2) is best for photos that are only slightly soft \u2014 rescues focus without making the image look harsh.",
+        "Strong sharpening (intensity 4+) is for text, scanned documents, or screenshots where you want crisp edges.",
+        "Over-sharpening introduces noise and halos around edges \u2014 if the photo looks gritty, dial it back.",
+        "Sharpening cannot recover detail that wasn\u2019t captured \u2014 truly blurry images won\u2019t become magically clear, but slight focus issues can be dramatically improved.",
+        "For best print results, sharpen as the LAST step in your editing workflow \u2014 after resizing, color correction, and watermarking.",
+      ],
+    },
+    faq: [
+      { question: "How does the sharpening filter work?", answer: "It applies a 3\u00d73 convolution kernel that emphasizes pixel differences against neighbors \u2014 making edges and details more visible. Intensity controls how strongly the effect is applied." },
+      { question: "Is my image uploaded?", answer: "No. The entire sharpening happens in your browser using Canvas pixel processing. Your photo never leaves your device." },
+      { question: "Can it fix a totally blurry photo?", answer: "No. Sharpening enhances detail that already exists. If a photo is completely out of focus, sharpening will reveal what\u2019s there but won\u2019t reconstruct missing detail. For genuinely blurry shots, AI-based unblur tools work better." },
+      { question: "Why does my sharpened image have halos?", answer: "Halos appear when sharpening is too strong \u2014 the filter overshoots on contrasting edges. Reduce intensity to fix." },
+      { question: "What\u2019s the output format?", answer: "PNG \u2014 lossless, preserves all the sharpening detail. If you want JPG, run the result through our Image Compressor or Batch Image Converter afterwards." },
+    ],
+    alternatives: {
+      intro: "Image sharpening is a staple of every photo editor. Here\u2019s where this one fits.",
+      tools: [
+        { name: "Photoshop Smart Sharpen", description: "Industry standard", differentiator: "Powerful with multiple algorithms but requires a paid subscription and a learning curve." },
+        { name: "GIMP Unsharp Mask", description: "Free desktop app", differentiator: "Excellent and free, but requires installation and is overkill for a quick sharpen job." },
+        { name: "AI unblur services", description: "Neural network tools", differentiator: "Best for severe blur, but slower and usually require uploads to their servers." },
+      ],
+      whyUs: "Browser-only processing, live preview, simple intensity slider, no upload, no signup, instant download.",
+    },
+    useCases: [
+      { title: "Rescue slightly soft photos", description: "Hand-held shots that didn\u2019t quite nail focus often benefit dramatically from mild sharpening." },
+      { title: "Crisp up scanned documents", description: "Scans of text and diagrams often look soft \u2014 strong sharpening makes text easier to read." },
+      { title: "Prepare images for print", description: "Print output benefits from a sharpening pass at the original size \u2014 the ink dot gain softens edges, so pre-sharpening compensates." },
+      { title: "Make screenshots punchier", description: "App or website screenshots taken at non-native resolution can look blurry \u2014 a sharpening pass restores crisp edges." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
