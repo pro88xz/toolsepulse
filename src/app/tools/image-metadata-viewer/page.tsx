@@ -3,6 +3,10 @@
 import { useState, useRef, useCallback } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
+import { useEffect } from "react";
 
 const tool = getToolBySlug("image-metadata-viewer")!;
 
@@ -204,6 +208,7 @@ function simplifyRatio(w: number, h: number): string {
 
 export default function ImageMetadataViewerPage() {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [sections, setSections] = useState<MetaSection[]>([]);
   const [processing, setProcessing] = useState(false);
@@ -240,7 +245,21 @@ export default function ImageMetadataViewerPage() {
     }
   }, [previewUrl]);
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadFile(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) loadFile(file);
   };
@@ -261,7 +280,7 @@ export default function ImageMetadataViewerPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!sourceFile ? (
           <div
@@ -282,6 +301,13 @@ export default function ImageMetadataViewerPage() {
           </div>
         ) : (
           <>
+            {inboxSource && (
+              <InboxBanner
+                sourceToolSlug={inboxSource}
+                fileName={sourceFile.name}
+                onStartFresh={() => { reset(); setInboxSource(null); }}
+              />
+            )}
             <div className="grid md:grid-cols-3 gap-4">
               <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
                 {previewUrl && (
@@ -326,6 +352,13 @@ export default function ImageMetadataViewerPage() {
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>
         )}
       </div>
+      <WhatsNext
+        currentTool="image-metadata-viewer"
+        getCurrentResult={async () => {
+          if (!sourceFile) return null;
+          return { blob: sourceFile, fileName: sourceFile.name };
+        }}
+      />
     </ToolPageLayout>
   );
 }
