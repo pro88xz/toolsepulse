@@ -1016,6 +1016,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["batch image converter", "bulk convert images", "convert multiple images", "batch jpg to png", "bulk image format converter"],
   },
+  {
+    id: "thumbnail-creator",
+    name: "Thumbnail Creator",
+    description: "Generate multiple thumbnail sizes from one image in a single step. Built-in presets for app icons, video thumbnails, social previews, plus custom sizes. Downloads as ZIP.",
+    shortDescription: "Generate thumbnails in multiple sizes",
+    slug: "thumbnail-creator",
+    relatedTools: ["image-resizer", "image-compressor", "favicon-generator", "batch-image-converter"],
+    category: "image",
+    icon: "LayoutGrid",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["thumbnail creator", "generate thumbnails", "image thumbnails online", "multiple thumbnail sizes", "thumbnail generator"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {

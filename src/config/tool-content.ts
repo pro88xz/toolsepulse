@@ -2721,6 +2721,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Legacy archive cleanup", description: "Old photo libraries in BMP, TIFF, or proprietary formats \u2014 bulk modernize to JPG or WebP for cloud storage and sharing." },
     ],
   },
+  "thumbnail-creator": {
+    toolSlug: "thumbnail-creator",
+    howTo: {
+      title: "How to Generate Multiple Thumbnail Sizes from One Image",
+      steps: [
+        { title: "Open the Thumbnail Creator", description: "Navigate to the tool. No signup, no uploads to a server." },
+        { title: "Upload your source image", description: "Drop a high-resolution image \u2014 the larger the source, the better the thumbnails. JPG, PNG, WebP all work." },
+        { title: "Pick a preset or define custom sizes", description: "Choose from app icons, video thumbs, social previews, or add your own sizes. Toggle whether to keep aspect ratio or crop to exact dimensions." },
+        { title: "Generate and download as ZIP", description: "Hit Generate \u2014 all sizes are produced in your browser. Download them all in one ZIP, or grab specific sizes individually." },
+      ],
+      tips: [
+        "Use a square (1:1) source image for app icons \u2014 it ensures crops look right at every size.",
+        "Start with a source at LEAST 2x the largest thumbnail size for sharp results on retina displays.",
+        "PNG output preserves transparency \u2014 ideal for icons. JPG produces smaller files \u2014 ideal for video and photo thumbnails.",
+        "For Open Graph (Facebook/LinkedIn link previews) the standard is 1200\u00d7630. For Twitter Cards it\u2019s 1200\u00d7675.",
+        "Modern app icons need many sizes: iOS uses 1024, 180, 167, 152, 120, 87, 80, 60 px. Android uses 512, 192, 144, 96, 72, 48 px.",
+      ],
+    },
+    faq: [
+      { question: "Is my image uploaded?", answer: "No. All thumbnails are generated entirely in your browser using Canvas. Your image never leaves your device." },
+      { question: "Can I add custom thumbnail sizes?", answer: "Yes. Beyond the preset packs, you can add any custom size (e.g., 256\u00d7144 for a custom video thumb)." },
+      { question: "Does it crop or just resize?", answer: "Both options are supported per generation. Crop mode produces exact pixel dimensions (best for app icons). Resize mode preserves aspect ratio (best for video thumbs and hero images)." },
+      { question: "What\u2019s the maximum source image size?", answer: "No hard limit, but very large images (50+ megapixel RAW conversions) may slow processing. JPGs up to 30MB convert smoothly." },
+      { question: "Why does my thumbnail look pixelated?", answer: "If your source image is smaller than the requested thumbnail, the tool can only upscale \u2014 results will look soft. For best quality, always start with a source larger than your biggest target size." },
+    ],
+    alternatives: {
+      intro: "Thumbnail generation is offered by many image tools, but few do it well in batch.",
+      tools: [
+        { name: "Photoshop / Sketch / Figma export", description: "Pro design tools", differentiator: "Powerful but require setup of artboards or export presets. Overkill for one-off thumbnail generation." },
+        { name: "ImageMagick CLI", description: "Command-line pro tool", differentiator: "Excellent for batch jobs but requires terminal skills and writing the right one-liner per size." },
+        { name: "Online single-size resizers", description: "Various web tools", differentiator: "Most only output one size at a time \u2014 you\u2019d have to upload and resize repeatedly for each target size." },
+      ],
+      whyUs: "Single upload, multiple sizes generated in one click, ZIP download, presets for common platforms, browser-only processing.",
+    },
+    useCases: [
+      { title: "App icon packs", description: "iOS / Android / PWA require many icon sizes. Generate the full set from one master 1024\u00d71024 source in seconds." },
+      { title: "Video thumbnail variants", description: "YouTube, TikTok, Vimeo, social previews \u2014 each platform wants slightly different sizes. Make them all at once." },
+      { title: "Blog hero image responsives", description: "Generate mobile (640w), tablet (1024w), desktop (1600w) versions for responsive img srcset." },
+      { title: "Social media kits", description: "Same image as Instagram square, story 9:16, Twitter Card, LinkedIn post \u2014 generate all variants in one batch." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries
