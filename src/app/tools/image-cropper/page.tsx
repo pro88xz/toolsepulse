@@ -4,6 +4,9 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("image-cropper")!;
 
@@ -31,6 +34,8 @@ export default function ImageCropperPage() {
   const [crop, setCrop] = useState<CropArea>({ x: 0, y: 0, w: 0, h: 0 });
   const [ratio, setRatio] = useState(0);
   const [done, setDone] = useState(false);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [croppedBlob, setCroppedBlob] = useState<Blob | null>(null);
   const [error, setError] = useState("");
   const [dragActive, setDragActive] = useState(false);
   const [dragging, setDragging] = useState(false);
@@ -152,6 +157,13 @@ export default function ImageCropperPage() {
           </div>
         ) : (
           <>
+            {inboxSource && imageSrc && (
+              <InboxBanner
+                sourceToolSlug={inboxSource}
+                fileName={fileName}
+                onStartFresh={() => { setImageSrc(""); setDone(false); setCroppedBlob(null); setInboxSource(null); }}
+              />
+            )}
             <div className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex gap-2 flex-wrap">
@@ -235,6 +247,15 @@ export default function ImageCropperPage() {
 
         {error && <div className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-600">{error}</div>}
       </div>
+      <WhatsNext
+        currentTool="image-cropper"
+        getCurrentResult={async () => {
+          if (!croppedBlob) return null;
+          const ext = fileName.split(".").pop() || "png";
+          const base = fileName.replace(/\.[^.]+$/, "") || "image";
+          return { blob: croppedBlob, fileName: `${base}-cropped.${ext}` };
+        }}
+      />
     </ToolPageLayout>
   );
 }
