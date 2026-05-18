@@ -2967,6 +2967,47 @@ export const toolContentMap: Record<string, ToolContent> = {
       { title: "Quote extraction for research", description: "Get clean, copy-able text from research papers and books to use in citations, notes, or literature reviews." },
     ],
   },
+  "pdf-header-footer": {
+    toolSlug: "pdf-header-footer",
+    howTo: {
+      title: "How to Add Headers and Footers to a PDF Online",
+      steps: [
+        { title: "Open the PDF Header & Footer tool", description: "Navigate to the tool. No signup, no upload to a server." },
+        { title: "Upload your PDF", description: "Drop any PDF file \u2014 reports, contracts, manuals, ebooks, all work the same way." },
+        { title: "Add header and footer text", description: "Type what you want in any of 6 positions: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right. Use {page} to insert the current page number." },
+        { title: "Download your PDF", description: "Hit Apply \u2014 the text is added to every page. Download the result instantly." },
+      ],
+      tips: [
+        "Use top-left for company name, top-right for date, bottom-center for page number \u2014 standard business document layout.",
+        "The {page} placeholder inserts the current page number wherever you put it. {pages} inserts the total. Try \u2018Page {page} of {pages}\u2019.",
+        "Headers and footers are added as a layer over the existing content \u2014 if your PDF already has margins with content, the text could overlap. Use the PDF Crop tool first if needed.",
+        "Keep font size 9\u201312 for body documents. Larger sizes start to intrude on the content area.",
+        "Different headers for different sections aren\u2019t supported here \u2014 the same text repeats on every page. For sectional headers, use a dedicated PDF editor.",
+      ],
+    },
+    faq: [
+      { question: "Is my PDF uploaded?", answer: "No. The text is added entirely in your browser using pdf-lib. Your document never leaves your device." },
+      { question: "Can I use a different header on the first page?", answer: "Currently the same header and footer apply to all pages. For cover-page exceptions, split the PDF first with our PDF Splitter, header just the body pages, then merge." },
+      { question: "How does {page} and {pages} work?", answer: "These are placeholders. {page} becomes the current page number (1, 2, 3...). {pages} becomes the total page count. Combine like \u2018Page {page} of {pages}\u2019 for full numbering." },
+      { question: "Can I add an image (like a logo) as a header?", answer: "Not currently \u2014 text only. For images, our PDF Editor supports logo placement." },
+      { question: "Will the text overlap with my content?", answer: "Possibly, if your PDF has tight margins. The tool places header text at the top margin and footer at the bottom margin. Use the PDF Crop tool to extend margins first if needed." },
+    ],
+    alternatives: {
+      intro: "Adding headers and footers to PDFs is common for branding and document tracking.",
+      tools: [
+        { name: "Adobe Acrobat Pro", description: "Industry standard", differentiator: "Powerful section-specific headers and footers, but requires a paid subscription and learning curve." },
+        { name: "Microsoft Word + export", description: "Roundabout approach", differentiator: "Only works if you have the original Word source. Doesn\u2019t help when you receive a PDF you didn\u2019t create." },
+        { name: "Online PDF services", description: "Smallpdf, iLovePDF, etc.", differentiator: "Convenient but require uploading your file to their servers \u2014 risky for confidential drafts." },
+      ],
+      whyUs: "Browser-only processing, 6-position layout, page-number placeholders, no upload, no signup, instant download.",
+    },
+    useCases: [
+      { title: "Brand business documents", description: "Add company name and logo-substitute text to every page of proposals, reports, and white papers." },
+      { title: "Legal document tracking", description: "Add case number, attorney name, or version date to every page of filings or evidence binders." },
+      { title: "Academic submissions", description: "Add author name, course, and \u2018Page X of Y\u2019 to every page \u2014 standard format for essays and theses." },
+      { title: "Multi-section reports", description: "After merging multiple PDFs into one, add consistent headers and footers to make the combined document feel cohesive." },
+    ],
+  },
 };
 
 // Generate content for tools that don't have custom entries

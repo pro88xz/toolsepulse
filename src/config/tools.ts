@@ -1100,6 +1100,20 @@ export const tools: Tool[] = [
     tier: 3,
     keywords: ["extract text from pdf", "pdf to text online", "pdf text extractor", "copy text from pdf", "pdf to plain text"],
   },
+  {
+    id: "pdf-header-footer",
+    name: "PDF Header & Footer",
+    description: "Add repeating text to the top and bottom of every PDF page. Company name, document title, copyright notice, contact info — anywhere in the margins. Runs entirely in your browser.",
+    shortDescription: "Add headers and footers to PDF pages",
+    slug: "pdf-header-footer",
+    relatedTools: ["pdf-page-numbering", "pdf-watermark", "pdf-compressor", "pdf-editor"],
+    category: "pdf",
+    icon: "Type",
+    isNew: true,
+    isPopular: false,
+    tier: 3,
+    keywords: ["pdf header footer", "add header to pdf", "pdf footer text", "running header pdf", "pdf footer online"],
+  },
 ];
 
 export function getToolsByCategory(category: ToolCategory): Tool[] {
