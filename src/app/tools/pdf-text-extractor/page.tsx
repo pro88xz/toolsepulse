@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("pdf-text-extractor")!;
 
@@ -10,6 +13,7 @@ type PageText = { pageNumber: number; text: string };
 
 export default function PdfTextExtractorPage() {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [pageTexts, setPageTexts] = useState<PageText[]>([]);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
@@ -70,6 +74,20 @@ export default function PdfTextExtractorPage() {
     }
   }, []);
 
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadFile(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (f) loadFile(f);
@@ -120,7 +138,7 @@ export default function PdfTextExtractorPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!sourceFile ? (
           <div
@@ -152,6 +170,13 @@ export default function PdfTextExtractorPage() {
           </div>
         ) : (
           <>
+            {inboxSource && sourceFile && (
+              <InboxBanner
+                sourceToolSlug={inboxSource}
+                fileName={sourceFile.name}
+                onStartFresh={() => { reset(); setInboxSource(null); }}
+              />
+            )}
             <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -198,6 +223,13 @@ export default function PdfTextExtractorPage() {
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>
         )}
       </div>
+      <WhatsNext
+        currentTool="pdf-text-extractor"
+        getCurrentResult={async () => {
+          if (!sourceFile) return null;
+          return { blob: sourceFile, fileName: sourceFile.name };
+        }}
+      />
     </ToolPageLayout>
   );
 }

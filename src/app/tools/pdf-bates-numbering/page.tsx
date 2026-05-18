@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("pdf-bates-numbering")!;
 
@@ -23,6 +26,7 @@ function buildBatesLabel(prefix: string, number: number, padding: number, suffix
 
 export default function PdfBatesNumberingPage() {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [prefix, setPrefix] = useState("SMITH-");
   const [suffix, setSuffix] = useState("");
@@ -52,6 +56,20 @@ export default function PdfBatesNumberingPage() {
       setError(err instanceof Error ? err.message : "Could not read PDF");
       setSourceFile(null);
     }
+  }, []);
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadFile(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +148,7 @@ export default function PdfBatesNumberingPage() {
   const lastLabel = pageCount > 0 ? buildBatesLabel(prefix, startNumber + pageCount - 1, padding, suffix) : "";
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!sourceFile ? (
           <div
@@ -151,6 +169,13 @@ export default function PdfBatesNumberingPage() {
           </div>
         ) : (
           <>
+            {inboxSource && sourceFile && (
+              <InboxBanner
+                sourceToolSlug={inboxSource}
+                fileName={sourceFile.name}
+                onStartFresh={() => { reset(); setInboxSource(null); }}
+              />
+            )}
             <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm space-y-5">
               <div className="flex items-center justify-between">
                 <div>
@@ -263,6 +288,16 @@ export default function PdfBatesNumberingPage() {
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>
         )}
       </div>
+      <WhatsNext
+        currentTool="pdf-bates-numbering"
+        getCurrentResult={async () => {
+          if (!resultUrl || !sourceFile) return null;
+          const res = await fetch(resultUrl);
+          const blob = await res.blob();
+          const base = sourceFile.name.replace(/\.pdf$/i, "") || "document";
+          return { blob, fileName: `${base}-bates.pdf` };
+        }}
+      />
     </ToolPageLayout>
   );
 }
