@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { PDFDocument, degrees } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("pdf-page-rotator")!;
 
@@ -16,6 +19,8 @@ function formatSize(bytes: number): string {
 
 export default function PDFPageRotatorPage() {
   const [fileName, setFileName] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+  const [resultBlob, setResultBlob] = useState<Blob | null>(null);
   const [fileSize, setFileSize] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [pdfData, setPdfData] = useState<ArrayBuffer | null>(null);
@@ -45,6 +50,20 @@ export default function PDFPageRotatorPage() {
     } catch {
       setError("Failed to load PDF. The file may be corrupted or encrypted.");
     }
+  }, []);
+
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      loadFile(file);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFiles = useCallback((files: FileList | File[]) => {
@@ -97,6 +116,7 @@ export default function PDFPageRotatorPage() {
 
       const pdfBytes = await pdf.save();
       const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
+      setResultBlob(blob);
       saveAs(blob, `${fileName.replace(".pdf", "")}_rotated.pdf`);
       setDone(true);
     } catch {
@@ -107,7 +127,7 @@ export default function PDFPageRotatorPage() {
   }, [pdfData, rotation, applyTo, rangeInput, fileName]);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           {!pdfData ? (
@@ -203,6 +223,14 @@ export default function PDFPageRotatorPage() {
           </div>
         )}
       </div>
+      <WhatsNext
+        currentTool="pdf-page-rotator"
+        getCurrentResult={async () => {
+          if (!resultBlob) return null;
+          const base = fileName.replace(/\.pdf$/i, "") || "document";
+          return { blob: resultBlob, fileName: `${base}-rotated.pdf` };
+        }}
+      />
     </ToolPageLayout>
   );
 }

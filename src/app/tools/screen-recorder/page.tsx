@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("screen-recorder")!;
 
@@ -104,7 +105,7 @@ export default function ScreenRecorderPage() {
   }, []);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           {!recording && !done && (
@@ -163,6 +164,7 @@ export default function ScreenRecorderPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="screen-recorder" />
     </ToolPageLayout>
   );
 }

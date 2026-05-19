@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("paragraph-generator")!;
 
@@ -61,7 +62,7 @@ export default function ParagraphGeneratorPage() {
   }, [result]);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="space-y-5">
@@ -127,6 +128,7 @@ export default function ParagraphGeneratorPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="paragraph-generator" />
     </ToolPageLayout>
   );
 }

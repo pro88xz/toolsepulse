@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("text-diff-checker")!;
 
@@ -95,7 +96,7 @@ export default function TextDiffCheckerPage() {
   }, [text1, text2]);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -188,6 +189,7 @@ export default function TextDiffCheckerPage() {
           </>
         )}
       </div>
+      <WhatsNext currentTool="text-diff-checker" />
     </ToolPageLayout>
   );
 }

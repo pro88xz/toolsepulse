@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("color-converter")!;
 
@@ -106,7 +107,7 @@ export default function ColorConverterPage() {
   ] : [];
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Enter any color</label>
@@ -159,6 +160,7 @@ export default function ColorConverterPage() {
           </>
         )}
       </div>
+      <WhatsNext currentTool="color-converter" />
     </ToolPageLayout>
   );
 }

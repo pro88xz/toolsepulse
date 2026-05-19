@@ -5,6 +5,7 @@ import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("resume-builder")!;
 
@@ -188,7 +189,7 @@ export default function ResumeBuilderPage() {
   const style = templateStyles[template];
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <style jsx global>{`
         @media print {
           body * { visibility: hidden; }
@@ -447,6 +448,7 @@ export default function ResumeBuilderPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="resume-builder" />
     </ToolPageLayout>
   );
 }

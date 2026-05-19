@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("uuid-generator")!;
 
@@ -53,7 +54,7 @@ export default function UuidGeneratorPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-4 sm:grid-cols-3">
@@ -117,6 +118,7 @@ export default function UuidGeneratorPage() {
           </div>
         </div>
       </div>
+      <WhatsNext currentTool="uuid-generator" />
     </ToolPageLayout>
   );
 }

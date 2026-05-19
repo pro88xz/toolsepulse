@@ -5,6 +5,7 @@ import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("invoice-generator")!;
 
@@ -144,7 +145,7 @@ export default function InvoiceGeneratorPage() {
   const labelClass = "block text-xs font-medium text-gray-500 mb-1";
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       {/* Print Styles */}
       <style jsx global>{`
         /* print styles removed */
@@ -423,6 +424,7 @@ export default function InvoiceGeneratorPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="invoice-generator" />
     </ToolPageLayout>
   );
 }
