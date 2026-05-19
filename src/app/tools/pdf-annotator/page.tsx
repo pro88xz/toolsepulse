@@ -4,6 +4,9 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("pdf-annotator")!;
 
@@ -33,6 +36,7 @@ type Annotation = HighlightAnnotation | TextAnnotation | DrawStroke;
 
 export default function PdfAnnotatorPage() {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [pageImages, setPageImages] = useState<{ width: number; height: number; dataUrl: string }[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [mode, setMode] = useState<ToolMode>("highlight");
@@ -386,7 +390,7 @@ export default function PdfAnnotatorPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!sourceFile ? (
           <div
@@ -466,6 +470,7 @@ export default function PdfAnnotatorPage() {
           <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">{error}</div>
         )}
       </div>
+      <WhatsNext currentTool="pdf-annotator" />
     </ToolPageLayout>
   );
 }

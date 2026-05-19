@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("pdf-unlocker")!;
 
@@ -16,6 +19,7 @@ function formatSize(bytes: number): string {
 
 export default function PDFUnlockerPage() {
   const [fileName, setFileName] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [fileSize, setFileSize] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [processing, setProcessing] = useState(false);
@@ -87,7 +91,7 @@ export default function PDFUnlockerPage() {
   }, [fileData, fileName, fileSize, password, processFile]);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           {!fileData || done ? (
@@ -164,6 +168,7 @@ export default function PDFUnlockerPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="pdf-unlocker" />
     </ToolPageLayout>
   );
 }

@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("pdf-editor")!;
 
@@ -26,6 +29,7 @@ interface TextAnnotation {
 
 export default function PDFEditorPage() {
   const [fileName, setFileName] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [fileSize, setFileSize] = useState(0);
   const [pdfData, setPdfData] = useState<ArrayBuffer | null>(null);
   const [pageCount, setPageCount] = useState(0);
@@ -124,7 +128,7 @@ export default function PDFEditorPage() {
   }, [pdfData, annotations, fileName]);
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           {!pdfData ? (
@@ -232,6 +236,7 @@ export default function PDFEditorPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="pdf-editor" />
     </ToolPageLayout>
   );
 }
