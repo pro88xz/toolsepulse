@@ -345,9 +345,8 @@ export default function HomePage() {
                 <RotatingText />
               </span>
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-sm text-slate-500 leading-relaxed sm:text-base">
-              {tools.length} professional-grade tools for PDF, image, audio, and developer tasks.
-              Everything processes on your device — nothing is ever uploaded.
+            <p className="mx-auto mt-4 max-w-xl text-base text-slate-600 leading-relaxed sm:text-lg font-medium">
+              {tools.length} free tools. <span className="text-slate-900 font-semibold">Zero uploads.</span> All work in your browser.
             </p>
 
             {/* Animated Search */}
@@ -383,6 +382,72 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Category cards — the discovery layer */}
+            <div className="mx-auto mt-8 max-w-4xl grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {[
+                {
+                  href: "/category/pdf",
+                  label: "PDF Tools",
+                  count: tools.filter((t) => t.category === "pdf").length,
+                  featured: getToolBySlug("pdf-compressor")?.name ?? "PDF Compressor",
+                  gradient: "linear-gradient(135deg, #1D4ED8 0%, #6D28D9 100%)",
+                  iconBg: "bg-violet-100",
+                  iconColor: "text-violet-700",
+                  icon: (<path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />),
+                },
+                {
+                  href: "/category/image",
+                  label: "Image Tools",
+                  count: tools.filter((t) => t.category === "image" || t.category === "converter").length,
+                  featured: getToolBySlug("background-remover")?.name ?? "Background Remover",
+                  gradient: "linear-gradient(135deg, #DB2777 0%, #F97316 100%)",
+                  iconBg: "bg-rose-100",
+                  iconColor: "text-rose-700",
+                  icon: (<path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />),
+                },
+                {
+                  href: "/category/audio",
+                  label: "Audio & Video",
+                  count: tools.filter((t) => t.category === "audio" || t.category === "video").length,
+                  featured: getToolBySlug("mp4-to-mp3")?.name ?? "MP4 to MP3",
+                  gradient: "linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)",
+                  iconBg: "bg-amber-100",
+                  iconColor: "text-amber-700",
+                  icon: (<path strokeLinecap="round" strokeLinejoin="round" d="M9 9 21 3m0 0v6m0-6h-6M9 9v9.75M9 9l-3.75 3.75M9 18.75A3.375 3.375 0 1 1 9 12a3.375 3.375 0 0 1 0 6.75ZM19.5 9.75a3.375 3.375 0 1 1 0 6.75 3.375 3.375 0 0 1 0-6.75Z" />),
+                },
+                {
+                  href: "/category/text",
+                  label: "Text & Dev",
+                  count: tools.filter((t) => t.category === "text" || t.category === "developer" || t.category === "generator" || t.category === "ai").length,
+                  featured: getToolBySlug("json-formatter")?.name ?? "JSON Formatter",
+                  gradient: "linear-gradient(135deg, #059669 0%, #0EA5E9 100%)",
+                  iconBg: "bg-emerald-100",
+                  iconColor: "text-emerald-700",
+                  icon: (<path strokeLinecap="round" strokeLinejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />),
+                },
+              ].map((cat) => (
+                <Link
+                  key={cat.label}
+                  href={cat.href}
+                  className="group relative rounded-2xl bg-white border-2 border-slate-200 p-4 text-left hover:border-transparent hover:shadow-lg transition-all overflow-hidden"
+                >
+                  {/* Hover gradient background */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: cat.gradient }} />
+                  <div className="relative flex flex-col h-full">
+                    <div className={`inline-flex h-9 w-9 items-center justify-center rounded-xl ${cat.iconBg} group-hover:bg-white/20 transition-colors`}>
+                      <svg className={`h-5 w-5 ${cat.iconColor} group-hover:text-white transition-colors`} fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor">
+                        {cat.icon}
+                      </svg>
+                    </div>
+                    <div className="mt-3 text-sm font-bold text-slate-900 group-hover:text-white transition-colors">{cat.label}</div>
+                    <div className="text-[11px] font-semibold text-slate-500 group-hover:text-white/80 transition-colors">{cat.count} tools</div>
+                    <div className="mt-2 text-[10px] uppercase tracking-wider font-semibold text-slate-400 group-hover:text-white/70 transition-colors">Featured</div>
+                    <div className="text-[11px] font-medium text-slate-700 group-hover:text-white transition-colors truncate">{cat.featured}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
             {/* Brand tagline */}
             <div className="mt-7 flex items-center justify-center gap-3">
               <span className="h-px w-8 bg-gradient-to-r from-transparent to-slate-300" />
@@ -390,13 +455,18 @@ export default function HomePage() {
               <span className="h-px w-8 bg-gradient-to-l from-transparent to-slate-300" />
             </div>
 
-            {/* Trust signals */}
-            <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-xs text-slate-500 font-medium">
-              {["No file uploads", "No signup needed", "No watermarks", "100% free", "Works offline"].map((t) => (
-                <span key={t} className="flex items-center gap-1.5">
-                  <svg className="h-3.5 w-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-                  {t}
-                </span>
+            {/* Stat bar */}
+            <div className="mt-5 grid grid-cols-4 gap-2 max-w-xl mx-auto">
+              {[
+                { num: String(tools.length), label: "tools" },
+                { num: "0", label: "uploads" },
+                { num: "∞", label: "file size" },
+                { num: "100%", label: "free" },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <div className="text-2xl sm:text-3xl font-extrabold bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, #1D4ED8, #6D28D9, #DB2777)" }}>{s.num}</div>
+                  <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mt-0.5">{s.label}</div>
+                </div>
               ))}
             </div>
           </div>
