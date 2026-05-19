@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("character-counter")!;
 
@@ -17,6 +20,7 @@ const LIMITS = [
 
 export default function CharacterCounterPage() {
   const [text, setText] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
 
   const stats = useMemo(() => {
     const characters = text.length;
@@ -29,8 +33,21 @@ export default function CharacterCounterPage() {
     return { characters, charactersNoSpaces, words, lines, sentences, paragraphs };
   }, [text]);
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setText(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
           {[
@@ -89,6 +106,9 @@ export default function CharacterCounterPage() {
           </div>
         </div>
       </div>
+      <WhatsNext currentTool="character-counter"
+        getCurrentResultString={async () => text || null}
+      />
     </ToolPageLayout>
   );
 }

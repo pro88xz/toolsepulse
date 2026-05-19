@@ -3,14 +3,15 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getNextSteps, recordVisit, type Recommendation } from "@/lib/recommendations";
-import { placeInInbox } from "@/lib/toolInbox";
+import { placeInInbox, placeStringInInbox } from "@/lib/toolInbox";
 
 type Props = {
   currentTool: string;
   getCurrentResult?: () => Promise<{ blob: Blob; fileName: string } | null>;
+  getCurrentResultString?: () => Promise<string | null>;
 };
 
-export default function WhatsNext({ currentTool, getCurrentResult }: Props) {
+export default function WhatsNext({ currentTool, getCurrentResult, getCurrentResultString }: Props) {
   const router = useRouter();
   const [recs, setRecs] = useState<Recommendation[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -25,13 +26,20 @@ export default function WhatsNext({ currentTool, getCurrentResult }: Props) {
   if (!mounted || recs.length === 0) return null;
 
   const handleClick = async (e: React.MouseEvent, targetSlug: string) => {
-    if (!getCurrentResult) return;
+    if (!getCurrentResult && !getCurrentResultString) return;
     e.preventDefault();
     setHandingOff(targetSlug);
     try {
-      const result = await getCurrentResult();
-      if (result) {
-        await placeInInbox(result.blob, result.fileName, currentTool);
+      if (getCurrentResult) {
+        const result = await getCurrentResult();
+        if (result) {
+          await placeInInbox(result.blob, result.fileName, currentTool);
+        }
+      } else if (getCurrentResultString) {
+        const text = await getCurrentResultString();
+        if (text !== null && text !== undefined) {
+          await placeStringInInbox(text, currentTool);
+        }
       }
     } catch {
       // Inbox failure is non-fatal — just navigate without hand-off
@@ -39,7 +47,7 @@ export default function WhatsNext({ currentTool, getCurrentResult }: Props) {
     router.push(`/tools/${targetSlug}?from=${encodeURIComponent(currentTool)}`);
   };
 
-  const canHandOff = Boolean(getCurrentResult);
+  const canHandOff = Boolean(getCurrentResult) || Boolean(getCurrentResultString);
 
   return (
     <section className="mt-6">

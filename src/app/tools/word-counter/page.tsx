@@ -1,13 +1,17 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("word-counter")!;
 
 export default function WordCounterPage() {
   const [text, setText] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
 
   const stats = useMemo(() => {
     const trimmed = text.trim();
@@ -38,8 +42,21 @@ export default function WordCounterPage() {
       .slice(0, 10);
   }, [text]);
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setText(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {/* Stats Bar */}
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-7">
@@ -119,6 +136,9 @@ export default function WordCounterPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="word-counter"
+        getCurrentResultString={async () => text || null}
+      />
     </ToolPageLayout>
   );
 }

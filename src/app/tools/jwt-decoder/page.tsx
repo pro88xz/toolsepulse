@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("jwt-decoder")!;
 
@@ -37,6 +40,7 @@ const TIMESTAMP_CLAIMS = new Set(["exp", "iat", "nbf", "auth_time"]);
 
 export default function JwtDecoderPage() {
   const [token, setToken] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [copied, setCopied] = useState("");
 
   const decoded = useMemo(() => {
@@ -63,8 +67,21 @@ export default function JwtDecoderPage() {
     setTimeout(() => setCopied(""), 1500);
   };
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setToken(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Paste your JWT</label>
@@ -140,6 +157,8 @@ export default function JwtDecoderPage() {
           </>
         )}
       </div>
+      <WhatsNext currentTool="jwt-decoder"
+      />
     </ToolPageLayout>
   );
 }

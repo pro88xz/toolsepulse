@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("url-encoder")!;
 
@@ -11,6 +14,7 @@ type Scope = "component" | "full";
 
 export default function UrlEncoderPage() {
   const [input, setInput] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [mode, setMode] = useState<Mode>("encode");
   const [scope, setScope] = useState<Scope>("component");
   const [copied, setCopied] = useState(false);
@@ -42,8 +46,21 @@ export default function UrlEncoderPage() {
     setMode(mode === "encode" ? "decode" : "encode");
   };
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setInput(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="flex flex-wrap items-center gap-4 mb-4">
@@ -117,6 +134,8 @@ export default function UrlEncoderPage() {
           )}
         </div>
       </div>
+      <WhatsNext currentTool="url-encoder"
+      />
     </ToolPageLayout>
   );
 }

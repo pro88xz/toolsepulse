@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("hash-generator")!;
 
@@ -23,6 +26,7 @@ async function hashString(text: string, algo: string): Promise<string> {
 
 export default function HashGeneratorPage() {
   const [text, setText] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [hashes, setHashes] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState("");
 
@@ -51,8 +55,21 @@ export default function HashGeneratorPage() {
     setTimeout(() => setCopied(""), 1500);
   };
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setText(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="flex items-center justify-between mb-3">
@@ -91,6 +108,8 @@ export default function HashGeneratorPage() {
           ))}
         </div>
       </div>
+      <WhatsNext currentTool="hash-generator"
+      />
     </ToolPageLayout>
   );
 }

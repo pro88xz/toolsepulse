@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("ai-text-rewriter")!;
 
@@ -204,6 +207,7 @@ function rewriteText(text: string, mode: Mode): string {
 
 export default function AITextRewriterPage() {
   const [input, setInput] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState<Mode>("formal");
   const [copied, setCopied] = useState(false);
@@ -223,8 +227,21 @@ export default function AITextRewriterPage() {
   const inputWords = input.trim() === "" ? 0 : input.trim().split(/\s+/).length;
   const outputWords = output.trim() === "" ? 0 : output.trim().split(/\s+/).length;
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setInput(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {/* Mode Selector */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -304,6 +321,9 @@ export default function AITextRewriterPage() {
           </button>
         </div>
       </div>
+      <WhatsNext currentTool="ai-text-rewriter"
+        getCurrentResultString={async () => output || null}
+      />
     </ToolPageLayout>
   );
 }

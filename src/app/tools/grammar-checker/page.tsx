@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("grammar-checker")!;
 
@@ -43,6 +46,7 @@ const commonErrors: { pattern: RegExp; type: Issue["type"]; message: string; sug
 
 export default function GrammarCheckerPage() {
   const [text, setText] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
 
   const issues = useMemo(() => {
@@ -83,8 +87,21 @@ export default function GrammarCheckerPage() {
 
   const wordCount = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setText(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="flex items-center justify-between mb-3">
@@ -178,6 +195,9 @@ export default function GrammarCheckerPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="grammar-checker"
+        getCurrentResultString={async () => text || null}
+      />
     </ToolPageLayout>
   );
 }

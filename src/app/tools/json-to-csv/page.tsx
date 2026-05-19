@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import StringInboxBanner from "@/components/tools/StringInboxBanner";
+import { takeStringFromInbox } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("json-to-csv")!;
 
@@ -32,6 +35,7 @@ function jsonToCSV(data: Record<string, unknown>[]): string {
 
 export default function JSONToCSVPage() {
   const [jsonText, setJsonText] = useState("");
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
   const [csvOutput, setCsvOutput] = useState("");
   const [rowCount, setRowCount] = useState(0);
   const [error, setError] = useState("");
@@ -100,8 +104,21 @@ export default function JSONToCSVPage() {
     await navigator.clipboard.writeText(csvOutput);
   }, [csvOutput]);
 
+  // On mount: check if a string was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeStringFromInbox();
+      if (!item) return;
+      setInboxSource(item.sourceTool);
+      setJsonText(item.text);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div
@@ -150,6 +167,9 @@ export default function JSONToCSVPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="json-to-csv"
+        getCurrentResultString={async () => csvOutput || null}
+      />
     </ToolPageLayout>
   );
 }
