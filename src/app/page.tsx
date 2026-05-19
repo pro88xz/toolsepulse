@@ -531,15 +531,15 @@ export default function HomePage() {
                   <Link
                     key={key}
                     href={"/category/" + key}
-                    className={"group relative rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-lg overflow-hidden " + vis.cardBg + " " + vis.borderColor}
+                    className={"group relative rounded-xl border p-3 sm:p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md overflow-hidden " + vis.cardBg + " " + vis.borderColor}
                   >
-                    <div className={"flex h-11 w-11 items-center justify-center rounded-xl mb-4 " + vis.iconBg + " " + vis.iconColor}>
-                      <svg width="22" height="22" viewBox="0 0 24 24">{vis.icon}</svg>
+                    <div className={"flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg mb-2.5 sm:mb-3 " + vis.iconBg + " " + vis.iconColor}>
+                      <svg width="18" height="18" viewBox="0 0 24 24">{vis.icon}</svg>
                     </div>
-                    <h3 className="text-sm font-bold text-white">{cat.label}</h3>
-                    <p className="mt-0.5 text-xs text-white/70">{vis.tagline}</p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-semibold text-white">{catTools.length} tools</span>
+                    <h3 className="text-[13px] sm:text-sm font-bold text-white leading-tight">{cat.label}</h3>
+                    <p className="mt-0.5 text-[10px] sm:text-xs text-white/70 leading-snug">{vis.tagline}</p>
+                    <div className="mt-2 sm:mt-3 flex items-center justify-between">
+                      <span className="rounded-full bg-white/20 px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold text-white">{catTools.length} tools</span>
                       <svg className="h-4 w-4 text-white/50 group-hover:text-white group-hover:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
                     </div>
                   </Link>
