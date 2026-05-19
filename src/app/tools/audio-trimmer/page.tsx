@@ -73,6 +73,20 @@ export default function AudioTrimmerPage() {
     setAudioUrl(URL.createObjectURL(audioFile));
   }, []);
 
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      handleFiles([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       const dur = audioRef.current.duration;
