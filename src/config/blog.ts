@@ -369,6 +369,44 @@ export const blogPosts: BlogPost[] = [
         "PDF splitting is a daily task in modern document workflows \u2014 contracts, reports, statements, applications all need to be broken apart at some point. Browser-based splitting gives you the speed of professional software with the privacy of working entirely offline. Try our free PDF Splitter for your next document.",
     },
   },
+  {
+    slug: "how-to-convert-jpg-to-pdf-online-free",
+    title: "How to Convert JPG to PDF Online for Free (Combine Multiple Images)",
+    description: "Turn one or more JPG photos into a single PDF document. Free browser-based converter with reordering, no upload to any server, and no signup.",
+    date: "2026-05-16",
+    readTime: "5 min",
+    toolSlug: "jpg-to-pdf",
+    category: "image",
+    keywords: ["jpg to pdf online", "convert jpg to pdf free", "combine jpg into pdf", "image to pdf converter", "jpeg to pdf no upload"],
+    content: {
+      intro:
+        "Need to send a stack of photos as one neat PDF instead of a dozen attachments? Want to compile receipts, ID scans, or product photos into a single shareable document? JPG to PDF conversion handles this in seconds. The catch with most online tools: they upload your images to their servers \u2014 a real concern for IDs, receipts, signed forms, or anything personal. Here\u2019s how to do it right in your browser.",
+      sections: [
+        {
+          heading: "When you actually need JPG to PDF conversion",
+          body: "Submitting an application that requires \u201cPDF only\u201d when you only have phone photos. Combining multi-page scans of a contract into a single document. Bundling receipts for an expense report. Compiling product photos into a catalog or brochure. Turning a series of screenshots into a tutorial document. Creating an evidence packet for legal or insurance claims. Each case wants the same thing: one PDF, multiple images, in the right order.",
+        },
+        {
+          heading: "Privacy: why this matters more than most conversions",
+          body: "JPGs you\u2019re converting to PDF are often sensitive: passport scans, driver\u2019s licenses, signed contracts, medical documents, financial statements. Uploading these to an unknown online service is genuinely risky \u2014 you have no way to verify their data handling. Browser-based conversion eliminates this entirely. Your images stay on your device throughout the process. Nothing uploads to any server.",
+        },
+        {
+          heading: "How to convert JPG to PDF with ToolsePulse",
+          body: "Open the JPG to PDF Converter tool. Drag multiple JPGs onto the upload zone, or click to browse. Reorder them by dragging the thumbnails into the sequence you want \u2014 the first image becomes page 1, second becomes page 2, and so on. Adjust page size if needed (A4 or Letter most common). Click Convert to generate the PDF in your browser. Download instantly. The whole flow takes about 10 seconds for a typical 5-page bundle.",
+        },
+        {
+          heading: "Reordering and page management",
+          body: "Page order matters \u2014 a contract is meaningless if the signature page comes before the terms. Most modern JPG-to-PDF tools let you drag thumbnails to reorder before conversion. You can also remove a wrong image and add a different one before finalizing. For very long bundles (20+ pages), consider naming your JPGs with numeric prefixes (01-cover.jpg, 02-page1.jpg) so they upload in order \u2014 you can still reorder after, but starting close to right saves time.",
+        },
+        {
+          heading: "After conversion: shrink, watermark, or password protect",
+          body: "Once your JPGs are a PDF, you can keep working with the file. Use our PDF Compressor if the resulting file is too large for email (large photos can produce a 20MB+ PDF). Add a watermark with PDF Watermark for confidential drafts. Password-protect with PDF Password Protector before emailing sensitive bundles. All of these also run in your browser \u2014 you stay private the whole way.",
+        },
+      ],
+      conclusion:
+        "JPG to PDF conversion is one of the most common document tasks in the modern workflow \u2014 we all take photos with our phones and need to share them as documents. Browser-based conversion keeps your files private and gives you instant results without uploading sensitive images to anyone. Try our free JPG to PDF Converter on your next photo bundle.",
+    },
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
