@@ -521,7 +521,7 @@ export default function HomePage() {
               <p className="mt-2 text-sm text-slate-500">{Object.keys(categories).length} categories, {tools.length} tools, zero compromise on privacy</p>
             </div>
 
-            <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 max-w-5xl mx-auto">
               {Object.entries(categories).map(([key, cat]) => {
                 const vis = categoryVisuals[key as ToolCategory];
                 const catTools = tools.filter((t) => t.category === key);
