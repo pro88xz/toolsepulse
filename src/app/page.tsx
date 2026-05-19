@@ -336,7 +336,7 @@ export default function HomePage() {
         />
         <div aria-hidden="true" className="absolute inset-0 opacity-[0.22]" style={{ backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
 
-        <div className="relative mx-auto max-w-5xl px-4 pt-10 pb-8 sm:pt-20 sm:pb-14">
+        <div className="relative mx-auto max-w-5xl px-4 pt-8 pb-8 sm:pt-12 sm:pb-12">
           <div className="text-center">
             <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.08]">
               The tools you need,
@@ -345,12 +345,12 @@ export default function HomePage() {
                 <RotatingText />
               </span>
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-base text-slate-600 leading-relaxed sm:text-lg font-medium">
+            <p className="mx-auto mt-3 max-w-xl text-base text-slate-600 leading-relaxed sm:text-lg sm:mt-4 font-medium">
               {tools.length} free tools. <span className="text-slate-900 font-semibold">Zero uploads.</span> All work in your browser.
             </p>
 
             {/* Animated Search */}
-            <div className="mx-auto mt-8 max-w-xl">
+            <div className="mx-auto mt-6 max-w-xl">
               <div className="relative flex items-center rounded-2xl border border-slate-200 bg-white pl-5 pr-1.5 py-1.5 shadow-md focus-within:border-violet-400 focus-within:ring-2 focus-within:ring-violet-100 transition-all">
                 <input
                   type="text"
@@ -383,7 +383,7 @@ export default function HomePage() {
             </div>
 
             {/* Stat bar — trust & scale */}
-            <div className="mt-7 grid grid-cols-4 gap-2 max-w-xl mx-auto">
+            <div className="mt-5 grid grid-cols-4 gap-2 max-w-xl mx-auto">
               {[
                 { num: String(tools.length), label: "tools" },
                 { num: "0", label: "uploads" },
@@ -398,14 +398,14 @@ export default function HomePage() {
             </div>
 
             {/* Brand tagline divider */}
-            <div className="mt-8 flex items-center justify-center gap-3">
+            <div className="mt-5 flex items-center justify-center gap-3">
               <span className="h-px w-12 bg-gradient-to-r from-transparent to-slate-300" />
               <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-slate-600">All Tools. One Pulse.</span>
               <span className="h-px w-12 bg-gradient-to-l from-transparent to-slate-300" />
             </div>
 
             {/* Category cards — the discovery layer */}
-            <div className="mx-auto mt-8 max-w-4xl grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="mx-auto mt-5 max-w-5xl grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 {
                   href: "/category/pdf",
@@ -435,7 +435,7 @@ export default function HomePage() {
                   gradient: "linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)",
                   iconBg: "bg-amber-100",
                   iconColor: "text-amber-700",
-                  icon: (<path strokeLinecap="round" strokeLinejoin="round" d="M9 9 21 3m0 0v6m0-6h-6M9 9v9.75M9 9l-3.75 3.75M9 18.75A3.375 3.375 0 1 1 9 12a3.375 3.375 0 0 1 0 6.75ZM19.5 9.75a3.375 3.375 0 1 1 0 6.75 3.375 3.375 0 0 1 0-6.75Z" />),
+                  icon: (<path strokeLinecap="round" strokeLinejoin="round" d="m15.91 11.672 a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />),
                 },
                 {
                   href: "/category/text",
