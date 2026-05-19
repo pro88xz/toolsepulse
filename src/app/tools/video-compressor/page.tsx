@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { saveAs } from "file-saver";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("video-compressor")!;
 
@@ -125,15 +128,31 @@ export default function VideoCompressorPage() {
     }
   }, [quality]);
 
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
+
   const handleFiles = useCallback((files: FileList | File[]) => {
     const file = Array.from(files).find((f) => f.type.startsWith("video/"));
     if (file) compressVideo(file);
   }, [compressVideo]);
 
+  // On mount: check if a file was passed from another tool via inbox
+  useEffect(() => {
+    const fromTool = new URLSearchParams(window.location.search).get("from");
+    if (!fromTool) return;
+    (async () => {
+      const item = await takeFromInbox();
+      if (!item) return;
+      const file = inboxItemToFile(item);
+      setInboxSource(item.sourceTool);
+      handleFiles([file]);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const reduction = fileSize > 0 && resultSize > 0 ? Math.round((1 - resultSize / fileSize) * 100) : 0;
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
           <div
@@ -204,6 +223,7 @@ export default function VideoCompressorPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="video-compressor" />
     </ToolPageLayout>
   );
 }

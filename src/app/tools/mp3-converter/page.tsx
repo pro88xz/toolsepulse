@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
+import InboxBanner from "@/components/tools/InboxBanner";
+import { takeFromInbox, inboxItemToFile } from "@/lib/toolInbox";
 
 const tool = getToolBySlug("mp3-converter")!;
 
@@ -31,6 +34,8 @@ export default function MP3ConverterPage() {
   const [bitrate, setBitrate] = useState(128);
   const inputRef = useRef<HTMLInputElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const [inboxSource, setInboxSource] = useState<string | null>(null);
 
   const handleFiles = useCallback((files: FileList | File[]) => {
     const audioFile = Array.from(files).find((f) => f.type.startsWith("audio/") || f.name.match(/\.(wav|ogg|flac|aac|m4a|wma|mp3)$/i));
@@ -140,7 +145,7 @@ export default function MP3ConverterPage() {
   };
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="space-y-6">
         {!file ? (
           <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
@@ -240,6 +245,7 @@ export default function MP3ConverterPage() {
           </>
         )}
       </div>
+      <WhatsNext currentTool="mp3-converter" />
     </ToolPageLayout>
   );
 }
