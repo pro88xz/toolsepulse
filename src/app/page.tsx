@@ -282,22 +282,22 @@ function RecentlyUsed() {
   if (recentTools.length === 0) return null;
 
   return (
-    <section className="bg-white py-8 border-b border-slate-100">
+    <section className="bg-white py-4 border-b border-slate-100">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="flex items-center gap-2 mb-4">
-          <svg className="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-          <h2 className="text-sm font-bold text-slate-900">Recently used</h2>
+        <div className="flex items-center gap-1.5 mb-2">
+          <svg className="h-3 w-3 text-slate-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+          <h2 className="text-[10px] uppercase tracking-wider font-bold text-slate-500">Recently used</h2>
         </div>
         <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
           {recentTools.map((tool) => {
             if (!tool) return null;
             const s = searchIconStyle[tool.category];
             return (
-              <a key={tool.slug} href={"/tools/" + tool.slug} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 hover:shadow-sm hover:border-slate-300 transition-all whitespace-nowrap flex-shrink-0">
-                <div className={"flex h-7 w-7 items-center justify-center rounded-md " + s.bg + " " + s.text}>
-                  <svg width="14" height="14" viewBox="0 0 24 24">{categoryVisuals[tool.category]?.icon}</svg>
+              <a key={tool.slug} href={"/tools/" + tool.slug} className="flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2 py-1 hover:shadow-sm hover:border-slate-300 transition-all whitespace-nowrap flex-shrink-0">
+                <div className={"flex h-5 w-5 items-center justify-center rounded " + s.bg + " " + s.text}>
+                  <svg width="11" height="11" viewBox="0 0 24 24">{categoryVisuals[tool.category]?.icon}</svg>
                 </div>
-                <span className="text-xs font-medium text-slate-700">{tool.name}</span>
+                <span className="text-[11px] font-medium text-slate-700">{tool.name}</span>
               </a>
             );
           })}
