@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("password-generator")!;
 
@@ -63,7 +64,7 @@ export default function PasswordGeneratorPage() {
   const strength = getStrength();
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
         {/* Generated Password Display */}
         <div className="mb-8">
@@ -213,6 +214,7 @@ export default function PasswordGeneratorPage() {
           </div>
         )}
       </div>
+      <WhatsNext currentTool="password-generator" />
     </ToolPageLayout>
   );
 }

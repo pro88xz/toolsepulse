@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import QRCode from "qrcode";
 import { getToolBySlug } from "@/config/tools";
 import ToolPageLayout from "@/components/tools/ToolPageLayout";
+import WhatsNext from "@/components/tools/WhatsNext";
 
 const tool = getToolBySlug("qr-code-generator")!;
 
@@ -98,7 +99,7 @@ export default function QRCodeGeneratorPage() {
   ];
 
   return (
-    <ToolPageLayout tool={tool}>
+    <ToolPageLayout tool={tool} hideWhatsNext>
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Controls */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -325,6 +326,7 @@ export default function QRCodeGeneratorPage() {
           )}
         </div>
       </div>
+      <WhatsNext currentTool="qr-code-generator" />
     </ToolPageLayout>
   );
 }
