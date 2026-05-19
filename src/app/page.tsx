@@ -382,6 +382,28 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Stat bar — trust & scale */}
+            <div className="mt-7 grid grid-cols-4 gap-2 max-w-xl mx-auto">
+              {[
+                { num: String(tools.length), label: "tools" },
+                { num: "0", label: "uploads" },
+                { num: "∞", label: "file size" },
+                { num: "100%", label: "free" },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <div className="text-2xl sm:text-3xl font-extrabold bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, #1D4ED8, #6D28D9, #DB2777)" }}>{s.num}</div>
+                  <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mt-0.5">{s.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Brand tagline divider */}
+            <div className="mt-8 flex items-center justify-center gap-3">
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-slate-300" />
+              <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-slate-600">All Tools. One Pulse.</span>
+              <span className="h-px w-12 bg-gradient-to-l from-transparent to-slate-300" />
+            </div>
+
             {/* Category cards — the discovery layer */}
             <div className="mx-auto mt-8 max-w-4xl grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
@@ -429,46 +451,30 @@ export default function HomePage() {
                 <Link
                   key={cat.label}
                   href={cat.href}
-                  className="group relative rounded-2xl bg-white border-2 border-slate-200 p-4 text-left hover:border-transparent hover:shadow-lg transition-all overflow-hidden"
+                  className="group relative rounded-2xl bg-white border-2 border-slate-200 p-4 pt-5 text-left hover:border-transparent hover:shadow-xl hover:-translate-y-0.5 transition-all overflow-hidden"
                 >
-                  {/* Hover gradient background */}
+                  {/* Top accent strip — gives card identity at rest */}
+                  <div className="absolute top-0 inset-x-0 h-1" style={{ background: cat.gradient }} />
+                  {/* Hover gradient fill */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: cat.gradient }} />
                   <div className="relative flex flex-col h-full">
-                    <div className={`inline-flex h-9 w-9 items-center justify-center rounded-xl ${cat.iconBg} group-hover:bg-white/20 transition-colors`}>
-                      <svg className={`h-5 w-5 ${cat.iconColor} group-hover:text-white transition-colors`} fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor">
+                    <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${cat.iconBg} group-hover:bg-white/20 transition-colors`}>
+                      <svg className={`h-6 w-6 ${cat.iconColor} group-hover:text-white transition-colors`} fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor">
                         {cat.icon}
                       </svg>
                     </div>
-                    <div className="mt-3 text-sm font-bold text-slate-900 group-hover:text-white transition-colors">{cat.label}</div>
-                    <div className="text-[11px] font-semibold text-slate-500 group-hover:text-white/80 transition-colors">{cat.count} tools</div>
-                    <div className="mt-2 text-[10px] uppercase tracking-wider font-semibold text-slate-400 group-hover:text-white/70 transition-colors">Featured</div>
-                    <div className="text-[11px] font-medium text-slate-700 group-hover:text-white transition-colors truncate">{cat.featured}</div>
+                    <div className="mt-3 text-base font-bold text-slate-900 group-hover:text-white transition-colors">{cat.label}</div>
+                    <div className="text-xs font-semibold text-slate-500 group-hover:text-white/80 transition-colors">{cat.count} tools</div>
+                    <div className="mt-3 text-[10px] uppercase tracking-wider font-bold text-slate-400 group-hover:text-white/70 transition-colors">Featured</div>
+                    <div className="text-[12px] font-semibold text-slate-700 group-hover:text-white transition-colors truncate">{cat.featured}</div>
                   </div>
                 </Link>
               ))}
             </div>
 
-            {/* Brand tagline */}
-            <div className="mt-7 flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-gradient-to-r from-transparent to-slate-300" />
-              <span className="text-[10px] uppercase tracking-[0.25em] font-semibold text-slate-500">All Tools. One Pulse.</span>
-              <span className="h-px w-8 bg-gradient-to-l from-transparent to-slate-300" />
-            </div>
 
-            {/* Stat bar */}
-            <div className="mt-5 grid grid-cols-4 gap-2 max-w-xl mx-auto">
-              {[
-                { num: String(tools.length), label: "tools" },
-                { num: "0", label: "uploads" },
-                { num: "∞", label: "file size" },
-                { num: "100%", label: "free" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="text-2xl sm:text-3xl font-extrabold bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, #1D4ED8, #6D28D9, #DB2777)" }}>{s.num}</div>
-                  <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mt-0.5">{s.label}</div>
-                </div>
-              ))}
-            </div>
+
+
           </div>
         </div>
       </section>
