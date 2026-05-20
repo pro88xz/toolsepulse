@@ -522,16 +522,18 @@ export default function HomePage() {
             </div>
 
             <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 max-w-5xl mx-auto">
-              {Object.entries(categories).map(([key, cat]) => {
+              {Object.entries(categories).map(([key, cat], idx, arr) => {
                 const vis = categoryVisuals[key as ToolCategory];
                 const catTools = tools.filter((t) => t.category === key);
                 if (catTools.length === 0) return null;
+                const isLast = idx === arr.length - 1;
+                const spanClass = isLast ? "col-span-2 sm:col-span-1 lg:col-span-2" : "";
 
                 return (
                   <Link
                     key={key}
                     href={"/category/" + key}
-                    className={"group relative rounded-xl border p-3 sm:p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md overflow-hidden " + vis.cardBg + " " + vis.borderColor}
+                    className={"group relative rounded-xl border p-3 sm:p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md overflow-hidden " + spanClass + " " + vis.cardBg + " " + vis.borderColor}
                   >
                     <div className={"flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg mb-2.5 sm:mb-3 " + vis.iconBg + " " + vis.iconColor}>
                       <svg width="18" height="18" viewBox="0 0 24 24">{vis.icon}</svg>
