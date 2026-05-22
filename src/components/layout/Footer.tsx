@@ -80,6 +80,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2">
               <li><Link href="/privacy" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link></li>
+              <li><Link href="/affiliate-disclosure" className="text-sm text-slate-400 hover:text-white transition-colors">Affiliate Disclosure</Link></li>
               <li><Link href="/about" className="text-sm text-slate-400 hover:text-white transition-colors">About</Link></li>
               <li><Link href="/contact" className="text-sm text-slate-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
