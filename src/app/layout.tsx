@@ -67,11 +67,8 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#8B5CF6" />
-        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="google-site-verification" content="6vkJFnHwHifL5TpqvVaG4vZo0dnsW1eJ65qSe0TF8zc" />
-        <meta name="b5be741c01525551266624e08456cf200e9b58ab" content="b5be741c01525551266624e08456cf200e9b58ab" />
           <meta name="google-adsense-account" content="ca-pub-9121922395304175" />
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9121922395304175" crossOrigin="anonymous"></script>
       </head>
