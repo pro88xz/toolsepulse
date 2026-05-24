@@ -1,4 +1,5 @@
 import { tools, categories, type ToolCategory } from "@/config/tools";
+import { useCases } from "@/config/use-cases";
 import { getBlogPosts } from "@/config/blog";
 import { siteConfig } from "@/config/site";
 import type { MetadataRoute } from "next";
@@ -52,6 +53,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page === "blog" ? 0.7 : 0.4,
   }));
 
+  const useCasePages = useCases.map((uc) => ({
+    url: `${siteConfig.url}/use/${uc.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
   return [
     {
       url: siteConfig.url,
@@ -61,6 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...categoryPages,
     ...toolPages,
+    ...useCasePages,
     ...blogPages,
     ...staticPages,
   ];
