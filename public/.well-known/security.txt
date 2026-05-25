@@ -1,0 +1,8 @@
+# ToolsePulse Security Policy
+# Report vulnerabilities responsibly.
+
+Contact: mailto:security@toolsepulse.co
+Expires: 2027-05-25T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://toolsepulse.co/.well-known/security.txt
+Policy: https://toolsepulse.co/security

@@ -73,7 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const staticPages = ["about", "contact", "privacy", "terms", "affiliate-disclosure", "blog", "how-to-use"].map((page) => ({
+  const staticPages = ["about", "contact", "privacy", "terms", "affiliate-disclosure", "security", "blog", "how-to-use"].map((page) => ({
     url: `${siteConfig.url}/${page}`,
     lastModified: RELEASE_DATE,
     changeFrequency: "monthly" as const,
