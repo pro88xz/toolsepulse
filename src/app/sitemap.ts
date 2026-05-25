@@ -1,6 +1,7 @@
 import { tools, categories, type ToolCategory } from "@/config/tools";
 import { useCases } from "@/config/use-cases";
 import { comparisons } from "@/config/comparisons";
+import { intentHubs } from "@/config/intent-hubs";
 
 /**
  * Get the last modified time of a file via git history.
@@ -80,6 +81,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page === "blog" ? 0.7 : 0.4,
   }));
 
+  const hubPages = intentHubs.map((h) => ({
+    url: `${siteConfig.url}/hubs/${h.slug}`,
+    lastModified: RELEASE_DATE,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   const comparisonPages = comparisons.map((c) => ({
     url: `${siteConfig.url}/compare/${c.slug}`,
     lastModified: RELEASE_DATE,
@@ -105,6 +113,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...toolPages,
     ...useCasePages,
     ...comparisonPages,
+    ...hubPages,
     ...blogPages,
     ...staticPages,
   ];
