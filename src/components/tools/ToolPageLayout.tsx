@@ -5,6 +5,8 @@ import ToolUseTracker from "./ToolUseTracker";
 import BugReport from "./BugReport";
 import WhatsNext from "./WhatsNext";
 import { getToolContent } from "@/config/tool-content";
+import { useCases } from "@/config/use-cases";
+import { comparisons } from "@/config/comparisons";
 
 const categoryIconColors: Record<string, string> = {
   pdf: "bg-red-100 text-red-600",
@@ -284,6 +286,46 @@ export default function ToolPageLayout({ tool, children, hideWhatsNext = false }
             {/* Ad - between FAQ and alternatives */}
             <div className="mb-12">
             </div>
+
+            {/* Use-case landing pages for this tool */}
+            {useCases.filter((uc) => uc.toolSlug === tool.slug).length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Common use cases for {tool.name}</h2>
+                <p className="text-sm text-gray-600 mb-4">Tailored step-by-step guides for the most common ways people use {tool.name.toLowerCase()}.</p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {useCases.filter((uc) => uc.toolSlug === tool.slug).map((uc) => (
+                    <Link
+                      key={uc.slug}
+                      href={`/use/${uc.slug}`}
+                      className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-300 hover:shadow-md transition-all group"
+                    >
+                      <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{uc.title}</h3>
+                      <p className="mt-1 text-xs text-gray-500 line-clamp-2">{uc.hook}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Comparison pages featuring this tool */}
+            {comparisons.filter((c) => c.ctaToolSlug === tool.slug).length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Compare {tool.name} with alternatives</h2>
+                <p className="text-sm text-gray-600 mb-4">Honest head-to-head comparisons against Smallpdf, iLovePDF, Adobe, and other popular tools.</p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {comparisons.filter((c) => c.ctaToolSlug === tool.slug).map((c) => (
+                    <Link
+                      key={c.slug}
+                      href={`/compare/${c.slug}`}
+                      className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-300 hover:shadow-md transition-all group"
+                    >
+                      <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{c.title}</h3>
+                      <p className="mt-1 text-xs text-gray-500 line-clamp-2">{c.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Ad - between FAQ and alternatives */}
             
