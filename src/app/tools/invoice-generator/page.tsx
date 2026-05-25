@@ -148,7 +148,7 @@ export default function InvoiceGeneratorPage() {
     <ToolPageLayout tool={tool} hideWhatsNext>
       {/* Print Styles */}
       <style jsx global>{`
-        /* print styles removed */
+        @media print {
           body * { visibility: hidden; }
           #invoice-preview, #invoice-preview * { visibility: visible; }
           #invoice-preview { position: absolute; left: 0; top: 0; width: 100%; padding: 40px; }
