@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { categories, getPopularTools } from "@/config/tools";
+import { intentHubs } from "@/config/intent-hubs";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -85,6 +86,24 @@ export default function Footer() {
               <li><Link href="/contact" className="text-sm text-slate-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
+        </div>
+
+        {/* Browse by intent — hub pages */}
+        <div className="mt-12 pt-10 border-t border-slate-800">
+          <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Browse by intent</h3>
+          <p className="mt-2 text-xs text-slate-500">Curated tool collections for specific needs.</p>
+          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3 lg:grid-cols-4">
+            {intentHubs.map((hub) => (
+              <li key={hub.slug}>
+                <Link
+                  href={`/hubs/${hub.slug}`}
+                  className="text-sm text-slate-400 hover:text-white transition-colors"
+                >
+                  {hub.title.split(":")[0].split(" — ")[0]}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="mt-12 border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
