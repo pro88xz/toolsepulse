@@ -1,5 +1,6 @@
 import { tools, categories, type ToolCategory } from "@/config/tools";
 import { useCases } from "@/config/use-cases";
+import { comparisons } from "@/config/comparisons";
 import { getBlogPosts } from "@/config/blog";
 import { siteConfig } from "@/config/site";
 import type { MetadataRoute } from "next";
@@ -53,6 +54,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page === "blog" ? 0.7 : 0.4,
   }));
 
+  const comparisonPages = comparisons.map((c) => ({
+    url: `${siteConfig.url}/compare/${c.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   const useCasePages = useCases.map((uc) => ({
     url: `${siteConfig.url}/use/${uc.slug}`,
     lastModified: new Date(),
@@ -70,6 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...categoryPages,
     ...toolPages,
     ...useCasePages,
+    ...comparisonPages,
     ...blogPages,
     ...staticPages,
   ];
