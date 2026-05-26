@@ -67,7 +67,7 @@ export default function PrivacyPage() {
             <li><strong>Google Analytics cookies</strong> &mdash; for the anonymous analytics described above</li>
           </ul>
           <p className="mt-3">
-            If we display advertisements (currently we do not, but may in the future), our advertising partners may set additional cookies for ad targeting and measurement. We will update this policy with specifics when and if that happens.
+            We display advertisements through PopAds, a third-party advertising network. PopAds and its downstream advertisers may set cookies on your device to limit ad frequency, measure ad performance, and serve relevant pop-under advertisements. These cookies are set by third parties, not by ToolsePulse directly, and are described in detail in the Advertising section below.
           </p>
           <p className="mt-3">
             You can control cookies through your browser settings. Blocking essential cookies may affect how some features work; blocking analytics cookies has no impact on tool functionality.
@@ -75,21 +75,24 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-slate-900 mb-3">Advertising and AdSense</h2>
+          <h2 className="text-lg font-semibold text-slate-900 mb-3">Advertising and PopAds</h2>
           <p>
-            {siteConfig.name} may display advertisements from Google AdSense or other approved ad networks. These ad networks operate independently and may use cookies and similar technologies to serve relevant ads and measure their effectiveness.
+            {siteConfig.name} displays advertisements through PopAds (popads.net), a third-party advertising network. PopAds serves pop-under advertisements &mdash; ads that open in a new browser window or tab behind the current one when you click anywhere on the page. PopAds operates independently of ToolsePulse and uses cookies and similar technologies to serve advertisements, limit ad frequency, and measure ad performance.
           </p>
           <p className="mt-3">
-            Specifically regarding <strong className="text-slate-900">Google AdSense</strong>:
+            Specifically regarding <strong className="text-slate-900">PopAds</strong>:
           </p>
           <ul className="mt-2 space-y-1 list-disc list-inside pl-2">
-            <li>Google, as a third-party vendor, uses cookies to serve ads on this site</li>
-            <li>Google&apos;s use of the DoubleClick DART cookie enables it to serve ads based on your visits to this site and other sites on the internet</li>
-            <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google&apos;s Ads Settings</a></li>
-            <li>You may also opt out of third-party vendors&apos; use of cookies for personalized ads by visiting <a href="https://optout.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">aboutads.info</a></li>
+            <li>PopAds, as a third-party advertising network, uses cookies to serve and measure advertisements on this site</li>
+            <li>Downstream advertisers in the PopAds network may set their own cookies subject to their own privacy policies</li>
+            <li>Ads are not displayed on the legal pages of this site (Privacy, Terms, Contact, About, Security) so you can review policies without interruption</li>
+            <li>Ads are not displayed on the tool widgets themselves &mdash; tools continue to process your files locally in your browser with no third-party access to file contents</li>
+            <li>You may opt out of personalized advertising network-wide by visiting <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Your Online Choices</a> (EU/UK) or <a href="https://optout.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">aboutads.info</a> (US)</li>
+            <li>You may block pop-under ads at the browser level by enabling the pop-up blocker (built into Chrome, Firefox, Safari, and Edge by default)</li>
+            <li>For PopAds&apos; own data practices, see the <a href="https://www.popads.net/privacy.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">PopAds Privacy Policy</a></li>
           </ul>
           <p className="mt-3">
-            Ads are never displayed on tool widgets themselves &mdash; only on surrounding content. The browser-based architecture of the tools means ad networks cannot see the files you process, even when ads are present on the page.
+            Pop-under ads are limited to standard page navigation events &mdash; PopAds cannot see, read, or transmit the files you process in the tools, because the tools run entirely in your browser with no upload step. The advertising network operates separately from the tool layer and has no technical means of accessing tool inputs or outputs.
           </p>
         </section>
 
@@ -99,7 +102,7 @@ export default function PrivacyPage() {
           <ul className="mt-2 space-y-1 list-disc list-inside pl-2">
             <li><strong>Google Analytics</strong> &mdash; anonymous usage analytics. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Privacy Policy</a></li>
             <li><strong>Vercel</strong> &mdash; web hosting infrastructure. Server logs (IP, timestamp, URL) processed for security and performance. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Vercel Privacy Policy</a></li>
-            <li><strong>Google AdSense</strong> (if/when ads are enabled) &mdash; advertising. See the section above for details.</li>
+            <li><strong>PopAds</strong> (popads.net) &mdash; pop-under advertising network. See the Advertising section above for details. <a href="https://www.popads.net/privacy.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">PopAds Privacy Policy</a></li>
           </ul>
           <p className="mt-3">
             We do not use Facebook Pixel, TikTok pixel, LinkedIn Insight tag, or any other social media tracking technology. We do not share data with data brokers or marketing partners.
