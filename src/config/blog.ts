@@ -16,6 +16,249 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "pdf-too-big-for-email-how-to-compress-under-25mb",
+    title: "PDF Too Big for Email? 5 Ways to Compress Under 25MB Without Quality Loss",
+    description: "Email bouncing your PDF? Gmail caps at 25MB, Outlook similar. Here are 5 proven methods to shrink any PDF under the limit while keeping text and images sharp.",
+    date: "2026-05-25",
+    readTime: "8 min",
+    toolSlug: "pdf-compressor",
+    category: "pdf",
+    keywords: ["pdf too big for email", "compress pdf under 25mb", "reduce pdf size for gmail", "pdf attachment too large", "email pdf size limit"],
+    content: {
+      intro:
+        "You finish a contract, a portfolio, a report. You hit attach. Then the dreaded message: \"File too large.\" Gmail won't budge past 25MB. Outlook draws the line in the same spot. Your corporate Exchange might cut you off at 10MB. Suddenly the work you spent hours on is stuck behind a wall built in 2004 when broadband was a dream and a 5MB file felt obscene. Here's the good news: a 100MB PDF can almost always be shrunk under 25MB — sometimes under 5MB — without anyone noticing the difference when they open it. The tricky part is knowing which method to use, because the wrong approach turns your sharp document into something a 1995 fax machine would reject. This guide walks through five proven methods, ranked from fastest to most thorough.",
+      sections: [
+        {
+          heading: "Why your PDF is so big in the first place",
+          body: "Before you compress, it helps to know what's bloating the file. PDFs grow large for three main reasons. The first is embedded images — every screenshot, photo, scan, or chart inside your document is stored as raw image data inside the PDF. A high-resolution scan can easily add 5-10MB per page. The second is embedded fonts. Custom fonts get bundled into the PDF so it looks identical on every device, but each font family can add 500KB or more. The third reason is the format itself — older PDF software or scanners produce inefficient files with redundant data, leftover edit history, and uncompressed streams. The most common culprit by a wide margin is images. A 50-page text-only report is rarely more than 1-2MB. A 50-page report with embedded photos, scanned signatures, or screenshots can easily blow past 50MB. Knowing this matters because the right compression method depends on what's making your file fat in the first place.",
+        },
+        {
+          heading: "Method 1: Browser-based compression (fastest, most private)",
+          body: "Browser-based PDF compressors process your file locally — your document never leaves your device. This is both faster (no upload time) and more private (no third party sees your file). The trade-off is that processing speed depends on your device. For most PDFs under 100MB, this is the right first method to try. Open a tool like the ToolsePulse PDF Compressor, drag your PDF in, pick a compression level (high compression for email attachments), and download the result in seconds. For a typical scanned contract or photo-heavy report, expect 60-80% size reduction with no visible quality loss. The compressed PDF opens identically in every PDF viewer, on every device. Text stays sharp because text compression is lossless. Only images get downsampled, and even there the algorithm is smart enough to preserve readability. This method works best when you need a fast result and you care about file privacy.",
+        },
+        {
+          heading: "Method 2: Convert to PDF/A or save as 'reduced size'",
+          body: "If you have Adobe Acrobat or any PDF editor (free or paid), there's a built-in option called \"Save As Reduced Size PDF\" or sometimes \"Optimize PDF.\" In Acrobat: File → Save as Other → Reduced Size PDF. Pick the target PDF version (1.5 or 1.6 is a good balance of compatibility and compression). This method is similar to browser compression but uses Adobe's specific algorithms. The output is usually 30-60% smaller, sometimes more for scan-heavy documents. The advantage of Adobe's version is integration with the rest of your PDF workflow — you can compress, then immediately edit, sign, or merge in the same app. The disadvantage is the cost (Acrobat is $19.99/month) and that the file still goes through Adobe's cloud if you're using the web version. For one-off email attachments, the browser-based route is usually faster and free.",
+        },
+        {
+          heading: "Method 3: Print to PDF with smaller settings",
+          body: "Almost every operating system has a built-in \"Print to PDF\" function. The trick is using it backwards: print your existing PDF to a new PDF with lower-quality settings. On Mac: open the PDF in Preview, hit Cmd+P, then in the print dialog choose \"Save as PDF\" with the \"Reduce File Size\" Quartz Filter applied. On Windows: open in any PDF reader, choose Print, select \"Microsoft Print to PDF\" as the printer, set lower DPI settings if available. This method is crude but reliable — it bakes the PDF down to its visual elements at whatever resolution you choose. Text often gets converted to images in this process, which means the result is no longer searchable. Use this method as a last resort when other compression isn't enough, or when you specifically don't want the recipient to be able to copy text from the document.",
+        },
+        {
+          heading: "Method 4: Split the PDF and send in parts",
+          body: "Sometimes compression isn't enough — a 200MB legal document or a 500-page report won't fit under 25MB even with aggressive compression without becoming unreadable. The solution: split the PDF into two or three parts and send them in separate emails. Use a PDF splitter tool to break the file by page ranges (e.g., pages 1-50 in Part A, pages 51-100 in Part B). Name the files clearly — \"Smith-Contract-Part-1-of-2.pdf\" and \"Smith-Contract-Part-2-of-2.pdf.\" Include in the email body which parts are coming and confirm the recipient can reassemble them if needed. Recipients can use a free PDF merger to rejoin the parts on their end, or simply view each part separately. This method is unglamorous but reliable — it's what large law firms, accountants, and government offices do when sending bulky filings by email.",
+        },
+        {
+          heading: "Method 5: Skip email — use a share link",
+          body: "If your PDF is genuinely too big to compress without ruining it, the smartest move is often to skip email attachment entirely. Upload the PDF to Google Drive, Dropbox, OneDrive, or any cloud service. Set the share permission to \"Anyone with the link can view.\" Copy the link. Paste it into your email. The recipient clicks, gets the file at full quality, no size limit anywhere in the chain. This method has three big advantages: no quality compromise, no email bounces, and a permanent link that won't expire if the recipient needs to re-download later. The disadvantages: the recipient must trust the link (corporate email sometimes flags external links), and the file lives on someone else's server. For sensitive documents — contracts with PII, medical records, financial reports — this might not be acceptable. For everyday large attachments, it's the cleanest answer.",
+        },
+        {
+          heading: "Which method should you use?",
+          body: "Most of the time, start with Method 1: browser-based compression. It's free, fast, private, and handles 90% of cases. If your file is still too big after high compression, try Method 4: split into parts. For very sensitive documents you can't share via cloud links, the combination of compression + splitting almost always gets you under any email limit. Reserve Method 5 (cloud links) for cases where compression genuinely ruins the file, like high-resolution architectural plans or medical imaging. Whichever method you pick, test the result before sending — open the compressed file, scroll through it, make sure the recipient will see what you intended.",
+        },
+      ],
+      conclusion:
+        "Email size limits are a relic from a slower era of the internet, but they're not going away anytime soon. The good news is you don't need to pay for software or upload sensitive files to mystery servers to work around them. Browser-based PDF compression handles the vast majority of cases in under a minute, with no signup and no quality loss. The next time you see \"File too large,\" you know exactly what to do.",
+    },
+  },
+  {
+    slug: "how-to-convert-pdf-resume-to-word-without-losing-formatting",
+    title: "How to Convert a PDF Resume to Word Without Losing Formatting (2026 Guide)",
+    description: "Lost the original Word version of your resume? Here's how to convert your PDF resume back to editable Word with formatting, fonts, and structure intact.",
+    date: "2026-05-24",
+    readTime: "7 min",
+    toolSlug: "pdf-to-word",
+    category: "pdf",
+    keywords: ["convert pdf resume to word", "pdf to word resume", "edit pdf resume", "make pdf resume editable", "pdf resume to docx"],
+    content: {
+      intro:
+        "You sent your resume out as a PDF months or years ago. Now you need to update it — change a job title, add a new role, tweak the summary for a different position. You go looking for the editable Word version and discover it's gone. The PDF is the only copy you have. This is one of the most common problems job seekers face, and the panic of \"I'll have to rebuild it from scratch\" is real. The good news: in 2026, converting a PDF resume back to Word with formatting intact is genuinely easy. The bad news: only if you do it right. The wrong conversion produces a Word document that looks like a 1998 email — broken bullet points, mangled spacing, fonts that don't match. This guide walks through the right approach and the common mistakes that cause those mangled outputs.",
+      sections: [
+        {
+          heading: "Why PDFs are hard to convert back to Word",
+          body: "PDFs are designed to look identical on every device, which is the opposite goal of Word documents. A Word document is structured data — paragraphs, lists, tables, styled headings — that gets rendered differently on different screens. A PDF is a visual snapshot of that document, frozen in place with exact pixel positions. Converting a PDF back to Word means reverse-engineering the structure from the visual layout. Modern converters do this well for simple layouts (single column, standard fonts) but struggle with complex resumes that use multiple columns, sidebars, custom fonts, or graphic elements. The best converters use AI to recognize layout patterns; the worst just extract text in reading order and lose all formatting. Knowing the limitation helps you pick the right tool and set realistic expectations.",
+        },
+        {
+          heading: "Single-column resumes convert nearly perfectly",
+          body: "If your resume follows the classic single-column layout — name at the top, then summary, then experience, then education, all flowing top to bottom — conversion is almost always clean. The text comes through accurately, paragraph breaks are preserved, bullet points usually transfer correctly, and standard fonts (Arial, Calibri, Times New Roman, Georgia, Helvetica) come through as expected. After conversion, you might need to manually adjust line spacing or re-apply bold/italic in a few places, but the document is immediately editable and looks correct. This is the resume format I'd recommend for job seekers anyway — applicant tracking systems (ATS) parse single-column resumes much more accurately than fancy multi-column layouts, so converting back to Word is just one of several reasons single-column is the safer choice.",
+        },
+        {
+          heading: "Multi-column and design-heavy resumes are tricky",
+          body: "Resumes built in Canva, Figma, or InDesign with sidebars, custom graphics, infographic skill bars, or icon-driven section headers are much harder to convert cleanly. The visual structure relies on absolute positioning that doesn't translate to Word's flowing text model. When you convert, you'll often see text from the sidebar interleaved with text from the main column, or images that won't move with the surrounding text, or bullet points that lost their indent levels. If your resume is in this style, you have two options. One: do the conversion anyway, then use the resulting messy Word file as a content source — copy and paste each section into a fresh, clean single-column resume template. Two: rebuild the resume from scratch in your preferred tool, using the PDF as a visual reference. Either way, the rebuilt version will be easier to update going forward.",
+        },
+        {
+          heading: "Step-by-step: converting your PDF resume",
+          body: "Open a PDF-to-Word converter that runs in your browser, like the ToolsePulse PDF to Word tool — this keeps your resume (with all its personal contact details and employer history) private, since the file never uploads to a server. Drag your PDF in. Wait 5-15 seconds for the conversion. Download the resulting .docx file. Open it in Microsoft Word, Google Docs, or LibreOffice. Scroll through the entire document and check: are fonts correct or did they fall back to defaults? Are bullet points still bullets, or did they become em-dashes or asterisks? Are job titles still bolded? Did dates stay aligned with their positions? Make a quick pass to fix anything that drifted. Then save as a fresh .docx file with a clear name like \"Smith-Resume-2026-updated.docx\" so you always have an editable copy for next time.",
+        },
+        {
+          heading: "What to do if your custom fonts disappear",
+          body: "If you used a designer font like Lato, Montserrat, Inter, or any Google Font in the original Word document, the converted file will reference those fonts but probably not have them installed on your computer. Word substitutes a default font (usually Calibri or Times New Roman), which can shift your spacing and look. The fix is simple: download the missing font from Google Fonts or wherever you originally got it, install it on your system, then reopen the Word document. The original font now displays correctly. Alternatively, if you're not attached to the specific font, just accept the substitute and re-apply a consistent font throughout the document. For ATS compatibility, sticking with system fonts (Arial, Calibri, Georgia) is actually better than custom fonts anyway — applicant tracking systems sometimes choke on unusual font references.",
+        },
+        {
+          heading: "Common conversion problems and how to fix them",
+          body: "Bullet points come through as plain text or strange characters: in Word, select the affected lines, apply a bullet list style from the toolbar, and you're back to normal. Section headings lost their styling: re-apply Word's built-in heading styles (Heading 1, Heading 2) so the document structure is preserved for ATS scanning. Dates and locations on the right side of job entries get misaligned: this happens when the original used tabs or a table that didn't survive conversion. Re-insert tabs or build a simple two-column table to align them. Page breaks appear in odd places: clean these up by deleting unnecessary section breaks and using Word's natural page flow. Most of these fixes take 5-10 minutes total. The alternative — rebuilding the whole resume from a template — usually takes 1-2 hours.",
+        },
+        {
+          heading: "Save yourself trouble next time",
+          body: "Now that you have an editable Word version of your resume, save it in multiple places: your computer, a cloud drive (Google Drive, Dropbox, OneDrive), and ideally a personal email folder. Use a clear naming convention with the year — \"Smith-Resume-2026.docx\" — so future-you can find the right version. Better yet, keep a master .docx that you update over time rather than starting from a PDF every job hunt. PDFs are perfect for sending to recruiters and uploading to job portals, but they're terrible for your own ongoing editing workflow. Treat the PDF as the output, not the source.",
+        },
+      ],
+      conclusion:
+        "Recovering an editable Word version of a PDF resume is one of those tasks that sounds impossible until you've done it once. With a privacy-respecting browser-based converter and 10 minutes of cleanup, you get your editable resume back without uploading personal employment details to a third-party server. Save the new Word file in multiple places, and you'll never face the \"I lost the original\" problem again.",
+    },
+  },
+  {
+    slug: "compress-image-for-online-forms-50kb-100kb-200kb",
+    title: "Compress a Photo for Online Forms: Hitting 50KB, 100KB, and 200KB Limits",
+    description: "Government, visa, and university forms enforce strict photo size limits. Here's exactly how to compress images to 50KB, 100KB, or 200KB without rejection.",
+    date: "2026-05-23",
+    readTime: "9 min",
+    toolSlug: "image-compressor",
+    category: "image",
+    keywords: ["compress image under 100kb", "compress photo for online form", "image under 50kb", "passport photo size kb", "compress image for visa application"],
+    content: {
+      intro:
+        "There's a particular hell that comes from staring at a government form upload dialog at 11:47 PM the night before a deadline. It demands a photo under 50KB. Your photo is 4.2MB. You upload it; the form rejects it. You try the obvious fix — reduce quality — and now the file is 380KB and still rejected. You crop it; still rejected. The reason these forms are so strict is buried in legacy systems built when 50KB felt generous. Visa portals, university applications, government identity systems, banking KYC flows — they all set hard caps measured in kilobytes because their databases were architected in 2003 and nobody has updated them since. This guide is the comprehensive answer to hitting those caps. Whether you're targeting 50KB, 100KB, 200KB, or any custom number, the technique is the same: control quality and dimensions in the right order, with the right tool.",
+      sections: [
+        {
+          heading: "Why forms use such strict size limits",
+          body: "These limits aren't arbitrary cruelty. They come from how database-backed applications were designed in the early 2000s. Each user record gets a fixed storage allocation. The form's database column for \"photo\" is typed as something like BLOB(50000), meaning anything over 50,000 bytes (about 50KB) physically can't be inserted. The system was sized when 1GB of storage cost $5 instead of $0.0001, and millions of applications fitting in a modest server was a real constraint. Even as storage got cheap, the systems didn't get rebuilt because they work and rebuilding government IT is famously expensive. The result: in 2026, you're still cramming photos into 50KB shapes designed when broadband was a luxury. The fix is on your side. Compression is the only realistic answer.",
+        },
+        {
+          heading: "Understanding what controls image file size",
+          body: "Image file size comes from three knobs: dimensions, format, and quality. Dimensions are width and height in pixels. A 4000x3000 photo from a modern phone has 12 million pixels of data to store. A 600x600 cropped headshot has 360,000 pixels — 33 times less data. Format matters because some formats compress more aggressively than others. JPG is the standard for photographs because it removes data the human eye can't easily see, achieving excellent compression. PNG is lossless and ideal for graphics with sharp lines and text, but produces larger files for photos. WebP is newer and beats both for compression, but many older form systems don't accept it. Quality is the JPG-specific setting that controls how aggressive the compression is. At quality 100, the image is nearly perfect but huge. At quality 50, the file is 6-10x smaller but you start seeing compression artifacts in detailed areas. Targeting 50KB or 100KB requires turning all three knobs in the right order.",
+        },
+        {
+          heading: "Method for hitting 200KB targets (most lenient)",
+          body: "200KB is the most common upload limit and the easiest to hit. Start with your original photo, then resize dimensions to roughly 1000x1000 pixels for a full body image or 800x800 for a face-only ID photo. Save as JPG at 80-85% quality. This combination almost always lands between 100-200KB while preserving visible sharpness. If you're slightly over, drop quality to 75%. If you're way under, you can go back and increase quality for better visual results. For visa and passport applications targeting 200KB, this is the sweet spot — your photo looks sharp, faces are clearly recognizable, and the file fits comfortably under the limit.",
+        },
+        {
+          heading: "Method for hitting 100KB targets (medium strict)",
+          body: "100KB requires more aggressive compression. Resize dimensions to 600x600 pixels (or 600x800 for portrait orientation). Save as JPG at 70-75% quality. The result usually lands at 80-110KB. If you're consistently over, drop quality to 65% or reduce dimensions to 500x500. At this point, the image still looks clear for ID purposes — faces are recognizable, features are sharp — but you'll start to see slight blur in fine details like hair texture or fabric weave. For most government forms accepting 100KB photos, this quality level is well above their requirement. Government systems were designed to recognize faces at low resolutions; you don't need pristine detail.",
+        },
+        {
+          heading: "Method for hitting 50KB targets (most strict)",
+          body: "50KB is the brutal one. Resize to 400x400 pixels (or 400x500 for portrait). Save as JPG at 55-65% quality. Expect the result to land at 35-55KB. At this compression level, you'll see noticeable artifacts in detailed areas, but face recognition still works fine. Some forms specifying 50KB also specify minimum dimensions like 200x200, so you have a narrow window between maximum size and minimum dimensions. The trick is finding the sweet spot. If your form rejects the photo for being too small in pixels, try 500x500 at quality 50% instead — you'll still hit 50KB while meeting dimension requirements. For backgrounds, plain white or light gray compresses much better than busy backgrounds. If your photo has a textured background and you're missing the 50KB target by a few KB, try replacing the background with plain white using a background remover tool first.",
+        },
+        {
+          heading: "Common form rejection reasons beyond size",
+          body: "Even after hitting the size limit, forms reject photos for other reasons. Wrong dimensions: some forms specify exact pixel dimensions (e.g., 200x300) and reject anything else. Wrong format: many systems only accept JPG, not PNG or HEIC. iPhones save photos as HEIC by default — convert to JPG before uploading using a HEIC to JPG converter. Wrong aspect ratio: forms often want 4:5 or 3:4 portrait, not landscape or square. Background not white: visa and passport forms often demand plain white backgrounds. Face too small in the frame: should be roughly 70-80% of the height. Glasses, hats, or hair covering the face: these are usually rejected by automated systems. Read the form's specific requirements carefully before compressing — hitting the size limit is just one of several gates.",
+        },
+        {
+          heading: "Tools that hit exact KB targets",
+          body: "Browser-based image compressors with a size slider let you preview file size before downloading. The ToolsePulse Image Compressor shows the projected size as you adjust quality, so you can dial in exactly the right setting for your target. Drop your image in, watch the live size preview, slide the quality control until the projected size is just under your limit, then download. This is dramatically faster than trial and error in Photoshop or with command-line tools. For repeated batches — say, hundreds of student ID photos for a school enrollment — command-line tools like ImageMagick give you precise control via scripts. For one-off form submissions, browser tools win on simplicity and time.",
+        },
+        {
+          heading: "What to do when nothing works",
+          body: "Occasionally a form is so badly designed that even properly sized photos fail. Common causes: a buggy file validator that rejects valid JPG, a hidden requirement (color profile, EXIF data presence, or specific encoding) that isn't documented, or browser-specific upload failures. If you've followed every documented requirement and the form still rejects, try these in order: clear your browser cache and try again, try a different browser (Chrome vs Firefox vs Safari often behaves differently with form uploads), try removing EXIF data using an EXIF remover tool, and as a last resort contact the form's support email. Some forms have undocumented dimension requirements (e.g., they secretly need exactly 600x800) and only support can clarify.",
+        },
+      ],
+      conclusion:
+        "Online form size limits are a relic from a slower era of databases, but they're not going away. The good news is that compressing photos to hit even brutal targets like 50KB is straightforward once you understand the relationship between dimensions, format, and quality. Browser-based tools that show live size previews make this a 60-second task instead of a frustrating trial-and-error session. Bookmark a good compressor for the next time a government form blocks your upload at 11:47 PM.",
+    },
+  },
+  {
+    slug: "whatsapp-file-size-limits-explained-2026",
+    title: "WhatsApp File Size Limits Explained: Photos, Videos, PDFs, and Documents in 2026",
+    description: "WhatsApp blocks files over certain sizes — 16MB for video, 100MB for documents, aggressive compression for photos. Here's exactly what the limits are and how to work around them.",
+    date: "2026-05-22",
+    readTime: "8 min",
+    toolSlug: "video-compressor",
+    category: "video",
+    keywords: ["whatsapp file size limit", "whatsapp document size limit", "whatsapp video size limit", "whatsapp pdf limit", "send big file whatsapp"],
+    content: {
+      intro:
+        "WhatsApp is the messaging app of choice for over two billion people, and yet its file size limits are some of the most confusing on the internet. Send a video and WhatsApp silently compresses it to garbage. Send a PDF and you get a vague \"file is too large\" error with no explanation of the actual limit. Try to share a high-resolution photo and it arrives looking like it was taken on a 2008 flip phone. The rules are real, the limits are real, and most of them are workable once you know them. This guide is the complete map: every file type, every limit, and the workarounds that get your file through at the quality you actually want.",
+      sections: [
+        {
+          heading: "Photos: technically no limit, but WhatsApp crushes them anyway",
+          body: "When you send a photo through WhatsApp's normal photo attachment flow, there is no published file size limit. But there is something worse: aggressive automatic compression. WhatsApp re-encodes every photo you send to roughly 100KB or less, regardless of how big the original was. A 12-megapixel photo from your latest phone, originally 4-6MB of crisp detail, arrives at your recipient as a 100KB blurry approximation. This is why pictures of documents look so bad when shared on WhatsApp — the compression algorithm assumes you're sending casual snapshots and doesn't care about preserving fine detail. The workaround that pro users know: send the photo as a Document instead of a Photo. WhatsApp's document attachment preserves the original file at original quality (within the 100MB document limit). Open WhatsApp, tap the attach icon, choose Document, find your photo, send. The recipient sees a file thumbnail instead of an inline image, but tapping it opens the photo at full quality.",
+        },
+        {
+          heading: "Videos: 16MB in chat, 100MB as a document",
+          body: "Videos hit two different limits in WhatsApp depending on how you send them. Sent as a video (the normal way, with inline playback), WhatsApp caps you at 16MB. This is brutal — most modern phones record video at 50-100MB per minute. A 30-second clip in 1080p easily exceeds 16MB. WhatsApp doesn't compress your video automatically the way it compresses photos; it just refuses to send. Sent as a document, the limit goes up to 100MB, and the video keeps its full quality. The trade-off is that the recipient has to download the file before they can play it, instead of tapping to watch inline. For important videos — recordings of events, presentations, evidence — sending as document is always better. For casual moments, you can pre-compress the video to fit under 16MB. A video compressor that targets a specific file size can get a 30-second 1080p clip down to about 12MB without visibly destructive quality loss. Drop the resolution to 720p and you can fit a longer clip easily.",
+        },
+        {
+          heading: "Documents and PDFs: 100MB cap, hard wall",
+          body: "WhatsApp's document attachment supports files up to 100MB. This applies to PDFs, Word docs, Excel sheets, ZIP files, and most other document types. The 100MB limit is hard — files larger than that simply won't upload, and you get a generic error message. Most documents are well under this cap, so the limit rarely matters. The exceptions are: scanned legal documents with hundreds of pages, design files (Photoshop or InDesign), and bundled archives. For these, you have a few options. Compress the PDF — most large PDFs shrink dramatically without quality loss, easily fitting under 100MB. Split a large PDF into multiple files and send them in sequence. Or share via a cloud link (Google Drive, Dropbox) and just send the link in the WhatsApp message. Most recipients prefer a direct document over a link, but for genuinely huge files, the link is the only practical option.",
+        },
+        {
+          heading: "Audio messages and audio files: different limits",
+          body: "WhatsApp distinguishes between voice notes (the press-and-hold recording feature) and audio file attachments. Voice notes have no published size limit because WhatsApp controls the recording length and format directly. Audio file attachments fall under the same document rules: 100MB cap when sent as a document, much lower when sent as audio. For a typical 30-minute podcast in MP3 format, 100MB is generous. For uncompressed WAV recordings, you'll need to convert to MP3 first to fit — fortunately, MP3 conversion from WAV typically shrinks files by 90% without audible quality loss for spoken content.",
+        },
+        {
+          heading: "GIFs and animated images: tricky",
+          body: "WhatsApp handles GIFs strangely. If you send a real animated GIF as a document, it preserves the animation but the recipient sees a file attachment instead of inline playback. If you send it as a photo, WhatsApp typically converts it to a still image. The workaround for sharing actual animated GIFs is to convert them to short MP4 videos (using a GIF-to-video converter), which WhatsApp plays inline with full motion. For sticker-style animated images, use WhatsApp's built-in sticker creator instead — stickers play animated automatically and have their own size budget.",
+        },
+        {
+          heading: "Why WhatsApp has these limits in the first place",
+          body: "WhatsApp serves users on slow connections in countries where data is expensive. A casual user in Lagos or Jakarta or Manila might be paying $0.50 per gigabyte of mobile data; receiving an uncompressed 50MB video clip from a relative is a meaningful expense. WhatsApp's aggressive compression is a deliberate choice to keep the service usable on weak networks. The 16MB video limit feels arbitrary in 2026, but for users on 3G connections it represents the difference between a chat that works and one that times out. Understanding this helps you choose the right workaround. If you're sending to someone on a fast connection (urban Europe, North America), pre-compressed files and document attachments work great. If you're sending to someone in a region with patchy connectivity, smaller is genuinely better — they'll thank you for the bandwidth-friendly version.",
+        },
+        {
+          heading: "Quick reference table",
+          body: "Photo (Photo attachment): no published limit, but WhatsApp compresses to ~100KB. Photo (Document attachment): up to 100MB, no quality loss. Video (Video attachment): 16MB hard limit. Video (Document attachment): up to 100MB, original quality. PDF/Document: up to 100MB. Voice note: no published limit. Audio file (Document): up to 100MB. Sticker: 100KB max for static, 500KB for animated. The pattern: any time you want to send something at full quality, send it as a Document attachment. Any time you want inline display, accept WhatsApp's compression.",
+        },
+        {
+          heading: "The browser-based workflow",
+          body: "When you need to pre-compress something for WhatsApp on your phone, browser-based tools work great. Open the file in a browser tab on the same phone, compress, download, then attach to WhatsApp. No app install required, files stay on your device, and the whole flow takes 30-60 seconds. For PDFs over 100MB, compress first to under 100MB then attach. For videos over 16MB, compress to 12-14MB if you want inline playback, or send as document if quality matters more than convenience. The compressed file lives in your phone's downloads folder and you can attach it to WhatsApp the same way you'd attach any file.",
+        },
+      ],
+      conclusion:
+        "WhatsApp's limits look arbitrary but they're consistent once you know the pattern: 16MB for inline video, 100MB for everything sent as a document, and aggressive auto-compression for anything sent as a photo. The pro move is using the document attachment for important files (preserves quality, raises limits) and pre-compressing only when you specifically want inline playback. Browser-based compression tools make this fast on phone or desktop, and the recipient gets exactly what you intended to send.",
+    },
+  },
+  {
+    slug: "hidden-danger-free-online-pdf-tools-privacy-risks",
+    title: "The Hidden Danger of Free Online PDF Tools (And What to Look For Instead)",
+    description: "Most free online PDF tools upload your files to their servers. Here's why that matters, what they could do with your documents, and how to spot the truly private alternatives.",
+    date: "2026-05-21",
+    readTime: "9 min",
+    toolSlug: "pdf-compressor",
+    category: "pdf",
+    keywords: ["free pdf tool privacy", "online pdf tool safety", "are online pdf tools safe", "private pdf compressor", "pdf tool data privacy"],
+    content: {
+      intro:
+        "You need to compress a PDF before emailing it. You type \"free PDF compressor online\" into Google. You click the first result. You drag your file in — a contract, a tax return, a medical report, a child's birth certificate, whatever it happens to be. The site processes it and gives you back a smaller version. You move on with your day. What you probably didn't think about: your file just traveled to a server in another country, was processed by software you've never seen, was potentially logged in their access records, and might still exist on a backup server somewhere weeks or months from now. Every \"free PDF tool\" that uploads files works this way. Most users never consider it because the workflow feels frictionless. This article is the case against blind trust — and the practical guide to picking tools that actually respect the privacy they all claim to offer.",
+      sections: [
+        {
+          heading: "How the typical free online PDF tool works",
+          body: "When you upload a PDF to a typical online tool, here's what happens behind the scenes. Your browser uploads the entire file to the company's server. The server stores it temporarily (or permanently, depending on the company) on disk or in cloud storage. A processing job picks up the file and runs the requested operation — compression, conversion, signing, whatever. The result gets saved back to disk. A download link gets generated and sent to your browser. The file may be \"deleted after one hour\" according to the company's promises, but you have no way to verify this. Backups might keep copies for 30-90 days. Logs almost certainly record that someone from your IP address uploaded a file at a specific time. The company's privacy policy probably contains clauses about how they reserve the right to retain files for \"legal compliance\" or \"service improvement.\" Everything about this flow is fine if you trust the company. The problem is you usually have no way to verify the trust.",
+        },
+        {
+          heading: "What's actually at risk",
+          body: "Most file uploads are low-stakes. A wedding photo you wanted to compress isn't going to cause problems if someone glimpses it. But some files genuinely matter. Tax documents contain your full name, address, social security number or national ID, bank account numbers, employer details, and income data. Medical records carry diagnoses, treatments, and family medical history. Legal contracts contain identifying details about parties, financial terms, and sometimes terms intended to stay confidential. Insurance applications, employment contracts, school transcripts, birth certificates, marriage certificates, court documents — all contain combinations of personally identifying information that would matter in a data breach. When you upload any of these to a free online tool, you're making a trust decision: do you trust this specific company, their developers, their hosting provider, their backup procedures, their incident response, and their long-term commitment to protecting your file? In most cases, you've never investigated any of those things. You clicked the first Google result.",
+        },
+        {
+          heading: "Real data breach history of online tool services",
+          body: "Online tool services have suffered breaches over the years. Some were technical exploits — exposed databases, misconfigured cloud storage buckets, vulnerable code. Others were insider incidents where employees accessed files they shouldn't have. Some were the company's own decision to sell or share data with partners, often described in legalese that nobody reads. The pattern is consistent: when files exist on a server, eventually someone unauthorized gets access. It might be next week, it might be in 2030, but the longer files persist somewhere, the higher the cumulative risk. For one-off file processing where you don't actually need the file to live on a server after processing, the safer architecture is to never upload the file at all.",
+        },
+        {
+          heading: "How browser-only tools work differently",
+          body: "A browser-only tool does everything client-side: in the JavaScript and WebAssembly code running inside your browser tab. When you drag a PDF into a browser-only compressor, the file gets read into your browser's memory but never sent anywhere. The compression algorithm runs on your CPU, in your browser, producing a smaller version of the file that also lives only in your browser's memory. When you click download, the smaller file gets saved to your device's downloads folder. At no point did the file touch a network connection to the tool's company. You can verify this yourself: open your browser's developer tools (F12), go to the Network tab, then run a browser-only tool. You'll see the page's HTML and JavaScript load when you first open it, but no upload requests for your file. The file genuinely never leaves your device. This isn't marketing copy; it's a technical architecture difference. The tool company physically cannot see your files because no code on their server is involved in processing them.",
+        },
+        {
+          heading: "How to tell if a tool actually runs in your browser",
+          body: "Look for these signals. A tool that claims privacy but uploads your file is probably fast on small files (because servers are fast) and offers an \"increased speed\" Pro tier (because more powerful servers cost more). A genuinely browser-only tool gets slower on bigger files (because your device's CPU isn't infinite) and doesn't have a Pro tier for speed because the bottleneck is your hardware, not their servers. Check the network tab in your browser developer tools — a real browser-only tool shows no file uploads. Read the company's documentation carefully: \"files processed in your browser\" or \"client-side processing\" usually means real browser-only architecture; \"files deleted after processing\" usually means uploads to a server with promised deletion. Look at the tool's loading behavior: browser-only tools often have a brief loading delay the first time you visit the page (because the processing library has to download to your browser) but feel instant on subsequent visits. Server-based tools feel instant on first visit but require constant network round-trips for each operation.",
+        },
+        {
+          heading: "When uploading is genuinely fine",
+          body: "Not every file deserves paranoia. If you're compressing a meme to share on Discord, the upload model is fine. If you're converting a public-domain document, the upload model is fine. If you're working with files you'd be comfortable posting publicly anyway, server-based tools work great and often have features browser-only tools can't match (like serious AI-powered features that need GPU clusters). The privacy concern is specifically about sensitive files: identifying documents, contracts, financial records, medical information, legal materials. For those, the browser-only architecture is a meaningful safety improvement. The rule of thumb: if you wouldn't want the file in a data breach headline next month, use a browser-only tool.",
+        },
+        {
+          heading: "Other features privacy-first tools should have",
+          body: "Beyond browser-only processing, look for: no signup required (because every account is a data record that could leak), no email collection (same reason), no third-party tracking scripts (Google Analytics is one thing; aggressive ad-tech tracking is another), a clear and short privacy policy (because complexity hides bad practices), and a real entity behind the tool (a human you can find on LinkedIn or a small company with a documented team is more accountable than an anonymous \"Acme Tools LLC\" registered in a tax haven). These signals don't guarantee safety, but they correlate strongly with companies that take privacy seriously.",
+        },
+        {
+          heading: "Why this matters more now, not less",
+          body: "Five years ago, browser capabilities couldn't handle most file processing tasks — you genuinely needed a server to compress a PDF or convert a video. So uploads were the only option. In 2026, that's no longer true. Modern browsers can handle complex file processing locally, with performance approaching native software. The fact that most online tool companies still upload files is increasingly a choice about their business model — uploads enable usage caps and Pro tiers — rather than a technical necessity. Knowing this, you can demand better. The pattern of \"if you're not paying, you're the product\" applies here too: free tools that need to monetize have incentives to retain your data; tools that genuinely process in your browser typically have different business models (donations, occasional ads, or no monetization at all) that don't require holding onto your files.",
+        },
+      ],
+      conclusion:
+        "Free online PDF tools are convenient, but the default assumption that they'll upload your file to a remote server is no longer technically necessary. Modern browsers can handle the processing locally for almost any common task. The next time you need to compress, convert, sign, merge, or edit a sensitive document, take 30 seconds to check: does this tool process files in my browser, or upload them to a server? The answer matters more than most people realize, and the alternatives are now genuinely as fast and as free.",
+    },
+  },
+
+  {
     slug: "how-to-convert-pdf-to-word-online-free",
     title: "How to Convert PDF to Word Online for Free (No Signup)",
     description:
