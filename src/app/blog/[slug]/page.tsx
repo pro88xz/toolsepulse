@@ -62,9 +62,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </h1>
 
         {/* Intro */}
-        <p className="mt-6 text-base text-slate-600 leading-relaxed sm:text-lg">
-          {post.content.intro}
-        </p>
+        <p className="mt-6 text-base text-slate-600 leading-relaxed sm:text-lg" dangerouslySetInnerHTML={{ __html: post.content.intro }} />
 
         {/* Ad after intro */}
         <div className="mt-6 mb-2">
@@ -77,13 +75,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {post.content.sections.map((section, i) => (
           <div key={i} className="mt-8">
             <h2 className="text-lg font-bold text-slate-900 sm:text-xl">{section.heading}</h2>
-            <p className="mt-3 text-base text-slate-600 leading-relaxed">{section.body}</p>
+            <p className="mt-3 text-base text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: section.body }} />
           </div>
         ))}
 
         {/* Conclusion */}
         <div className="mt-8">
-          <p className="text-base text-slate-600 leading-relaxed">{post.content.conclusion}</p>
+          <p className="text-base text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: post.content.conclusion }} />
         </div>
 
         {/* CTA to tool */}
