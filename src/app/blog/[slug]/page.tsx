@@ -88,17 +88,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* CTA to tool */}
         {tool && (
-          <div className="mt-10 rounded-2xl border border-blue-200 bg-blue-50 p-6 sm:p-8">
+          <div className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1">Try it free</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Try it free</p>
                 <h3 className="text-lg font-bold text-slate-900">{tool.name}</h3>
                 <p className="mt-1 text-sm text-slate-600">{tool.shortDescription}. No signup, no file uploads, 100% private.</p>
               </div>
             </div>
             <Link
               href={`/tools/${tool.slug}`}
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-lg hover:scale-[1.01]" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}
             >
               Open {tool.name}
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
