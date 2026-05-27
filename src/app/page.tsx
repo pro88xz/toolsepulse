@@ -236,7 +236,7 @@ function LiveCounter() {
   return (
     <>
       <div className="rounded-xl bg-slate-800 border border-slate-700 p-5 text-center">
-        <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-pink-500/20 text-pink-300 mb-3">
+        <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20 text-blue-400 mb-3">
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" /></svg>
         </div>
         <p className="text-3xl font-extrabold text-white sm:text-4xl"><AnimatedNumber target={tools.length} suffix="+" /></p>
@@ -260,7 +260,7 @@ function LiveCounter() {
         <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/20 text-violet-400 mb-3">
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
         </div>
-        <p className="text-3xl font-extrabold text-pink-400 sm:text-4xl"><AnimatedNumber target={100} suffix="%" /></p>
+        <p className="text-3xl font-extrabold text-blue-400 sm:text-4xl"><AnimatedNumber target={100} suffix="%" /></p>
         <p className="mt-1 text-[10px] text-slate-400 font-medium uppercase tracking-wider">Private & Secure</p>
       </div>
     </>
@@ -679,7 +679,7 @@ export default function HomePage() {
               { icon: "M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z", title: "Nothing stored, ever", desc: "When you close the tab, everything is gone. No cookies, no cache, no trace." },
             ].map((f) => (
               <div key={f.title} className="rounded-xl bg-slate-800 border border-slate-700 p-5">
-                <svg className="h-5 w-5 text-pink-400 mb-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d={f.icon} /></svg>
+                <svg className="h-5 w-5 text-blue-400 mb-3" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d={f.icon} /></svg>
                 <h3 className="text-sm font-semibold text-white">{f.title}</h3>
                 <p className="mt-1 text-xs text-slate-400 leading-relaxed">{f.desc}</p>
               </div>

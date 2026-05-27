@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Script from "next/script";
 
 // Routes where popunders should NOT fire.
-// Keeps legal/policy/contact pages clean for trust + future AdSense reapplication.
+// Keeps legal/policy/contact pages clean and ad-free.
 const EXCLUDED_PREFIXES = [
   "/privacy",
   "/terms",

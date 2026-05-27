@@ -107,7 +107,7 @@ export default function Header() {
           <div className="mt-3 pt-3 border-t border-slate-100">
             <Link
               href="/contact"
-              className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2.5 text-sm font-semibold text-white hover:from-blue-700 hover:to-cyan-600 transition-all"
+              className="flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition-all shadow-sm hover:shadow-md" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact Us
