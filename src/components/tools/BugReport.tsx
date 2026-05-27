@@ -10,13 +10,13 @@ export default function BugReport({ toolName }: { toolName: string }) {
   const [sent, setSent] = useState(false);
 
   const presets = [
-    "Tool not loading",
-    "File upload not working",
-    "Download failed",
-    "Result is blank or corrupted",
-    "Tool is very slow",
-    "Error message appeared",
-    "Other issue",
+    "I can’t get the tool to start",
+    "I can’t upload my file",
+    "My download didn’t work",
+    "The output doesn’t look right",
+    "It’s running slowly",
+    "I’m seeing an error message",
+    "Something else",
   ];
 
   const handleSubmit = async () => {
@@ -49,10 +49,10 @@ export default function BugReport({ toolName }: { toolName: string }) {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-4 right-4 z-50 flex items-center gap-1.5 rounded-full bg-slate-800 px-3 py-1.5 text-[11px] font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-colors shadow-lg"
+        className="fixed bottom-4 right-4 z-50 flex items-center gap-1.5 rounded-full bg-white border border-slate-200 px-3.5 py-2 text-xs font-medium text-slate-700 hover:text-purple-700 hover:border-purple-300 hover:shadow-md transition-all shadow-sm"
       >
-        <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+        <svg className="h-4 w-4 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
         </svg>
         Help
       </button>
