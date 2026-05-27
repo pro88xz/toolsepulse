@@ -168,7 +168,7 @@ export default function ToolPageLayout({ tool, children, hideWhatsNext = false }
 
       {/* Visual Banner */}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pb-4">
-        <div className="rounded-2xl bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-500 p-6 sm:p-8 text-white relative overflow-hidden">
+        <div className="rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}>
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
           <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm flex-shrink-0">
@@ -205,7 +205,7 @@ export default function ToolPageLayout({ tool, children, hideWhatsNext = false }
               <div className="space-y-4">
                 {content.howTo.steps.map((step: { title: string; description: string }, i: number) => (
                   <div key={i} className="flex gap-4 rounded-xl border border-gray-200 bg-white p-5">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-sm font-bold flex-shrink-0">{i + 1}</div>
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-100 text-purple-700 text-sm font-bold flex-shrink-0">{i + 1}</div>
                     <div>
                       <h3 className="text-sm font-bold text-gray-900">{step.title}</h3>
                       <p className="mt-1 text-sm text-gray-600 leading-relaxed">{step.description}</p>
@@ -240,7 +240,7 @@ export default function ToolPageLayout({ tool, children, hideWhatsNext = false }
                   { icon: "M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z", label: "Everyone", desc: "Personal everyday tasks" },
                 ].map((persona) => (
                   <div key={persona.label} className="rounded-xl border border-gray-200 bg-white p-4 text-center">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 mb-2">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-purple-50 text-purple-700 mb-2">
                       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d={persona.icon} /></svg>
                     </div>
                     <h3 className="text-xs font-bold text-gray-900">{persona.label}</h3>
@@ -346,9 +346,9 @@ export default function ToolPageLayout({ tool, children, hideWhatsNext = false }
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 rounded-xl border-2 border-blue-200 bg-blue-50 p-5">
+                <div className="mt-4 rounded-xl border-2 border-purple-200 bg-purple-50 p-5">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="rounded-full bg-blue-600 px-2.5 py-0.5 text-[9px] font-bold text-white uppercase">Our advantage</span>
+                    <span className="rounded-full px-2.5 py-0.5 text-[9px] font-bold text-white uppercase" style={{ backgroundImage: "linear-gradient(90deg, #1D4ED8 0%, #6D28D9 50%, #DB2777 100%)" }}>Our advantage</span>
                   </div>
                   <p className="text-sm text-gray-700 leading-relaxed">{content.alternatives.whyUs}</p>
                 </div>
