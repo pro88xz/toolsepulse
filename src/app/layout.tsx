@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import FooterGate from "@/components/layout/FooterGate";
 import HomeJsonLd from "@/components/seo/HomeJsonLd";
 import "./globals.css";
 import Analytics from "./analytics";
@@ -75,7 +75,7 @@ export default function RootLayout({
         <HomeJsonLd />
         <Header />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <FooterGate />
       </body>
     </html>
   );

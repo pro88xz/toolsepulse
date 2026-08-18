@@ -8,10 +8,11 @@ import { siteConfig } from "@/config/site";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  // Hide the site header on the immersive game-play page (/games/<slug>),
-  // but keep it on the games grid (/games) so users can still navigate.
-  const isGamePlay = /^\/games\/[^/]+$/.test(pathname ?? "");
-  if (isGamePlay) return null;
+  // Hide the site header across the whole games section (grid + play) so games
+  // own the screen. Users reach games from the Search app, which has its own
+  // home affordance (the owl) plus the Android nav bar, so no web nav is needed.
+  const isGames = /^\/games(\/|$)/.test(pathname ?? "");
+  if (isGames) return null;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
