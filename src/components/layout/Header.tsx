@@ -2,10 +2,16 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  // Hide the site header on the immersive game-play page (/games/<slug>),
+  // but keep it on the games grid (/games) so users can still navigate.
+  const isGamePlay = /^\/games\/[^/]+$/.test(pathname ?? "");
+  if (isGamePlay) return null;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
