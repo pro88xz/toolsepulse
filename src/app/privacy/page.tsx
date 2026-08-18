@@ -67,7 +67,7 @@ export default function PrivacyPage() {
             <li><strong>Google Analytics cookies</strong> &mdash; for the anonymous analytics described above</li>
           </ul>
           <p className="mt-3">
-            We display advertisements through PopAds, a third-party advertising network. PopAds and its downstream advertisers may set cookies on your device to limit ad frequency, measure ad performance, and serve relevant pop-under advertisements. These cookies are set by third parties, not by ToolsePulse directly, and are described in detail in the Advertising section below.
+            We display advertisements through GamePix, a third-party gaming and advertising provider, within the games section of the site. GamePix and its downstream advertising partners may set cookies on your device to serve ads, limit ad frequency, and measure ad performance. These cookies are set by third parties, not by ToolsePulse directly, and are described in detail in the Advertising section below.
           </p>
           <p className="mt-3">
             You can control cookies through your browser settings. Blocking essential cookies may affect how some features work; blocking analytics cookies has no impact on tool functionality.
@@ -75,24 +75,23 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-slate-900 mb-3">Advertising and PopAds</h2>
+          <h2 className="text-lg font-semibold text-slate-900 mb-3">Advertising and GamePix</h2>
           <p>
-            {siteConfig.name} displays advertisements through PopAds (popads.net), a third-party advertising network. PopAds serves pop-under advertisements &mdash; ads that open in a new browser window or tab behind the current one when you click anywhere on the page. PopAds operates independently of ToolsePulse and uses cookies and similar technologies to serve advertisements, limit ad frequency, and measure ad performance.
+            {siteConfig.name} displays advertisements through GamePix (gamepix.com), a third-party HTML5 gaming platform and advertising provider. GamePix ads appear within the games section of the site, alongside and inside the embedded games. GamePix operates independently of ToolsePulse and, together with its advertising partners, uses cookies and similar technologies to serve advertisements, limit ad frequency, and measure ad performance.
           </p>
           <p className="mt-3">
-            Specifically regarding <strong className="text-slate-900">PopAds</strong>:
+            Specifically regarding <strong className="text-slate-900">GamePix</strong>:
           </p>
           <ul className="mt-2 space-y-1 list-disc list-inside pl-2">
-            <li>PopAds, as a third-party advertising network, uses cookies to serve and measure advertisements on this site</li>
-            <li>Downstream advertisers in the PopAds network may set their own cookies subject to their own privacy policies</li>
-            <li>Ads are not displayed on the legal pages of this site (Privacy, Terms, Contact, About, Security) so you can review policies without interruption</li>
-            <li>Ads are not displayed on the tool widgets themselves &mdash; tools continue to process your files locally in your browser with no third-party access to file contents</li>
+            <li>GamePix and its downstream advertising partners use cookies to serve and measure advertisements within the games section</li>
+            <li>These advertising partners may set their own cookies subject to their own privacy policies</li>
+            <li>Ads are shown only in the games section &mdash; they are not displayed on the legal pages (Privacy, Terms, Contact, About, Security) or on the tool widgets</li>
+            <li>The tools continue to process your files locally in your browser with no third-party access to file contents</li>
             <li>You may opt out of personalized advertising network-wide by visiting <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Your Online Choices</a> (EU/UK) or <a href="https://optout.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">aboutads.info</a> (US)</li>
-            <li>You may block pop-under ads at the browser level by enabling the pop-up blocker (built into Chrome, Firefox, Safari, and Edge by default)</li>
-            <li>For PopAds&apos; own data practices, see the <a href="https://www.popads.net/privacy.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">PopAds Privacy Policy</a></li>
+            <li>For GamePix&apos;s own data practices, see the <a href="https://www.gamepix.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">GamePix Privacy Policy</a></li>
           </ul>
           <p className="mt-3">
-            Pop-under ads are limited to standard page navigation events &mdash; PopAds cannot see, read, or transmit the files you process in the tools, because the tools run entirely in your browser with no upload step. The advertising network operates separately from the tool layer and has no technical means of accessing tool inputs or outputs.
+            GamePix advertising is confined to the games section and cannot see, read, or transmit the files you process in the tools, because the tools run entirely in your browser with no upload step. The games and advertising layer operates separately from the tool layer and has no technical means of accessing tool inputs or outputs.
           </p>
         </section>
 
@@ -102,7 +101,7 @@ export default function PrivacyPage() {
           <ul className="mt-2 space-y-1 list-disc list-inside pl-2">
             <li><strong>Google Analytics</strong> &mdash; anonymous usage analytics. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Privacy Policy</a></li>
             <li><strong>Vercel</strong> &mdash; web hosting infrastructure. Server logs (IP, timestamp, URL) processed for security and performance. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Vercel Privacy Policy</a></li>
-            <li><strong>PopAds</strong> (popads.net) &mdash; pop-under advertising network. See the Advertising section above for details. <a href="https://www.popads.net/privacy.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">PopAds Privacy Policy</a></li>
+            <li><strong>GamePix</strong> (gamepix.com) &mdash; HTML5 gaming platform and advertising provider for the games section. See the Advertising section above for details. <a href="https://www.gamepix.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">GamePix Privacy Policy</a></li>
           </ul>
           <p className="mt-3">
             We do not use Facebook Pixel, TikTok pixel, LinkedIn Insight tag, or any other social media tracking technology. We do not share data with data brokers or marketing partners.

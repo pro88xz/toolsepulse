@@ -5,7 +5,6 @@ import Footer from "@/components/layout/Footer";
 import HomeJsonLd from "@/components/seo/HomeJsonLd";
 import "./globals.css";
 import Analytics from "./analytics";
-import PopAds from "@/components/ads/PopAds";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://toolsepulse.co"),
@@ -73,7 +72,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <Analytics />
-        <PopAds />
         <HomeJsonLd />
         <Header />
         <main className="flex-1">{children}</main>
