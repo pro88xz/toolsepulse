@@ -56,7 +56,7 @@ export default async function GamePlayPage({
                   <div className="aspect-square overflow-hidden bg-slate-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={g.image}
+                      src={(g.banner_image || g.image).replace(/([?&])w=\d+/, "$1w=512")}
                       alt={g.title}
                       loading="lazy"
                       className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
