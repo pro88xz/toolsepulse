@@ -1,8 +1,7 @@
-"use client";
-
-import { use } from "react";
 import Link from "next/link";
 import { tools, categories, type ToolCategory } from "@/config/tools";
+import { ArrowRight, DeviceMobile } from "@phosphor-icons/react/dist/ssr";
+import ToolCard from "@/components/home/ToolCard";
 
 const categoryMeta: Record<
   string,
@@ -251,8 +250,12 @@ const categoryMeta: Record<
   },
 };
 
-export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+export function generateStaticParams() {
+  return Object.keys(categories).map((slug) => ({ slug }));
+}
+
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const category = categories[slug as ToolCategory];
   const meta = categoryMeta[slug];
   const categoryTools = tools.filter((t) => t.category === slug);
@@ -299,6 +302,18 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
                 {meta.longDescription}
               </p>
             </div>
+
+            <a href="https://play.google.com/store/apps/details?id=cc.devbangs.morpho" target="_blank" rel="noopener" className="hidden lg:flex flex-shrink-0 w-64 flex-col gap-3 rounded-2xl bg-white/10 border border-white/20 p-4 backdrop-blur-sm hover:bg-white/15 transition-colors group">
+              <span className="flex items-center gap-2.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/20 flex-shrink-0"><DeviceMobile size={19} weight="bold" className="text-white" /></span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-bold text-white leading-tight">Morpho for Android</span>
+                  <span className="block text-[11px] text-white/70 leading-tight">Files, transformed</span>
+                </span>
+              </span>
+              <span className="block text-xs text-white/80 leading-relaxed">133 tools for PDFs, images, audio and video. 118 of them work offline, right on your phone.</span>
+              <span className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-white px-3 py-2 text-xs font-bold text-slate-900 group-hover:gap-2.5 transition-all">Get it on Google Play <ArrowRight size={13} weight="bold" /></span>
+            </a>
           </div>
         </div>
       </div>
@@ -371,37 +386,9 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
           <span className="text-xs text-slate-400">{categoryTools.length} total</span>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="tp-grid">
           {(otherTools.length > 0 ? otherTools : categoryTools).map((tool) => (
-            <Link
-              key={tool.id}
-              href={`/tools/${tool.slug}`}
-              className="group rounded-2xl border border-slate-200 bg-white p-5 hover:border-slate-300 hover:shadow-md transition-all hover:-translate-y-0.5"
-            >
-              <div className="flex items-start gap-4">
-                <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${meta.iconBg} flex-shrink-0`}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" className={meta.accent}>{meta.icon}</svg>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors truncate">{tool.name}</h3>
-                    {tool.isNew && (
-                      <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[9px] font-bold text-emerald-700 uppercase flex-shrink-0">New</span>
-                    )}
-                    {tool.isPopular && !tool.isNew && (
-                      <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[9px] font-bold text-amber-700 uppercase flex-shrink-0">Popular</span>
-                    )}
-                  </div>
-                  <p className="mt-1.5 text-xs text-slate-500 leading-relaxed">{tool.shortDescription}</p>
-                </div>
-              </div>
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-[11px] text-slate-400 font-medium">Free &middot; No signup</span>
-                <svg className="h-4 w-4 text-slate-300 group-hover:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-              </div>
-            </Link>
+            <ToolCard key={tool.id} tool={tool} />
           ))}
         </div>
       </div>
