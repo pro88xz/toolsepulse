@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
+import { Instrument_Sans } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import Header from "@/components/layout/Header";
 import FooterGate from "@/components/layout/FooterGate";
 import HomeJsonLd from "@/components/seo/HomeJsonLd";
 import "./globals.css";
 import Analytics from "./analytics";
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://toolsepulse.co"),
@@ -58,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={instrumentSans.variable}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
