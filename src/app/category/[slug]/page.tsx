@@ -303,17 +303,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               </p>
             </div>
 
-            <a href="https://play.google.com/store/apps/details?id=cc.devbangs.morpho" target="_blank" rel="noopener" className="hidden lg:flex flex-shrink-0 w-64 flex-col gap-3 rounded-2xl bg-white/10 border border-white/20 p-4 backdrop-blur-sm hover:bg-white/15 transition-colors group">
-              <span className="flex items-center gap-2.5">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/20 flex-shrink-0"><DeviceMobile size={19} weight="bold" className="text-white" /></span>
-                <span className="min-w-0">
-                  <span className="block text-sm font-bold text-white leading-tight">Morpho for Android</span>
-                  <span className="block text-[11px] text-white/70 leading-tight">Files, transformed</span>
-                </span>
-              </span>
-              <span className="block text-xs text-white/80 leading-relaxed">133 tools for PDFs, images, audio and video. 118 of them work offline, right on your phone.</span>
-              <span className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-white px-3 py-2 text-xs font-bold text-slate-900 group-hover:gap-2.5 transition-all">Get it on Google Play <ArrowRight size={13} weight="bold" /></span>
-            </a>
           </div>
         </div>
       </div>

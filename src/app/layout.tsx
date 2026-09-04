@@ -6,6 +6,7 @@ import FooterGate from "@/components/layout/FooterGate";
 import HomeJsonLd from "@/components/seo/HomeJsonLd";
 import "./globals.css";
 import Analytics from "./analytics";
+import MorphoBar from "@/components/layout/MorphoBar";
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <Analytics />
         <HomeJsonLd />
+        <MorphoBar />
         <Header />
         <main className="flex-1">{children}</main>
         <FooterGate />

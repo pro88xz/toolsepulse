@@ -130,6 +130,11 @@ export default function ToolBrowser({ total, counts, hero, heroArt, children }: 
               </button>
             );
           })}
+          {filter !== "all" && (
+            <a className="tp-rail-all" href={`/category/${filter}`}>
+              See all {counts[filter as ToolCategory]} {categoryStyles[filter as ToolCategory].label} tools
+            </a>
+          )}
         </aside>
 
         <div>
